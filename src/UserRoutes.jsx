@@ -1,9 +1,13 @@
+import UserLayout from "./contexts/UserLayout";
 import Home from "./pages/user/home"
 
 const routes = [
     {
         path : "/",
-        element : <Home />,
+        element : <UserLayout />,
+        children : [
+            {index : true , element : <Home />}
+        ]
     }
 ]
 

@@ -1,3 +1,36 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Myanmar:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+    .btn-1 {
+        @apply bg-dreamLabColor1 text-white font-semibold rounded-md;
+    }
+
+    .btn-2 {
+        @apply bg-dreamLabColor2 text-textColor4 font-semibold rounded-md;
+    }
+
+    .btn-cancel{
+        @apply bg-grey6 rounded-md; 
+    }
+
+    .btn-delete{
+        @apply bg-red-600 rounded-md text-white; 
+    }
+
+    .btn-prev{
+        @apply border-2 border-dreamLabColor1 rounded-md text-dreamLabColor1 font-semibold;
+    }
+
+    .btn-disable{
+        @apply border-2 border-dreamLabColor rounded-md text-dreamLabColor1 font-semibold;
+    }
+
+    .card-shadow {
+        box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.1);
+    }
+}
