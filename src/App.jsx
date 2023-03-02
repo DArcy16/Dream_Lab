@@ -1,10 +1,21 @@
-import './App.css'
+/** @format */
+
+import "./App.css";
+import { Route, Routes, useRoutes } from "react-router-dom";
+import UserRoutes from './UserRoutes'
+import AdminRoutes from './AdminRoutes'
+
 
 function App() {
-
+  const UserRouting = useRoutes(UserRoutes)
+  const AdminRouting = useRoutes(AdminRoutes);
   return (
-    <div className='min-w-[100vw] min-h-screen flex items-center justify-center text-center font-bold uppercase text-4xl'>Home</div>
-  )
+    <Routes>
+      <Route path="/*" element={UserRouting} />
+      <Route path="/admin/*" element={AdminRouting} />
+      <Route path="/login" element={<div>Login</div>} />
+    </Routes>
+  );
 }
 
-export default App
+export default App;
