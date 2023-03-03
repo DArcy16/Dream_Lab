@@ -1,6 +1,6 @@
 /** @format */
 
-import AdminLayout from "./contexts/AdminLayout";
+import AdminLayout from "./layouts/AdminLayout";
 import Dashboard from "./pages/admin/dashboard";
 import Plan from "./pages/admin/plan";
 import Login from "./pages/admin/login"
