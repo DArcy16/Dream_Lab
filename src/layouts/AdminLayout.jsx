@@ -7,16 +7,18 @@ import Sidebar from "../components/admin/Sidebar";
 
 const AdminLayout = () => {
   return (
-    <>
+    <div>
       <Header>
-        <h3>Admin Dashboard</h3>
+        <span>Admin Dashboard</span>
       </Header>
-      <div className="flex w-screen h-screen flex-shrink-0">
-        <Sidebar />
 
-        <Outlet />
+      <div className="flex">
+        <Sidebar />
+        <div>
+          <Outlet />
+        </div>
       </div>
-    </>
+    </div>
   );
 };
 
