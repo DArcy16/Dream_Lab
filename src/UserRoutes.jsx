@@ -1,4 +1,4 @@
-import UserLayout from "./contexts/UserLayout";
+import UserLayout from "./layouts/UserLayout";
 import Home from "./pages/user/home"
 
 const routes = [

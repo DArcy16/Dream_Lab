@@ -5,6 +5,10 @@
 @tailwind components;
 @tailwind utilities;
 
+.active{
+    @apply text-dreamLabColor1;
+}
+
 @layer components {
     .btn-1 {
         @apply bg-dreamLabColor1 text-white font-semibold rounded-md;
