@@ -13,15 +13,15 @@
     }
 
     .btn-2 {
-        @apply bg-dreamLabColor2 text-textColor4 font-semibold rounded-md;
+        @apply bg-dreamLabColor2 text-textColor4 font-semibold rounded-md hover:bg-dreamLabColor2/80 hover:text-textColor4/80;
     }
 
     .btn-cancel{
-        @apply bg-grey6 rounded-md; 
+        @apply bg-grey6 rounded-md hover:bg-grey2 hover:text-white; 
     }
 
     .btn-delete{
-        @apply bg-red-600 rounded-md text-white; 
+        @apply bg-red-600 rounded-md text-white hover:bg-red-600/80; 
     }
 
     .btn-prev{
@@ -35,4 +35,24 @@
     .card-shadow {
         box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.1);
     }
+
+    .sub-heading {
+        @apply text-lg font-semibold;
+    }
+
+    .card-header {
+        @apply text-xl font-semibold;
+    }
+
+    .admin-outlet-container {
+        @apply p-10 py-14 basis-3/5;
+    }
+}
+
+body {
+    background-color: white;
+    width : 100vw;
+    min-height : 100vh;
+    color : #333333;
+
 }
