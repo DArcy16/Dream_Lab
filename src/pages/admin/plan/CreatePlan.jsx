@@ -1,5 +1,6 @@
 import React from "react";
 import { RxCross2 } from "react-icons/rx";
+import InputForm from "../../../components/form/InputForm";
 
 const CreatePlan = ({setShowCreateNewPlan}) => {
   return (
