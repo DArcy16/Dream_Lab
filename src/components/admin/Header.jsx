@@ -5,10 +5,10 @@ import profileImg from "../../assets/profile.png";
 const Header = ({ children }) => {
   return (
     <div className="flex items-center justify-between w-full px-24 py-3 pr-16 bg-white shadow-lg">
-      <div className="flex w-1/2 items-center justify-between">
+      
         <img src={Logo} alt="" />
         <h2 className="text-2xl font-bold capitalize">{children}</h2>
-      </div>
+      
 
       <div className="flex items-center gap-10 self-center">
         <figure className="bg-dreamLabColor1 rounded-full p-2">
