@@ -6,9 +6,14 @@ import Navbar from "../components/user/Navbar";
 import UserLoginModal from "../components/user/UserLoginModal";
 import UserRegisterModal from "../components/user/UserRegisterModal";
 import Footer from "../components/user/Footer";
+import {
+  useLoginBoxContext,
+} from "../contexts/user/LoginBoxContext";
+import { useRegisterBoxContext } from "../contexts/user/RegisterBoxContext";
 
 const UserLayout = () => {
-  const status = false;
+  const { show } = useLoginBoxContext();
+  const {showRegister} = useRegisterBoxContext();
 
   return (
     <div>
@@ -17,14 +22,14 @@ const UserLayout = () => {
         <Outlet />
       </article>
       <Footer />
-      {status ? (
-        <div className="w-screen h-screen top-0">
+      {show ? (
+        <div className="">
           <UserLoginModal />
         </div>
       ) : null}
-      {status ? (
-        <div className="w-screen h-screen top-0">
-            <UserRegisterModal />
+      {showRegister ? (
+        <div className="">
+          <UserRegisterModal />
         </div>
       ) : null}
     </div>

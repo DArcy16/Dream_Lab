@@ -1,11 +1,11 @@
-import React from 'react'
+import React from "react";
 
 const index = () => {
   return (
-    <div>
-       Home
+    <div className="h-screen">
+      <div className=" container mx-auto">Home</div>
     </div>
-  )
-}
+  );
+};
 
-export default index
+export default index;

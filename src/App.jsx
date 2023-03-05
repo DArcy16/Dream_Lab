@@ -4,6 +4,8 @@ import "./App.css";
 import { Navigate, Route, Routes, useRoutes } from "react-router-dom";
 import UserRoutes from "./UserRoutes";
 import AdminRoutes from "./AdminRoutes";
+import { LoginBoxContextProvider } from "./contexts/user/LoginBoxContext";
+import { RegisterBoxContextProvider } from "./contexts/user/RegisterBoxContext";
 
 function App() {
   const UserRouting = useRoutes(UserRoutes);
@@ -11,11 +13,17 @@ function App() {
   const isAdmin = true;
 
   return (
-    <Routes>
-      <Route path="/*" element={UserRouting} />
-      <Route path="/admin/*" element={isAdmin ? AdminRouting : <Navigate to='/login' /> } />
-      <Route path="/login" element={isAdmin ? <Navigate to='/admin' replace /> : AdminRouting} />
-    </Routes>
+
+    <LoginBoxContextProvider>
+      <RegisterBoxContextProvider>
+        <Routes>
+          <Route path="/*" element={UserRouting} />
+          <Route path="/login" element={AdminRouting} />
+          <Route path="/admin/*" element={AdminRouting} />
+        </Routes>
+      </RegisterBoxContextProvider>
+    </LoginBoxContextProvider>
+
   );
 }
 

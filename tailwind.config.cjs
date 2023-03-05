@@ -12,6 +12,15 @@ module.exports = {
       sans: ["Poppins", "ui-sans-serif", "system-ui"],
       myanmar: ["Noto Sans Myanmar"],
     },
+    container: {
+      padding: {
+        DEFAULT: '1rem',
+        sm: '1rem',
+        lg: '0.5rem',
+        xl: '2rem',
+        '2xl': '4rem',
+      },
+    },
     colors: {
       red: colors.red,
       green: colors.green,
