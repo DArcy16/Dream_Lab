@@ -34,11 +34,11 @@ const CreatePlan = ({setShowCreateNewPlan}) => {
           />
 
           <button
-            className="btn-2 w-full py-2 px-3"
+            className="btn-2 w-full py-2 px-3 mt-4"
             type="button"
             onClick={() => !setShowCreateNewPlan()}
           >
-            Save
+            Create
           </button>
         </form>
       </div>
