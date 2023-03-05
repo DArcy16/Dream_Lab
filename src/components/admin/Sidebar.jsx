@@ -21,6 +21,10 @@ const Sidebar = () => {
 
   const handleLogout = () => {
     navigate("/login");
+
+
+
+    
   };
   return (
     <aside className="w-80 min-h-screen bg-dreamLabColor4 pl-16 pr-10">
