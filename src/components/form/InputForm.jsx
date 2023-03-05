@@ -1,11 +1,11 @@
 import React from 'react'
 
-const InputForm = ({type, id, placeholder, label}) => {
+const InputForm = ({type, id, placeholder, label = false}) => {
   return (
     <div className="mt-3 w-full">
-      <label htmlFor="name" className="font-semibold capitalize">
+      {label ? <label htmlFor="name" className="font-semibold capitalize">
         {label}
-      </label>
+      </label> : null}
       <input
         type={type}
         id={id}

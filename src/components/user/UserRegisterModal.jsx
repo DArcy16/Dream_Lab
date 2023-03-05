@@ -2,6 +2,7 @@ import React from 'react'
 import { useLoginBoxContext } from '../../contexts/user/LoginBoxContext';
 import { useRegisterBoxContext } from '../../contexts/user/RegisterBoxContext';
 import {FiChevronsLeft} from "react-icons/fi";
+import InputForm from '../form/InputForm';
 
 const UserRegisterModal = () => {
   const {setShow}= useLoginBoxContext();
@@ -55,40 +56,15 @@ const UserRegisterModal = () => {
               <p className=" text-center text-sm mb-5">
                 Login to find new experiences
               </p>
-              <form className="space-y-3" action="#">
-                <div>
-                  <input
-                    type="email"
-                    name="email"
-                    id="email"
-                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
-                    placeholder="Email"
-                    required
-                  />
-                </div>
-                <div>
-                  <input
-                    type="password"
-                    name="password"
-                    id="password"
-                    placeholder="Password"
-                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
-                    required
-                  />
-                </div>
-                <div>
-                  <input
-                    type="password"
-                    name="password"
-                    id="re-password"
-                    placeholder="Re-enter password"
-                    className="bg-gray-50 mb-3 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
-                    required
-                  />
-                </div>
+              <form action="#">
+                <InputForm type="email" id="email" placeholder="Email" />
+                
+                <InputForm type="password" id="password" placeholder="Password" />
+                
+                <InputForm type="password" id="re-password" placeholder="Re-enter Password" />
                 <button
                   type="submit"
-                  className="w-full btn-2 py-2 transition-all duration-200 active:scale-95"
+                  className="w-full btn-2 py-2 mt-4 transition-all duration-200 active:scale-95"
                 >
                   Register
                 </button>

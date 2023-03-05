@@ -1,15 +1,18 @@
+/** @format */
+
 import React, { useEffect, useState } from "react";
 import { AiOutlineUser } from "react-icons/ai";
 import { useLoginBoxContext } from "../../contexts/user/LoginBoxContext";
 import { useRegisterBoxContext } from "../../contexts/user/RegisterBoxContext";
+import InputForm from "../form/InputForm";
 
 const UserLoginModal = () => {
-  const {setShow}= useLoginBoxContext();
-  const {setShowRegister}= useRegisterBoxContext();
-  const handleChangeBox=()=>{
+  const { setShow } = useLoginBoxContext();
+  const { setShowRegister } = useRegisterBoxContext();
+  const handleChangeBox = () => {
     setShow(false);
     setShowRegister(true);
-  }
+  };
   return (
     <div>
       {/* Main modal */}
@@ -26,7 +29,7 @@ const UserLoginModal = () => {
               type="button"
               className="absolute top-3 right-2.5 text-grey bg-transparent text-sm p-1.5 ml-auto inline-flex items-center hover:text-grey4"
               data-modal-hide="authentication-modal"
-              onClick={()=>setShow(false)}
+              onClick={() => setShow(false)}
             >
               <svg
                 aria-hidden="true"
@@ -44,31 +47,18 @@ const UserLoginModal = () => {
               <span className="sr-only">Close modal</span>
             </button>
             <div className="px-6 py-6 lg:px-8">
-              <h3 className="my-4 text-center text-xl font-bold text-gray-900 dark:text-white">
+              <h3 className="my-4 text-center text-xl font-bold text-grey4">
                 Login
               </h3>
-              <form className="space-y-6" action="#">
-                <div>
-                  <input
-                    type="email"
-                    name="email"
-                    id="email"
-                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
-                    placeholder="Email"
-                    required
-                  />
-                </div>
-                <div>
-                  <input
-                    type="password"
-                    name="password"
-                    id="password"
-                    placeholder="Password"
-                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
-                    required
-                  />
-                </div>
-                <div className="flex justify-between">
+              <form action="#">
+                <InputForm type="email" id="email" placeholder="Email" />
+
+                <InputForm
+                  type="password"
+                  id="password"
+                  placeholder="Password"
+                />
+                <div className="flex justify-between mt-4">
                   <div className="flex items-start">
                     <div className="flex items-center h-5">
                       <input
@@ -88,22 +78,23 @@ const UserLoginModal = () => {
                   </div>
                   <a
                     href="#"
-                    className="text-sm text-blue-700 hover:underline dark:text-blue-500"
+                    className="text-sm text-grey2 hover:underline dark:text-blue-500"
                   >
                     Forgot Password?
                   </a>
                 </div>
                 <button
                   type="submit"
-                  className="w-full btn-2 py-2 transition-all duration-200 active:scale-95"
+                  className="w-full btn-2 py-2 mt-4 transition-all duration-200 active:scale-95"
                 >
                   Login
                 </button>
-                <div className="text-sm font-medium text-grey2 text-center">
+                <div className="text-sm mt-2 font-medium text-grey2 text-center">
                   Don't have an account?{" "}
-                  <button type="button"
+                  <button
+                    type="button"
                     className="text-grey hover:underline dark:text-blue-500 ml-2"
-                    onClick={()=>handleChangeBox()}
+                    onClick={() => handleChangeBox()}
                   >
                     Register Now
                   </button>
