@@ -4,10 +4,10 @@ import Logo from "../../assets/Icon.svg";
 import profileImg from "../../assets/profile.png";
 const Header = ({ children }) => {
   return (
-    <div className="flex items-center justify-between w-full px-24 pt-2 pb-3 pr-16 bg-white shadow-lg">
-      <div className="flex items-center justify-between gap-20 mb-2">
+    <div className="flex items-center justify-between w-full px-24 py-3 pr-16 bg-white shadow-lg">
+      <div className="flex w-1/2 items-center justify-between">
         <img src={Logo} alt="" />
-        <h2 className="text-2xl font-bold self-center">{children}</h2>
+        <h2 className="text-2xl font-bold capitalize">{children}</h2>
       </div>
 
       <div className="flex items-center gap-10 self-center">

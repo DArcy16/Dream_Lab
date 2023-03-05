@@ -22,14 +22,14 @@ const EditPlan = ({ setShowEditPlan }) => {
           <InputForm
             id="plan_code"
             type="text"
-            placeholder="type plan code"
+            placeholder="Type Plan Code"
             label="plan code"
           />
 
           <InputForm
             id="plan_name"
             type="text"
-            placeholder="type plan name"
+            placeholder="Type Plan Name"
             label="Plan Name"
           />
 
