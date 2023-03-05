@@ -27,6 +27,7 @@ const Sidebar = () => {
     
   };
   return (
+
     <aside className="w-80 min-h-screen bg-dreamLabColor4 pl-16 pr-10">
       <ul className="mt-8 text-textColor2 flex flex-col gap-3 text-xl">
         <li className="font-medium mb-2">Admin Dashboard</li>
@@ -146,5 +147,6 @@ const Sidebar = () => {
     </aside>
   );
 };
+
 
 export default Sidebar;
