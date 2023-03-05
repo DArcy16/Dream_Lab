@@ -41,6 +41,10 @@
     .card-header {
         @apply text-xl font-semibold;
     }
+
+    .admin-outlet-container {
+        @apply p-10 py-14 basis-3/5;
+    }
 }
 
 body {

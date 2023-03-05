@@ -14,7 +14,7 @@ const index = () => {
   const [showDeleteModal, setShowDeleteModal] = useState(false);
 
   return (
-    <section className=" px-10 py-14 basis-3/5">
+    <section className=" admin-outlet-container">
       {/* header */}
       <div className="flex justify-between items-center">
         <h3 className="sub-heading">Subscription Plan Lists</h3>
