@@ -17,20 +17,20 @@ const UserRegisterModal = () => {
         id="authentication-modal"
         tabIndex={-1}
         aria-hidden="true"
-        className={`fixed grid place-items-center bg-[#1c1c1ca3] top-0 left-0 right-0 bottom-0 z-50 w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-modal md:h-full`}
+        className={`fixed grid place-items-center text-[#222222] bg-[#1c1c1ca3] top-0 left-0 right-0 bottom-0 z-50 w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-modal md:h-full`}
       >
         <div className=" w-full max-w-md h-auto">
           {/* Modal content */}
           <div className="relative bg-white rounded-lg shadow dark:bg-gray-700 pb-5">
             <button
               type="button"
-              className="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-800 dark:hover:text-white"
+              className="absolute top-3 right-2.5 text-grey bg-transparent text-sm p-1.5 ml-auto inline-flex items-center hover:text-grey4"
               data-modal-hide="authentication-modal"
-              onClick={()=>setShowRegister(false)}
+              onClick={() => setShowRegister(false)}
             >
               <svg
                 aria-hidden="true"
-                className="w-5 h-5"
+                className="w-6 h-6"
                 fill="currentColor"
                 viewBox="0 0 20 20"
                 xmlns="http://www.w3.org/2000/svg"
@@ -44,12 +44,17 @@ const UserRegisterModal = () => {
               <span className="sr-only">Close modal</span>
             </button>
             <div className="px-6 py-6 lg:px-8">
-              <h3 className="mb-4 flex items-center cursor-pointer gap-3 font-medium text-sm text-gray-900 dark:text-white" onClick={()=>handleChangeBox()}>
-                <FiChevronsLeft/>
+              <h3
+                className="mb-4 flex items-center text-sm cursor-pointer gap-3 font-medium text-grey4"
+                onClick={() => handleChangeBox()}
+              >
+                <FiChevronsLeft />
                 Back to Login
               </h3>
-              <h3 className=' text-center text-lg font-semibold'>Register</h3>
-              <p className=' text-center text-sm mb-5'>Login to find new experiences</p>
+              <h3 className=" text-center text-lg font-semibold">Register</h3>
+              <p className=" text-center text-sm mb-5">
+                Login to find new experiences
+              </p>
               <form className="space-y-3" action="#">
                 <div>
                   <input
@@ -83,7 +88,7 @@ const UserRegisterModal = () => {
                 </div>
                 <button
                   type="submit"
-                  className="w-full bg-dreamLabColor2 py-2 rounded-lg transition-all duration-200 active:scale-95"
+                  className="w-full btn-2 py-2 transition-all duration-200 active:scale-95"
                 >
                   Register
                 </button>
@@ -93,7 +98,7 @@ const UserRegisterModal = () => {
         </div>
       </div>
     </div>
-  )
+  );
 }
 
 export default UserRegisterModal

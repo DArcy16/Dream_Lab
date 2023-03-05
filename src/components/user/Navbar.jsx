@@ -76,7 +76,7 @@ const Navbar = () => {
               data-modal-target="authentication-modal"
               data-modal-toggle="authentication-modal"
               type="button"
-              className=" bg-dreamLabColor2 px-3 py-2 flex text-[16px] rounded-[8px] gap-2 items-center cursor-pointer transition-all duration-75 active:scale-95"
+              className="btn-2 flex items-center justify-center gap-2 px-4 py-2 "
               onClick={() => setShow(true)}
             >
               <AiOutlineUser className=" text-[18px] select-none" />

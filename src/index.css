@@ -5,9 +5,7 @@
 @tailwind components;
 @tailwind utilities;
 
-.active{
-    @apply text-dreamLabColor1;
-}
+
 
 @layer components {
     .btn-1 {
