@@ -3,7 +3,7 @@
 import AdminLayout from "./layouts/AdminLayout";
 import Dashboard from "./pages/admin/dashboard";
 import Plan from "./pages/admin/plan";
-import Login from "./pages/admin/login"
+import Login from "./pages/admin/login";
 
 const routes = [
   {
@@ -21,8 +21,8 @@ const routes = [
     ],
   },
   {
-    path : "login",
-    element : <Login />
+    path: "login",
+    element: <Login />,
   },
 ];
 

@@ -12,14 +12,8 @@ function App() {
   return (
     <Routes>
       <Route path="/*" element={UserRouting} />
-      <Route
-        path="/login"
-        element={AdminRouting}
-      />
-      <Route
-        path="/admin/*"
-        element={AdminRouting}
-      />
+      <Route path="/admin/*" element={AdminRouting} />
+      <Route path="/login" element={AdminRouting} />
     </Routes>
   );
 }
