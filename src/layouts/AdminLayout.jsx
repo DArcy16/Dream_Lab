@@ -7,14 +7,19 @@ import Sidebar from "../components/admin/Sidebar";
 
 const AdminLayout = () => {
   return (
+
     <div className="relative">
+
       <Header>
-        <h3>Admin Dashboard</h3>
+        <span>Admin Dashboard</span>
       </Header>
+
       <div className="flex w-screen gap-4 flex-shrink-0">
         <Sidebar />
 
-        <Outlet />
+        <div>
+          <Outlet />
+        </div>
       </div>
     </div>
   );

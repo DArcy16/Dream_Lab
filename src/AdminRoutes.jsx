@@ -8,6 +8,7 @@ import Subscription from "./pages/admin/subscription"
 import CreateSubscription from "./pages/admin/subscription/CreateSubscription"
 import EditSubscription from "./pages/admin/subscription/EditSubscription"
 
+
 const routes = [
   {
     path: "admin",
@@ -32,8 +33,8 @@ const routes = [
     ],
   },
   {
-    path : "login",
-    element : <Login />
+    path: "login",
+    element: <Login />,
   },
 ];
 
