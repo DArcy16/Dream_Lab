@@ -1,11 +1,13 @@
 /** @format */
 
 import React, { useState } from "react";
-import { IoArrowBackOutline } from "react-icons/io5";
 import ReactSwitch from "react-switch";
 import InputForm from "../../../components/form/InputForm";
 import TextareaForm from "../../../components/form/TextareaForm";
 import ChoosePlanModal from "./ChoosePlanModal";
+import { IoArrowBackOutline } from "react-icons/io5";
+import {AiOutlineDoubleRight} from "react-icons/ai"
+import { useNavigate } from "react-router-dom";
 
 const plan = [
   {
@@ -27,20 +29,31 @@ const plan = [
 ];
 
 const CreateSubscription = () => {
+  const navigate = useNavigate();
+  const [status, setStatus] = useState(false);
   const [showModal, setShowModal] = useState(false);
+  const [selectedPlans, setSelectedPlans] = useState([]);
+
+  const handleSubmit = (e) => {
+    e.preventDefault(); 
+    navigate('/admin/subscription');
+  }
 
   return (
     <section className="admin-outlet-container">
       {/* header */}
       <div className="flex items-center gap-[18vw]">
-        <button className="flex items-center justify-center gap-2 btn-prev py-2 px-4 border-none">
+        <button
+          className="flex items-center justify-center gap-2 btn-prev py-2 px-4 border-none"
+          onClick={() => navigate("/admin/subscription")}
+        >
           <IoArrowBackOutline />
           Back
         </button>
         <h3 className="sub-heading text-center">Create Subscription</h3>
       </div>
 
-      <form className="px-24 py-8">
+      <form onSubmit={handleSubmit} className="px-24 py-8">
         <InputForm
           type="text"
           id="name"
@@ -100,22 +113,31 @@ const CreateSubscription = () => {
 
         <div className="mt-3 flex items-center gap-6">
           <label className="font-semibold capitalize">Active Status</label>
-          <ReactSwitch />
+          <ReactSwitch onChange={() => setStatus(!status)} checked={status} />
         </div>
 
-        <div className="mt-3 w-full flex justify-between items-center bg-white py-2 px-6 rounded-md outline outline-1 outline-grey/30 focus:outline-2"
-        onClick={() => setShowModal(true)}>
+        <div
+          className="mt-3 w-full flex justify-between items-center bg-white py-2 px-6 rounded-md outline outline-1 outline-grey/30 focus:outline-2"
+          onClick={() => setShowModal(true)}
+        >
           <label className="font-semibold capitalize">Choose Plan</label>
-          <p>arrow</p>
+          <AiOutlineDoubleRight />
         </div>
 
-        <button type="submit" className="btn-2 w-full py-2 mt-4">
+        <p className="mt-1 text-sm">{selectedPlans.length} selected</p>
+
+        <button type="submit" className="btn-2 w-full py-2 mt-6">
           Create
         </button>
       </form>
 
       {showModal ? (
-        <ChoosePlanModal plan={plan} setShowModal={setShowModal} />
+        <ChoosePlanModal
+          plan={plan}
+          setShowModal={setShowModal}
+          setSelectedPlans={setSelectedPlans}
+          selectedPlans={selectedPlans}
+        />
       ) : null}
     </section>
   );

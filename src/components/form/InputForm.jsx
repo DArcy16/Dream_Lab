@@ -12,6 +12,7 @@ const InputForm = ({type, id, placeholder, label}) => {
         name={id}
         className="w-full bg-white py-2 px-4 rounded-md outline outline-1 outline-grey/30 focus:outline-2 mt-2"
         placeholder={placeholder}
+        required
       ></input>
     </div>
   );

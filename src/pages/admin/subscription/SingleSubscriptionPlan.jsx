@@ -23,7 +23,7 @@ const SingleSubscriptionPlan = ({setShowDeleteModal}) => {
         </div>
         <div className="basis-1/4 flex justify-end gap-4">
           <button className="btn-2 w-1/3 py-2"
-          onClick={() => navigate('edit/:id')}>Edit</button>
+          onClick={() => navigate('edit/id')}>Edit</button>
           <button className="text-red-600 font-semibold hover:text-red-400"
           onClick={() => setShowDeleteModal(true)}>Delete</button>
         </div>
