@@ -7,7 +7,7 @@ const SingleSubscriptionPlan = ({setShowDeleteModal}) => {
   return (
     <div className="w-full p-8 shadow-xl rounded-lg border-x border-x-grey4/[.15] mt-4">
       <div className="flex justify-between items-center px-6">
-        <div className="basis-3/4">
+        <div className='basis-3/4'>
           <h3 className="card-header">6 Months Plan</h3>
           <p className="my-2">
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis

@@ -3,19 +3,14 @@
 import React, { useState } from "react";
 import { RxCross2 } from "react-icons/rx";
 
-const ChoosePlanModal = ({
-  setShowModal,
-  plan,
-  selectedPlans,
-  setSelectedPlans,
-}) => {
-  const [sampleSelect, setSampleSelect] = useState(selectedPlans)
+const ChoosePlanModal = ({ setShowModal, plan, selectedPlans, setSelectedPlans }) => {
+  const [sampleSelect, setSampleSelect] = useState(selectedPlans);
 
   const handleChange = (e) => {
     if (e.currentTarget.checked) {
       setSampleSelect([
         ...sampleSelect,
-        { key: e.target.value },
+        { key: e.target.value, name: e.target.name },
       ]);
     } else {
       setSampleSelect(
@@ -51,9 +46,7 @@ const ChoosePlanModal = ({
                   name={item.name}
                   type="checkbox"
                   onClick={handleChange}
-                  checked={
-                    sampleSelect.find((plan) => plan.key === item.key) 
-                  }
+                  checked = {sampleSelect?.find(plan => plan.key === item.key)}
                 />
                 <label htmlFor={item.name} className="font-semibold capitalize">
                   {item.name}

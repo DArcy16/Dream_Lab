@@ -1,5 +1,8 @@
+/** @format */
+
 import React from "react";
 import { RxCross2 } from "react-icons/rx";
+import InputForm from "../../../components/form/InputForm";
 
 const EditPlan = ({ setShowEditPlan }) => {
   return (
@@ -16,37 +19,22 @@ const EditPlan = ({ setShowEditPlan }) => {
           </button>
         </div>
         <form className="">
-          <div className="mb-4">
-            <label
-              className="block text-gray-700 text-sm  mb-2"
-              for="plan_code"
-            >
-              Plan Code
-            </label>
-            <input
-              className="border rounded w-full py-2 px-3 text-gray-500 "
-              id="plan_code"
-              type="text"
-              placeholder="Type Plan Code"
-            />
-          </div>
-          <div className="mb-6">
-            <label
-              className="block text-gray-700 text-sm  mb-2"
-              for="plan_name"
-            >
-              Plan Name
-            </label>
-            <input
-              className=" border rounded w-full py-2 px-3 text-gray-500 mb-3 "
-              id="plan_name"
-              type="text"
-              placeholder="Type Plan Name"
-            />
-          </div>
+          <InputForm
+            id="plan_code"
+            type="text"
+            placeholder="type plan code"
+            label="plan code"
+          />
+
+          <InputForm
+            id="plan_name"
+            type="text"
+            placeholder="type plan name"
+            label="Plan Name"
+          />
 
           <button
-            className="btn-2 border rounded w-full py-2 px-3"
+            className="btn-2 w-full py-2 px-3 mt-4"
             type="button"
             onClick={() => !setShowEditPlan()}
           >

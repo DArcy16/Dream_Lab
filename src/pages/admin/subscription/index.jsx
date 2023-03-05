@@ -14,7 +14,7 @@ const index = () => {
   const [showDeleteModal, setShowDeleteModal] = useState(false);
 
   return (
-    <section className=" admin-outlet-container">
+    <section className="admin-outlet-container">
       {/* header */}
       <div className="flex justify-between items-center">
         <h3 className="sub-heading">Subscription Plan Lists</h3>

@@ -15,9 +15,9 @@ const index = () => {
   const [showEditPlan, setShowEditPlan] = useState(false);
 
   return (
-    <section className=" admin-outlet-container  ">
+    <section className="admin-outlet-container">
       {/* header */}
-      <div className="w-3/5 h-full absolute right-20">
+      <div className="w-full h-full">
         <div className="flex justify-between items-center  ">
           <h3 className="sub-heading text-slate-900 font-bold ">
             Created Plans

@@ -28,7 +28,7 @@ const Sidebar = () => {
   };
   return (
 
-    <aside className="w-80 min-h-screen bg-dreamLabColor4 pl-16 pr-10">
+    <aside className="basis-1/5 min-h-screen bg-dreamLabColor4 pl-16 pr-10">
       <ul className="mt-8 text-textColor2 flex flex-col gap-3 text-xl">
         <li className="font-medium mb-2">Admin Dashboard</li>
         <AdminSidebarLink
@@ -37,17 +37,17 @@ const Sidebar = () => {
           title="Dashboard"
         />
         <AdminSidebarLink
-          to="/books"
+          to="books"
           icon={<IoBookOutline size={25} />}
           title="Books"
         />
         <AdminSidebarLink
-          to="/plans"
+          to="plan"
           icon={<RiVideoLine size={25} />}
           title="Plans"
         />
         <AdminSidebarLink
-          to="/product"
+          to="subscription"
           icon={<RiVipCrownLine size={25} />}
           title="Subscription Plan"
         />
@@ -65,53 +65,53 @@ const Sidebar = () => {
         {manage && (
           <div className="mt-5 flex flex-col gap-3">
             <AdminSidebarLink
-              to="/books"
+              to="books"
               icon={<IoBookOutline size={25} />}
               title="Books"
             />
             <AdminSidebarLink
-              to="/ebooks"
+              to="ebooks"
               icon={<BsFileEarmarkPdf size={25} />}
               title="E-books"
             />
             <AdminSidebarLink
-              to="/articles"
+              to="articles"
               icon={<RiArticleLine size={25} />}
               title="Articles"
             />
             <AdminSidebarLink
-              to="/podcasts"
+              to="podcasts"
               icon={<MdOutlineKeyboardVoice size={25} />}
               title="Podcasts"
             />
             <AdminSidebarLink
-              to="/videos"
+              to="videos"
               icon={<RiVideoLine size={25} />}
               title="videos"
             />
             <AdminSidebarLink
-              to="/plans"
+              to="plans"
               icon={<TbCheckupList size={25} />}
               title="Plans"
             />
             <AdminSidebarLink
-              to="/categories"
+              to="categories"
               icon={<BiCategory size={25} />}
               title="Category"
             />
 
             <AdminSidebarLink
-              to="/videos"
+              to="videos"
               icon={<FiUsers size={25} />}
               title="Users"
             />
             <AdminSidebarLink
-              to="/videos"
+              to="videos"
               icon={<BiImage size={25} />}
               title="Banner"
             />
             <AdminSidebarLink
-              to="/videos"
+              to="videos"
               icon={<RiMoneyDollarCircleLine size={25} />}
               title="Payment method"
             />
@@ -131,12 +131,12 @@ const Sidebar = () => {
         {subscription && (
           <div className="mt-5 flex flex-col gap-3">
             <AdminSidebarLink
-              to="/subscribers"
+              to="subscribers"
               icon={<TbUserPlus size={25} />}
               title="Subscriber"
             />
             <AdminSidebarLink
-              to="/subscriptions"
+              to="subscription"
               icon={<RiVipCrownLine size={25} />}
               title="Subscription Plan"
             />

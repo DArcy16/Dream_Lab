@@ -17,9 +17,9 @@ const AdminLayout = () => {
       <div className="flex w-screen gap-4 flex-shrink-0">
         <Sidebar />
 
-        <div>
-          <Outlet />
-        </div>
+        
+        <Outlet />
+        
       </div>
     </div>
   );
