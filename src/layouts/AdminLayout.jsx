@@ -8,7 +8,6 @@ import Sidebar from "../components/admin/Sidebar";
 const AdminLayout = () => {
   const url = useLocation();
   const headerName = url.pathname.split('/').slice(2,3).join('');
-  console.log(headerName)
   
 
   return (
