@@ -138,7 +138,7 @@ const EditSubscription = () => {
         <div className="flex items-center mt-2 gap-2">
           {selectedPlans.length > 0 ? (
             selectedPlans.map((plan) => (
-              <div className="flex w-fit items-center gap-2 py-1 px-3 border border-1 border-solid border-grey/30 rounded-lg">
+              <div className="flex w-fit items-center gap-2 py-1 px-3 border border-1 border-solid border-grey/30 rounded-lg" key={plan.key}>
                 <h2 className="text-semibold capitalize">{plan.name}</h2>
                 <RxCross2
                   className="w-3 h-3"

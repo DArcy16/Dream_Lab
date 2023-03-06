@@ -25,9 +25,9 @@ const ChoosePlanModal = ({ setShowModal, plan, selectedPlans, setSelectedPlans }
   };
 
   return (
-    <div className="absolute z-50 top-0 left-0 flex justify-end items-center w-screen h-full bg-grey/30">
+    <div className="absolute z-50 top-0 left-0 flex justify-end items-center w-full h-full bg-grey/30">
       <div className="w-1/4 fixed top-0 right-0 h-full bg-white py-10 px-12">
-        <div className="w-full flex justify-between items-center">
+        <div className="flex justify-between items-center">
           <h3 className="sub-heading">Select Plan</h3>
 
           <RxCross2 onClick={() => setShowModal(false)} />

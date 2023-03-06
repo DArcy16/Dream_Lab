@@ -7,7 +7,8 @@ import Sidebar from "../components/admin/Sidebar";
 
 const AdminLayout = () => {
   const url = useLocation();
-  const lastPath = url.pathname.split('/').slice(-1).join('');
+  const headerName = url.pathname.split('/').slice(2,3).join('');
+  console.log(headerName)
   
 
   return (
@@ -15,10 +16,10 @@ const AdminLayout = () => {
     <div className="relative">
 
       <Header>
-        { lastPath === "admin" ? "Admin Dashboard" : lastPath}
+        { headerName === '' ? "Admin Dashboard" : `${headerName}s`}
       </Header>
 
-      <div className="flex w-screen gap-4 flex-shrink-0">
+      <div className="flex gap-4 flex-shrink-0">
         <Sidebar />
 
         

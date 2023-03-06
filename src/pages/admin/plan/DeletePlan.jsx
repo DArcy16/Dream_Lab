@@ -3,7 +3,7 @@ import { MdDeleteForever } from "react-icons/md";
 
 const DeletePlan = ({ setShowDeleteModal }) => {
   return (
-    <div className="absolute z-50 top-0 left-0 flex justify-center items-center w-screen h-full bg-grey/30">
+    <div className="absolute z-50 top-0 left-0 flex justify-center items-center w-full h-full bg-grey/30">
       <div className="fixed top-[30vh] w-1/4 h-fit bg-white p-8 rounded-lg shadow-md">
         <MdDeleteForever className="w-12 h-12 mx-auto" />
         <p className="text-center my-4">

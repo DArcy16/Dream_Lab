@@ -10,7 +10,7 @@ import { RegisterBoxContextProvider } from "./contexts/user/RegisterBoxContext";
 function App() {
   const UserRouting = useRoutes(UserRoutes);
   const AdminRouting = useRoutes(AdminRoutes);
-  const isAdmin = true;
+  const isAdmin = false;
 
   return (
 
