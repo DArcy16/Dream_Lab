@@ -3,7 +3,7 @@ import React from 'react'
 const InputForm = ({type, id, placeholder, label = false}) => {
   return (
     <div className="mt-3 w-full">
-      {label ? <label htmlFor="name" className="font-semibold capitalize">
+      {label ? <label htmlFor={id} className="font-semibold capitalize">
         {label}
       </label> : null}
       <input

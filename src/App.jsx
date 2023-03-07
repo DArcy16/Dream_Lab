@@ -8,23 +8,27 @@ import { LoginBoxContextProvider } from "./contexts/user/LoginBoxContext";
 import { RegisterBoxContextProvider } from "./contexts/user/RegisterBoxContext";
 
 function App() {
-  const UserRouting = useRoutes(UserRoutes);
-  const AdminRouting = useRoutes(AdminRoutes);
-  const isAdmin = false;
+	const UserRouting = useRoutes(UserRoutes);
+	const AdminRouting = useRoutes(AdminRoutes);
+	const isAdmin = true;
 
-  return (
-
-    <LoginBoxContextProvider>
-      <RegisterBoxContextProvider>
-        <Routes>
-          <Route path="/*" element={UserRouting} />
-          <Route path="/login" element={AdminRouting} />
-          <Route path="/admin/*" element={AdminRouting} />
-        </Routes>
-      </RegisterBoxContextProvider>
-    </LoginBoxContextProvider>
-
-  );
+	return (
+		<LoginBoxContextProvider>
+			<RegisterBoxContextProvider>
+				<Routes>
+					<Route path="/*" element={UserRouting} />
+					<Route
+						path="/login"
+						element={isAdmin ? <Navigate to="/admin" replace /> : AdminRouting}
+					/>
+					<Route
+						path="/admin/*"
+						element={isAdmin ? AdminRouting : <Navigate to="/login" />}
+					/>
+				</Routes>
+			</RegisterBoxContextProvider>
+		</LoginBoxContextProvider>
+	);
 }
 
 export default App;

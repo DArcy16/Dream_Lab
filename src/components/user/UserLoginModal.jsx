@@ -1,10 +1,10 @@
 /** @format */
 
 import React, { useEffect, useState } from "react";
-import { AiOutlineUser } from "react-icons/ai";
+
 import { useLoginBoxContext } from "../../contexts/user/LoginBoxContext";
 import { useRegisterBoxContext } from "../../contexts/user/RegisterBoxContext";
-import InputForm from "../form/InputForm";
+import InputForm from "../form/InputForm";  
 
 const UserLoginModal = () => {
   const { setShow } = useLoginBoxContext();
@@ -58,6 +58,7 @@ const UserLoginModal = () => {
                   id="password"
                   placeholder="Password"
                 />
+
                 <div className="flex justify-between mt-4">
                   <div className="flex items-start">
                     <div className="flex items-center h-5">

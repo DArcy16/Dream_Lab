@@ -3,7 +3,7 @@ import React from 'react'
 const TextareaForm = ({id, label, placeholder}) => {
   return (
     <div className="mt-3 w-full">
-      <label htmlFor="description" className="font-semibold capitalize">
+      <label htmlFor={id} className="font-semibold capitalize">
         {label}
       </label>
       <textarea

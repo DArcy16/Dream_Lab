@@ -95,18 +95,18 @@ const EditSubscription = () => {
             type="number"
             id="subscription-length"
             placeholder="1"
-            label="subscription length"
+            label="Subscription Length"
           />
           <div className="mt-3 w-full">
             <label
-              htmlFor="subscription-length"
+              htmlFor="subscription-length-type"
               className="font-semibold capitalize"
             >
               Subscription Length Type
             </label>
             <select
-              id="subscription-length"
-              name="subscription-length"
+              id="subscription-length-type"
+              name="subscription-length-type"
               className="w-full bg-white py-2 px-6 rounded-md outline outline-1 outline-grey/30 focus:outline-2 mt-2"
             >
               <option value="day">Day</option>
@@ -118,7 +118,7 @@ const EditSubscription = () => {
 
         <TextareaForm
           id="description"
-          placeholder="type description"
+          placeholder="Type Description"
           label="description"
         />
 

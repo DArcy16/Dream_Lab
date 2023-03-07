@@ -45,7 +45,7 @@ const ChoosePlanModal = ({ setShowModal, plan, selectedPlans, setSelectedPlans }
                   value={item.key}
                   name={item.name}
                   type="checkbox"
-                  onClick={handleChange}
+                  onChange={handleChange}
                   checked = {sampleSelect?.find(plan => plan.key === item.key)}
                 />
                 <label htmlFor={item.name} className="font-semibold capitalize">
