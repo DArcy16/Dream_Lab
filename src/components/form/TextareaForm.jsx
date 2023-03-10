@@ -12,7 +12,6 @@ const TextareaForm = ({id, label, placeholder}) => {
         placeholder={placeholder}
         className="w-full bg-white py-2 px-4 rounded-md outline outline-1 outline-grey/30 focus:outline-2 mt-2 capitalize"
         rows="6"
-        required
       ></textarea>
     </div>
   );
