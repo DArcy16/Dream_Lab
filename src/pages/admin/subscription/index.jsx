@@ -9,13 +9,16 @@ import DeleteModal from "./DeleteModal";
 import { useSubscriptions } from "../../../hooks/useSubscription";
 import {ClipLoader} from 'react-spinners'
 
-const list = [1,2,3,4];
 
 const index = () => {
+  const [id , setId]= useState('');
   const {isLoading , isError, data, error, refetch} = useSubscriptions();
 
+  const refreshData = () => {
+    refetch();
+  }
 
-  console.log(data)
+
 
   const navigate = useNavigate();
   const [showDeleteModal, setShowDeleteModal] = useState(false);
@@ -58,6 +61,7 @@ const index = () => {
               setShowDeleteModal={setShowDeleteModal}
               key={item.id}
               item={item}
+              setId= {setId}
             />
           ))
         ) : (
@@ -69,7 +73,7 @@ const index = () => {
       </div>
 
       {showDeleteModal ? (
-        <DeleteModal setShowDeleteModal={setShowDeleteModal} />
+        <DeleteModal setShowDeleteModal={setShowDeleteModal} id={id} setId={setId} refreshData={refreshData}/>
       ) : null}
     </section>
   );

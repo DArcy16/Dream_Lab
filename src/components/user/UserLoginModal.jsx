@@ -13,6 +13,7 @@ const UserLoginModal = () => {
     setShow(false);
     setShowRegister(true);
   };
+  
   return (
     <div>
       {/* Main modal */}
@@ -50,13 +51,14 @@ const UserLoginModal = () => {
               <h3 className="my-4 text-center text-xl font-bold text-grey4">
                 Login
               </h3>
-              <form action="#">
-                <InputForm type="email" id="email" placeholder="Email" />
+              <form >
+                <InputForm type="email" id="email" placeholder="Email"/>
 
                 <InputForm
                   type="password"
                   id="password"
                   placeholder="Password"
+                  
                 />
 
                 <div className="flex justify-between mt-4">

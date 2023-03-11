@@ -23,3 +23,78 @@ export const fetchSubscription = async () => {
 		throw error;
 	}
 }
+
+export const deleteSubscription = async (id) => {
+    const token = getToken();
+    console.log(token)
+    const requestOption = {
+			headers: {
+				Accept: "application/json",
+				"Content-Type": "application/json",
+				Authorization: `Bearer ${token}`,
+			},
+			mode: "cors",
+			method: "DELETE",
+            redirect : "follow"
+		};
+    try {
+        const res = await fetch(`${URL}subscriptions/${id}`, requestOption)
+        const result = await res.json();
+
+        if(!res.ok) throw new Error(result.message)
+
+        return result;
+
+    } catch (error) {
+        throw error;
+    }
+}
+
+export const createSubscripiton = async (data) => {
+    const token = getToken();
+    const requestOption = {
+        headers : {
+            Authorization: `Bearer ${token}`,
+            Accept : 'application/json',
+            'Content-Type' : 'application/json'
+        },
+        mode : 'cors',
+        method : 'POST',
+        body : JSON.stringify(data)
+    }
+
+    try {
+        const res = await fetch(`${URL}subscriptions`, requestOption);
+        const result = await res.json();
+        
+        if(!res.ok) throw new Error(result.message);
+
+        return result;
+    } catch (error) {
+        throw error;
+    }
+}
+
+export const fetchPlan = async () => {
+	const token = getToken();
+	const requestOption = {
+		headers: {
+			Authorization: `Bearer ${token}`,
+		},
+		mode: "cors",
+		method: "GET",
+	};
+
+	try {
+		const res = await fetch(`${URL}plans`, requestOption);
+		const result = await res.json();
+
+		if (!res.ok) throw new Error(result.message);
+
+		return result;
+	} catch (error) {
+		throw error;
+	}
+};
+
+

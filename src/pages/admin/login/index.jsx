@@ -2,6 +2,8 @@ import React from "react";
 import AdminLoginLogo from "../../../assets/adminlogin.png";
 import Logo2 from "../../../assets/Logo2.svg";
 const index = () => {
+
+
   return (
     <div className="min-h-screen w-full flex">
       <div className="bg-[#E6FBFF] flex self-stretch items-center p-10">
