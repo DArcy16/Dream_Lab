@@ -48,9 +48,9 @@ const CreateSubscription = () => {
 	const onSubmit = (data) => {
 		let statusCode;
 		if (status) {
-			statusCode = "p";
-		} else {
 			statusCode = "a";
+		} else {
+			statusCode = "p";
 		}
 		createSubscriptionMutation.mutate({
 			...data,

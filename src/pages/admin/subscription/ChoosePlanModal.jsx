@@ -5,22 +5,51 @@ import { ClipLoader } from "react-spinners";
 import { RxCross2 } from "react-icons/rx";
 import { usePlanInSubscription } from "../../../hooks/useSubscription";
 
-const ChoosePlanModal = ({ setShowModal, selectedPlans, setSelectedPlans }) => {
+const ChoosePlanModal = ({
+	setShowModal,
+	selectedPlans,
+	setSelectedPlans,
+	handleRemovePlan,
+}) => {
 	const [sampleSelect, setSampleSelect] = useState(selectedPlans);
 	const { isLoading, isError, data, error } = usePlanInSubscription();
 
+
 	const handleChange = (e) => {
 		if (e.currentTarget.checked) {
-			setSampleSelect([
-				...sampleSelect,
-				{ planCode: e.target.value },
-			]);
+			const indexOfCurrentPlan = selectedPlans?.findIndex(
+				(item) => item.planCode === e.target.value
+			);
+
+			if (indexOfCurrentPlan === -1 || indexOfCurrentPlan === undefined) {
+				setSampleSelect([
+					...sampleSelect,
+					{
+						planCode: e.target.value,
+						plan: { planCode: e.target.value, name: e.target.name },
+					},
+				]);
+
+			} else {
+        setSampleSelect([
+					...sampleSelect,
+					{
+            id : selectedPlans.length > 0 ? selectedPlans[indexOfCurrentPlan]?.id : null,
+						planCode: e.target.value,
+						plan: { planCode: e.target.value, name: e.target.name },
+					},
+				]);
+      }
 		} else {
 			setSampleSelect(
 				sampleSelect.filter((plan) => plan.planCode !== e.target.value)
 			);
+			handleRemovePlan(
+				sampleSelect?.filter((plan) => plan.planCode === e.target.value)[0]
+			);
 		}
 	};
+
 
 	const handleDone = () => {
 		setSelectedPlans(sampleSelect);
@@ -54,7 +83,6 @@ const ChoosePlanModal = ({ setShowModal, selectedPlans, setSelectedPlans }) => {
 					data.map((item) => (
 						<div className="flex items-center gap-4 mt-4" key={item.code}>
 							<input
-								id={item.name}
 								value={item.code}
 								name={item.name}
 								type="checkbox"

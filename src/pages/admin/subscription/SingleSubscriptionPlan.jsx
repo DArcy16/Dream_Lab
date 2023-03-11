@@ -22,7 +22,7 @@ const SingleSubscriptionPlan = ({ setShowDeleteModal, item, setId }) => {
 				<div className="basis-1/4 flex justify-end gap-4">
 					<button
 						className="btn-2 w-1/3 py-2"
-						onClick={() => navigate("edit/id")}
+						onClick={() => navigate(`edit/${item.id}`)}
 					>
 						Edit
 					</button>
