@@ -7,17 +7,34 @@ import {RiFileCopy2Line} from "react-icons/ri"
 import SingleSubscriptionPlan from "./SingleSubscriptionPlan";
 import DeleteModal from "./DeleteModal";
 import { useSubscriptions } from "../../../hooks/useSubscription";
+import {ClipLoader} from 'react-spinners'
 
 const list = [1,2,3,4];
 
 const index = () => {
   const {isLoading , isError, data, error, refetch} = useSubscriptions();
 
-  console.log(data);
 
+  console.log(data)
 
   const navigate = useNavigate();
   const [showDeleteModal, setShowDeleteModal] = useState(false);
+
+  if(isLoading) {
+    return <div className="admin-outlet-container flex items-center justify-center">
+      <ClipLoader color="gray" size={50}/>
+    </div>
+  }
+
+  if (isError) {
+		return (
+			<div className="admin-outlet-container flex top-10 justify-center">
+				<p className="text-red-400 text-lg normal-case font-bold">{error.message}</p>
+			</div>
+		);
+	}
+
+
 
   return (
     <section className="admin-outlet-container">
@@ -35,11 +52,12 @@ const index = () => {
 
       {/* Subscription Plan List */}
       <div className="w-full mt-8">
-        {list.length > 0 ? (
-          list.map((item, index) => (
+        {data.length > 0 ? (
+          data.map((item) => (
             <SingleSubscriptionPlan
               setShowDeleteModal={setShowDeleteModal}
-              key={index}
+              key={item.id}
+              item={item}
             />
           ))
         ) : (

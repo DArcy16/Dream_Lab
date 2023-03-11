@@ -1,24 +1,22 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom';
 
-const SingleSubscriptionPlan = ({setShowDeleteModal}) => {
+const SingleSubscriptionPlan = ({setShowDeleteModal, item}) => {
     const navigate = useNavigate();
 
   return (
     <div className="w-full p-8 shadow-xl rounded-lg border-x border-x-grey4/[.15] mt-4">
       <div className="flex justify-between items-center px-6">
         <div className='basis-3/4'>
-          <h3 className="card-header">6 Months Plan</h3>
+          <h3 className="card-header">{item.name}</h3>
           <p className="my-2">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis
-            est animi labore in perspiciatis, voluptatibus expedita eveniet iure
-            sapiente itaque.
+            {item.description}
           </p>
           <p className="text-xl text-dreamLabColor1 font-semibold">
             <span className="text-sm line-through text-textColor3">
-              90000 Ks
+              {item.originalPrice} Ks
             </span>{" "}
-            49,000 Ks
+            {item.salePrice} Ks
           </p>
         </div>
         <div className="basis-1/4 flex justify-end gap-4">
