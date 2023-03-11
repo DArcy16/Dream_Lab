@@ -6,10 +6,16 @@ import { BsPlusCircleFill } from "react-icons/bs";
 import {RiFileCopy2Line} from "react-icons/ri"
 import SingleSubscriptionPlan from "./SingleSubscriptionPlan";
 import DeleteModal from "./DeleteModal";
+import { useSubscriptions } from "../../../hooks/useSubscription";
 
 const list = [1,2,3,4];
 
 const index = () => {
+  const {isLoading , isError, data, error, refetch} = useSubscriptions();
+
+  console.log(data);
+
+
   const navigate = useNavigate();
   const [showDeleteModal, setShowDeleteModal] = useState(false);
 
