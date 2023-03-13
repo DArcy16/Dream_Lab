@@ -8,6 +8,7 @@ import { ClipLoader } from "react-spinners";
 import { useAdminLogin } from "../../../hooks/useAdminAuth";
 
 const index = () => {
+
   const adminLoginMutation = useAdminLogin();
 
   const UserLoginSchema = yup.object({
@@ -26,6 +27,7 @@ const index = () => {
   const onSubmit = (data) => {
     adminLoginMutation.mutate(data);
   };
+
 
   return (
     <div className="min-h-screen w-full flex">
