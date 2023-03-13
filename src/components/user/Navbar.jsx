@@ -14,7 +14,7 @@ const Navbar = () => {
   const { show, setShow } = useLoginBoxContext();
   const token = localStorage.getItem(TOKEN_LOCAL_STORAGE);
   const [isLogin,setIsLogin]= useState(false);
-  const userData= JSON.parse(localStorage.getItem(USER_DATA_LOCAL_STORAGE));
+  const [user, setUser]= useState()
 
   const userLogout=()=>{
     localStorage.clear();
@@ -24,8 +24,10 @@ const Navbar = () => {
   useEffect(()=>{
     if(token){
       setIsLogin(true);
+      setUser(JSON.parse(localStorage.getItem(USER_DATA_LOCAL_STORAGE)));
     }else{
       setIsLogin(false);
+      setUser({})
     };
   },[token])
   
@@ -94,7 +96,7 @@ const Navbar = () => {
                 <div className="w-[45px] rounded-full">
                   <img src="https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=880&q=80" />
                 </div>
-                <p className=" font-semibold">Nice Man</p>
+                <p className=" font-semibold">{user?.displayName ? user?.displayName : user?.email}</p>
               </div>
               <ul tabIndex={0} className="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52">
                 <li><a> <BiUserCircle size={20}/> My Profile</a></li>
