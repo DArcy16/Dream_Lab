@@ -1,4 +1,5 @@
 import { URL } from "./api_endpoint";
+
 export const userRegister= async(data)=>{
     const requestOption={
         headers:{
@@ -44,3 +45,4 @@ export const userLogin= async(data)=>{
         throw error;
     }
 }
+
