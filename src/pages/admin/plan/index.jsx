@@ -6,6 +6,7 @@ import DeletePlan from "./DeletePlan";
 import EditPlan from "./EditPlan";
 import CreatePlan from "./CreatePlan";
 import { usePlanData } from "../../../hooks/usePlan";
+import {RiFileCopy2Line} from 'react-icons/ri'
 import { ClipLoader } from "react-spinners";
 import PlanItem from "./PlanItem";
 

@@ -19,10 +19,7 @@ function App() {
   const [token, setToken] = useState(localStorage.getItem(TOKEN_LOCAL_STORAGE));
   const [isAdmin, setIsAdmin] = useState(false);
 
-  console.log(
-    "localStorage.getItem(TOKEN_LOCAL_STORAGE)",
-    localStorage.getItem(TOKEN_LOCAL_STORAGE)
-  );
+ 
   const checkAdmin = async () => {
     const requestOption = {
       headers: {

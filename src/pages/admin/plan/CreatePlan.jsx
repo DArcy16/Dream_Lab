@@ -14,7 +14,7 @@ const PlanSchema = yup.object({
   name: yup.string().required(),
 });
 
-const CreatePlan = ({createStatus, setCreateStatus, refreshData }) => {
+const CreatePlan = ({ setCreateStatus, refreshData }) => {
   const createPlanMutation = useCreatePlan();
 
   const {
