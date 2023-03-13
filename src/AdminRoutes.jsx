@@ -4,10 +4,9 @@ import AdminLayout from "./layouts/AdminLayout";
 import Dashboard from "./pages/admin/dashboard";
 import Plan from "./pages/admin/plan";
 import Login from "./pages/admin/login";
-import Subscription from "./pages/admin/subscription"
-import CreateSubscription from "./pages/admin/subscription/CreateSubscription"
-import EditSubscription from "./pages/admin/subscription/EditSubscription"
-
+import Subscription from "./pages/admin/subscription";
+import CreateSubscription from "./pages/admin/subscription/CreateSubscription";
+import EditSubscription from "./pages/admin/subscription/EditSubscription";
 
 const routes = [
   {
@@ -24,12 +23,12 @@ const routes = [
       },
       {
         path: "subscription",
-        children : [
-          { index : true, element : <Subscription />},
-          { path : "create", element : <CreateSubscription /> },
-          { path : "edit/:id", element : <EditSubscription /> }
-        ]
-      }
+        children: [
+          { index: true, element: <Subscription /> },
+          { path: "create", element: <CreateSubscription /> },
+          { path: "edit/:id", element: <EditSubscription /> },
+        ],
+      },
     ],
   },
   {
