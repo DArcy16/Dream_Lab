@@ -18,7 +18,7 @@ function App() {
   const AdminRouting = useRoutes(AdminRoutes);
   const [token, setToken] = useState(localStorage.getItem(TOKEN_LOCAL_STORAGE));
   const [isAdmin, setIsAdmin] = useState(false);
-
+     
  
   const checkAdmin = async () => {
     const requestOption = {
@@ -38,7 +38,7 @@ function App() {
       if (rep === 200) {
         setIsAdmin(true);
       } else {
-        setIsAdmin(false);
+        setIsAdmin(false); 
       }
     });
   }, [token]);
@@ -53,7 +53,7 @@ function App() {
                 path="/login"
                 element={
                   isAdmin ? <Navigate to="/admin" replace /> : AdminRouting
-                }
+                }         
               />
               <Route
                 path="/admin/*"
