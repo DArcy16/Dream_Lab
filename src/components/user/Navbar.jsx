@@ -1,3 +1,5 @@
+/** @format */
+
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { AiFillHome, AiOutlineUser, AiOutlineLogout } from "react-icons/ai";
@@ -5,41 +7,43 @@ import { BiSearch, BiMenuAltLeft, BiUserCircle } from "react-icons/bi";
 import { RiMoneyDollarCircleFill } from "react-icons/ri";
 import { MdLocalLibrary } from "react-icons/md";
 import UserLoginModal from "./UserLoginModal";
+import Logo from "../../assets/Icon.svg";
 import { useLoginBoxContext } from "../../contexts/user/LoginBoxContext";
 import NavDrawer from "./NavDrawer";
-import { TOKEN_LOCAL_STORAGE, USER_DATA_LOCAL_STORAGE } from "../../hooks/useUserAuth";
+import {
+	TOKEN_LOCAL_STORAGE,
+	USER_DATA_LOCAL_STORAGE,
+} from "../../hooks/useUserAuth";
 
 const Navbar = () => {
-  const [active, setActive] = useState("home");
-  const { show, setShow } = useLoginBoxContext();
-  const token = localStorage.getItem(TOKEN_LOCAL_STORAGE);
-  const [isLogin,setIsLogin]= useState(false);
-  const [user, setUser]= useState()
+	const [active, setActive] = useState("home");
+	const { show, setShow } = useLoginBoxContext();
+	const token = localStorage.getItem(TOKEN_LOCAL_STORAGE);
+	const [isLogin, setIsLogin] = useState(false);
+	const [user, setUser] = useState();
 
-  const userLogout=()=>{
-    localStorage.clear();
-    setIsLogin(false);
-  };
+	const userLogout = () => {
+		localStorage.clear();
+		setIsLogin(false);
+	};
 
-  useEffect(()=>{
-    if(token){
-      setIsLogin(true);
-      setUser(JSON.parse(localStorage.getItem(USER_DATA_LOCAL_STORAGE)));
-    }else{
-      setIsLogin(false);
-      setUser({})
-    };
-  },[token])
-  
-  return (
+	useEffect(() => {
+		if (token) {
+			setIsLogin(true);
+			setUser(JSON.parse(localStorage.getItem(USER_DATA_LOCAL_STORAGE)));
+		} else {
+			setIsLogin(false);
+			setUser({});
+		}
+	}, [token]);
+
+	return (
 		<div className="w-full sticky top-0 left-0 right-0 shadow-sm bg-white">
 			<nav className="container mx-auto flex items-center justify-between h-[70px] md:h-[80px] text-[16px]">
 				<div className="nav-left flex items-center">
 					{/* drawer init and show */}
 					{<NavDrawer />}
-					<div className="logo mr-10">
-						<p>DREAM LAB</p>
-					</div>
+					<img src={Logo} className="mr-10" />
 					<ul className="hidden md:flex gap-6 ">
 						<li>
 							<Link
