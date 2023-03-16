@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const PlanCard = ({ planDetail }) => {
   const formatPrice = (price) => {
@@ -23,7 +24,12 @@ const PlanCard = ({ planDetail }) => {
           </span>
         </div>
 
-        <button className="btn-2 py-2 px-3 mt-4">Purchase Now</button>
+        <Link
+          to="/payment-details"
+          className="btn-2 py-2 px-3 mt-4 text-center"
+        >
+          <button>Purchase Now</button>
+        </Link>
       </div>
     </div>
   );
