@@ -12,13 +12,13 @@ const AdminLayout = () => {
 
   return (
 
-    <div className="relative">
+    <div className="relative h-full">
 
       <Header>
         { headerName === '' ? "Admin Dashboard" : `${headerName}s`}
       </Header>
 
-      <div className="flex gap-4 flex-shrink-0">
+      <div className="flex gap-4 flex-shrink-0 h-full">
         <Sidebar />
 
         

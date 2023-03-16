@@ -89,7 +89,7 @@ const NavDrawer = () => {
                 className={`flex items-center gap-2 ${
                   active == "pricing" ? "text-dreamLabColor1" : null
                 }`}
-                to={"/"}
+                to="/pricing"
                 onClick={() => setActive("pricing")}
               >
                 <RiMoneyDollarCircleFill />

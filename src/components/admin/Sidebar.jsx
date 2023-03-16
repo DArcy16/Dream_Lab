@@ -20,11 +20,7 @@ const Sidebar = () => {
   const [subscription, setSubscription] = useState(false);
 
   const handleLogout = () => {
-    navigate("/login");
-
-
-
-    
+    navigate("/login"); 
   };
   return (
 

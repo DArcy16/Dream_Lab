@@ -2,18 +2,38 @@
 
 import React, { useState } from "react";
 import { BsPlusCircleFill } from "react-icons/bs";
-import SinglePlan from "./SinglePlan";
 import DeletePlan from "./DeletePlan";
 import EditPlan from "./EditPlan";
 import CreatePlan from "./CreatePlan";
-
-const list = [1, 2, 3, 4];
+import { usePlanData } from "../../../hooks/usePlan";
+import {RiFileCopy2Line} from 'react-icons/ri'
+import { ClipLoader } from "react-spinners";
+import PlanItem from "./PlanItem";
 
 const index = () => {
-  const [showDeleteModal, setShowDeleteModal] = useState(false);
-  const [showCreateNewPlan, setShowCreateNewPlan] = useState(false);
-  const [showEditPlan, setShowEditPlan] = useState(false);
-  
+  const [deleteStatus, setDeleteStatus] = useState(false);
+  const [createStatus, setCreateStatus] = useState(false);
+  const [editStatus, setEditStatus] = useState(false);
+  const [code, setCode] = useState("");
+  const [editPlan, setEditPlan] = useState({ code: "", name: "" });
+
+  const { isLoading, isError, error, data, refetch } = usePlanData();
+
+  const refreshData = () => {
+    refetch();
+  };
+
+  if (isLoading) {
+    return (
+      <section className="flex items-center justify-center h-screen w-full">
+        <ClipLoader />
+      </section>
+    );
+  }
+
+  if (isError) {
+    return <h1>{error.message}</h1>;
+  }
 
   return (
     <section className="admin-outlet-container">
@@ -25,7 +45,7 @@ const index = () => {
           </h3>
           <button
             className="btn-2 flex gap-2 items-center justify-center px-4 py-2 w-44"
-            onClick={() => setShowCreateNewPlan(true)}
+            onClick={() => setCreateStatus(true)}
           >
             {" "}
             <BsPlusCircleFill /> Create New{" "}
@@ -34,11 +54,14 @@ const index = () => {
 
         {/*  Plan List */}
         <div className="w-full mt-8">
-          {list.length > 0 ? (
-            list.map((item, index) => (
-              <SinglePlan
-                setShowDeleteModal={setShowDeleteModal}
-                setShowEditPlan={setShowEditPlan}
+          {data.length > 0 ? (
+            data.map((plan, index) => (
+              <PlanItem
+                plan={plan}
+                setDeleteStatus={setDeleteStatus}
+                setEditStatus={setEditStatus}
+                setCode={setCode}
+                setEditPlan={setEditPlan}
                 key={index}
               />
             ))
@@ -53,13 +76,28 @@ const index = () => {
         </div>
       </div>
 
-      {showDeleteModal ? (
-        <DeletePlan setShowDeleteModal={setShowDeleteModal} />
+      {createStatus ? (
+        <CreatePlan
+          setCreateStatus={setCreateStatus}
+          refreshData={refreshData}
+        />
       ) : null}
-      {showCreateNewPlan ? (
-        <CreatePlan setShowCreateNewPlan={setShowCreateNewPlan} />
+
+      {editStatus ? (
+        <EditPlan
+          setEditStatus={setEditStatus}
+          refreshData={refreshData}
+          editPlan={editPlan}
+        />
       ) : null}
-      {showEditPlan ? <EditPlan setShowEditPlan={setShowEditPlan} /> : null}
+
+      {deleteStatus ? (
+        <DeletePlan
+          setDeleteStatus={setDeleteStatus}
+          code={code}
+          refreshData={refreshData}
+        />
+      ) : null}
     </section>
   );
 };
