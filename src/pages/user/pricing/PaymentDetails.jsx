@@ -1,5 +1,5 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { HiOutlinePhotograph } from "react-icons/hi";
 import { BsArrowLeft } from "react-icons/bs";
 import { RiVipCrownLine } from "react-icons/ri";
@@ -9,10 +9,58 @@ import wavePay from "../../../assets/wavePay.png";
 import kbzPay from "../../../assets/kbzBank.png";
 import ayaPay from "../../../assets/ayaPay.png";
 import aya1 from "../../../assets/aya1.png";
+import { useLocation } from "react-router-dom";
+import { useForm } from "react-hook-form";
+import { useDropzone } from "react-dropzone";
+import { useSubscriberScription } from "../../../hooks/useSubscription";
+import { ClipLoader } from "react-spinners";
+import dayjs from "dayjs";
 const PaymentDetails = () => {
+  const navigate = useNavigate();
+  const [previewUrl, setPreviewUrl] = useState(null);
+  const [imageFile, setImageFile] = useState(null);
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm();
+
+  const location = useLocation();
+
+  const createSubscriberscriptionMutation = useSubscriberScription();
+
   const formatPrice = (price) => {
     return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   };
+
+  const handleDrop = (acceptedFiles) => {
+    console.log("acceptedFiles", acceptedFiles);
+    const file = acceptedFiles[0];
+    const previewUrl = URL.createObjectURL(file);
+    setPreviewUrl(previewUrl);
+    setImageFile(file);
+  };
+
+  const { getRootProps, getInputProps } = useDropzone({
+    accept: "image/*",
+    multiple: false,
+    onDrop: handleDrop,
+  });
+
+  const onHandleSubmit = (e) => {
+    e.preventDefault();
+
+    createSubscriberscriptionMutation.mutate({
+      startDate: dayjs().format("YYYY-MM-DD"),
+      subscriptionId: location?.state?.subscriptionId.toString(),
+      paymentImage: imageFile,
+    });
+  };
+
+  if (createSubscriberscriptionMutation.isSuccess) {
+    navigate("/pricing");
+  }
   return (
     <div className="flex w-full h-auto">
       <div className="flex-1 bg-dreamLabColor4 text-white pl-14 pr-10 pt-8">
@@ -40,7 +88,7 @@ const PaymentDetails = () => {
             <span>Total Price</span>
           </p>
           <p className="text-[22px] font-semibold flex items-center justify-between">
-            <span>*LifeTimePlan</span>
+            <span>*{location?.state?.planData?.name}</span>
 
             <span
               className="text-[28px] font-semibold"
@@ -51,7 +99,7 @@ const PaymentDetails = () => {
                 WebkitTextFillColor: "transparent",
               }}
             >
-              {formatPrice(490000)} Ks
+              {formatPrice(location?.state?.planData?.salePrice)} Ks
             </span>
           </p>
         </div>
@@ -153,7 +201,11 @@ const PaymentDetails = () => {
                 id="name"
                 type="text"
                 placeholder="Enter Your Name"
+                {...register("name", { required: true })}
               />
+              {errors.name && (
+                <span className="text-red-500">This field is required</span>
+              )}
             </div>
             <div className="mb-8">
               <label
@@ -167,6 +219,7 @@ const PaymentDetails = () => {
                 id="email"
                 type="email"
                 placeholder="Enter Your Email"
+                {...register("email")}
               />
             </div>
             <div className="mb-8">
@@ -181,32 +234,50 @@ const PaymentDetails = () => {
                 id="phone"
                 type="tel"
                 placeholder="Enter Your Phone Number"
+                {...register("phone", { required: true })}
               />
+              {errors.phone && (
+                <span className="text-red-500">This field is required</span>
+              )}
             </div>
             <div className="font-2xl font-semibold mb-4">ငွေလွှဲပြေစာ</div>
-            <div className="relative cursor-pointer">
-              <label
-                htmlFor="bank-slip-input"
-                className="w-full h-full border border-dashed border-gray-500 rounded-md p-12 cursor-pointer flex flex-col items-center justify-center"
-              >
-                <HiOutlinePhotograph className="text-grey2 text-4xl mb-4" />
-                <span className="text-grey2 text-sm">
-                  Upload Your Bank Slip Here
-                </span>
-              </label>
-              <input
-                id="bank-slip-input"
-                className="absolute top-0 left-0 right-0 bottom-0 w-full opacity-0 cursor-pointer"
+
+            <div
+              {...getRootProps()}
+              className="flex flex-col rounded-sm h-40 border border-dashed items-center gap-5 cursor-pointer"
+            >
+              <input {...getInputProps()} />
+              {/* <input
                 type="file"
-                accept="image/*"
-              />
+                onChange={(e) => setImageFile(e.target.files[0])}
+              /> */}
+
+              {previewUrl ? (
+                <div>
+                  <img
+                    src={previewUrl}
+                    alt="Preview"
+                    className="w-[120px] h-[120px] mt-5 "
+                  />
+                </div>
+              ) : (
+                <div className="text-xl text-grey2 flex flex-col items-center">
+                  <HiOutlinePhotograph className="mt-10 text-4xl text-grey2" />
+                  Upload Your Bank Slip Here
+                </div>
+              )}
             </div>
 
-            <div className="btn-2 py-2 px-3 mt-16 text-center">
-              <Link to="/payment-details">
-                <button>Buy Now</button>
-              </Link>
-            </div>
+            <button
+              onClick={onHandleSubmit}
+              type="submit"
+              className="btn-2 py-2 px-3 mt-16 flex items-center justify-center w-[100%]"
+            >
+              {createSubscriberscriptionMutation.isLoading && (
+                <ClipLoader color="white" size={20} className="mr-3" />
+              )}
+              Buy Now
+            </button>
           </form>
         </div>
       </div>

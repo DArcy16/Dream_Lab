@@ -1,15 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 import { RiVipCrownLine } from "react-icons/ri";
 import CheckIcon from "../../../assets/checkMark";
 import CrownIcon from "../../../assets/crownIcon";
 import PlanCard from "../../../components/user/PlanCard";
-import { planData } from "../../../utils/planData";
-
+import { useSubscriptions } from "../../../hooks/useSubscription";
 const index = () => {
+  const { isLoading, isError, error, data, refetch } = useSubscriptions();
+
   return (
     <div>
       <div className="flex flex-col bg-dreamLabColor4 p-14 text-white">
-        <div class="flex self-end gap-8">
+        <div className="flex self-end gap-8">
           <div>FREE</div>
           <div>PREMIUM</div>
         </div>
@@ -51,8 +52,8 @@ const index = () => {
             <p className="mb-0">Unlimited Podcasts</p>
             <p className="mb-0">Unlimited Videos</p>
           </div>
-          <div class="flex w-custom self-start mt-3">
-            <div class="flex flex-col items-center justify-center gap-8 mr-16 mt-5">
+          <div className="flex w-custom self-start mt-3">
+            <div className="flex flex-col items-center justify-center gap-8 mr-16 mt-5">
               <span>
                 <CheckIcon />
               </span>
@@ -62,7 +63,7 @@ const index = () => {
               <span>-</span>
             </div>
 
-            <div class="flex flex-col justify-center gap-10 mt-4">
+            <div className="flex flex-col justify-center gap-10 mt-4">
               <span>
                 <CheckIcon />
               </span>
@@ -87,8 +88,8 @@ const index = () => {
           Choose Your MemberShip
         </h3>
         <div className="flex gap-6">
-          {planData.map((plan) => (
-            <PlanCard planDetail={plan} />
+          {data?.map((plan) => (
+            <PlanCard key={plan?.id} planDetail={plan} />
           ))}
         </div>
       </div>
