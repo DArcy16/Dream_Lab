@@ -49,7 +49,7 @@ const Sidebar = () => {
         />
         <div className="border-t text-white text-opacity-25 my-3"></div>
         <li
-          className="flex items-center justify-between"
+          className="flex items-center justify-between cursor-pointer"
           onClick={() => {
             setManage(!manage);
             setSubscription(false);
@@ -115,7 +115,7 @@ const Sidebar = () => {
         )}
         <div className="border-t text-white text-opacity-25 my-3"></div>
         <li
-          className="flex items-center justify-between"
+          className="flex items-center justify-between cursor-pointer"
           onClick={() => {
             setSubscription(!subscription);
             setManage(false);
