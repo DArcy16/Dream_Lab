@@ -23,7 +23,7 @@ module.exports = {
     },
     colors: {
       red: colors.red,
-      green: colors.green,
+      green: "#058523",
       yellow: colors.yellow,
       white: "#FFFFFF",
       black: "#00000",
@@ -45,6 +45,7 @@ module.exports = {
       stoke: "#bfbfbf",
       gold: "#C58F09",
       greyNav: "#8E98B0",
+      orangee : "#C99206"
     },
     width: {
       custom: "125px",

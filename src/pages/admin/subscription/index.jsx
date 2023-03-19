@@ -13,6 +13,7 @@ import {ClipLoader} from 'react-spinners'
 const index = () => {
   const [id , setId]= useState('');
   const {isLoading , isError, data, error, refetch} = useSubscriptions();
+  
 
   const refreshData = () => {
     refetch();
