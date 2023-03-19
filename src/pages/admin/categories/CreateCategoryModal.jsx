@@ -11,7 +11,6 @@ import { useCreateCategory } from "../../../hooks/useCategories";
 
 const CategorySchema = yup.object({
   name: yup.string().required(),
-  icon: yup.string().required()
 });
 
 const CreateCategoryModal = ({ setCreateStatus, refreshData }) => {
@@ -30,16 +29,13 @@ const CreateCategoryModal = ({ setCreateStatus, refreshData }) => {
   });
 
   const onSubmit=(data)=>{
-    // const formData= new FormData();
-    // formData.append("name",data.name);
-    // formData.append("icon",data.icon[0]);
-    // createCategoryMutation.mutate(data);
-    console.log(data);
+    createCategoryMutation.mutate({name:data.name,icon});
   }
 
   useEffect(() => {
     if (createCategoryMutation.isSuccess) {
-      reset({ name: "",icon:"" });
+      reset({ name: ""});
+      setIcon(null);
       refreshData();
       setCreateStatus(false);
     }
@@ -69,6 +65,8 @@ const CreateCategoryModal = ({ setCreateStatus, refreshData }) => {
             accept="image/*"
             register={register}
             errors={errors}
+            setIcon={setIcon}
+            icon= {icon}
           />
 
           <InputForm
@@ -80,7 +78,10 @@ const CreateCategoryModal = ({ setCreateStatus, refreshData }) => {
             errors={errors}
           />
 
-          <button className="btn-2 w-full py-2 px-3 mt-4" type="submit">
+          <button className="btn-2 w-full py-2 px-3 mt-4 flex justify-center items-center gap-3" type="submit">
+            {
+              createCategoryMutation.isLoading && <ClipLoader color="white" size={20}/>
+            }
             Create
           </button>
         </form>

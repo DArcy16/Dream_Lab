@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { RxCross2 } from "react-icons/rx";
 import { ClipLoader } from "react-spinners";
@@ -7,6 +7,8 @@ import { useUpdateCategory } from "../../../hooks/useCategories";
 
 const EditCategoryModal = ({ editCategory, setEditStatus, refreshData }) => {
   const updateCategoryMutation = useUpdateCategory();
+  const [icon,setIcon]= useState(editCategory.icon);
+  const isEdit= true;
 
   const {
     register,
@@ -16,11 +18,10 @@ const EditCategoryModal = ({ editCategory, setEditStatus, refreshData }) => {
   } = useForm();
 
   const onSubmit = (data) => {
-    console.log(data);
+    updateCategoryMutation.mutate({id:editCategory.id,name:data.name,icon});
   };
 
   useEffect(() => {
-    setValue("icon", editCategory.icon);
     setValue("name", editCategory.name);
   }, [editCategory]);
 
@@ -48,8 +49,9 @@ const EditCategoryModal = ({ editCategory, setEditStatus, refreshData }) => {
             id="icon"
             type="file"
             accept="image/*"
-            register={register}
-            errors={errors}
+            setIcon={setIcon}
+            icon={icon}
+            isEdit={isEdit}
           />
 
           <InputForm
@@ -65,7 +67,7 @@ const EditCategoryModal = ({ editCategory, setEditStatus, refreshData }) => {
             <p className="text-red-600">{updateCategoryMutation.error.message}</p>
           )}
 
-          <button className="btn-2 w-full py-2 px-3 mt-4" type="submit">
+          <button className="btn-2 w-full py-2 px-3 mt-4 flex justify-center items-center gap-3" type="submit">
             {updateCategoryMutation.isLoading && (
               <ClipLoader color="white" size={20} />
             )}

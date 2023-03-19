@@ -1,7 +1,8 @@
 /** @format */
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { RiImageAddFill } from "react-icons/ri";
+import {FaRegTrashAlt} from "react-icons/fa";
 
 const InputForm = ({
   type,
@@ -11,6 +12,9 @@ const InputForm = ({
   register = "",
   errors = "",
   accept="",
+  setIcon,
+  icon,
+  isEdit
 }) => {
 	const [image,setImage]= useState("");
   const inputClick = () => {
@@ -20,8 +24,15 @@ const InputForm = ({
   const handleImage=(event)=>{
 	if(event.target.files[0]){
 		setImage(URL.createObjectURL(event.target.files[0]));
+    setIcon(event.target.files[0]);
 	}
   };
+
+  useEffect(()=>{
+    if(isEdit){
+      setImage(icon);
+    }
+  },[]);
 
   if (accept !== "") {
     return (
@@ -39,13 +50,15 @@ const InputForm = ({
             accept={accept}
             id={id}
             className=" hidden"
-            {...register(id)}
 			      onChange={handleImage}
           />
         </div>
 			) : (
-				<div className="mt-3 w-full">
+				<div className="mt-3 w-full relative group">
 					<img src={image} alt="input-img" className="w-full"/>
+          <button className=" absolute top-2 right-[-100%] group-hover:right-2 transition-all duration-200 p-2 bg-white overflow-hidden" onClick={()=>setImage("")}>
+            <FaRegTrashAlt className=" text-red-500"/>
+          </button>
 				</div>
 			)
 		}

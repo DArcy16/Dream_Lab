@@ -22,15 +22,16 @@ export const fetchCategories = async () => {
 
 export const createCategory = async (data) => {
   const token = getToken();
+  const formData= new FormData();
+    formData.append("name",data.name);
+    formData.append("icon",data.icon,data.icon.name);
   const requestOption = {
     headers: {
-      Accept: " application/json",
-      "Content-Type": "application/json",
       Authorization: `Bearer ${token}`,
     },
     mode: "cors",
     method: "POST",
-    body: JSON.stringify(data),
+    body: formData,
   };
   try {
     const response = await fetch(`${URL}categories`,requestOption);
@@ -44,15 +45,16 @@ export const createCategory = async (data) => {
 
 export const updateCategory = async (data) => {
   const token = getToken();
+  const formData= new FormData();
+    formData.append("name",data.name);
+    formData.append("icon",data.icon);
   const requestOption = {
     headers: {
-      Accept: "application/json",
-      "Content-Type": "application/json",
       Authorization: `Bearer ${token}`,
     },
     mode: "cors",
     method: "PATCH",
-    body: JSON.stringify(data),
+    body: formData,
   };
   try {
     const response = await fetch(`${URL}categories/${data.id}`, requestOption);
