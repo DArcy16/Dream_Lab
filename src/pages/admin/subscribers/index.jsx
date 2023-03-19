@@ -1,7 +1,6 @@
 /** @format */
 
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 import { ClipLoader } from "react-spinners";
 
 import SubscriberList from "./SubscriberList";
@@ -24,7 +23,6 @@ const index = () => {
 		url,
 		navLink
 	);
-
 
 	const filterArr = isLoading
 		? null
