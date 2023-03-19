@@ -10,6 +10,8 @@ import EditSubscription from "./pages/admin/subscription/EditSubscription";
 import Subscribers from "./pages/admin/subscribers";
 import UserDetails from "./pages/admin/subscribers/UserDetails";
 import Categories from "./pages/admin/categories"
+import ActiveUserPage from "./pages/admin/subscribers/ActiveUserPage";
+import ExpiredUserPage from "./pages/admin/subscribers/ExpiredUserPage";
 
 const routes = [
 	{
@@ -36,7 +38,8 @@ const routes = [
 				path: "subscribers",
 				children: [
 					{ index: true, element: <Subscribers /> },
-					{ path: "user-details", element: <UserDetails /> },
+					{ path: "active-user-details", element: <ActiveUserPage /> },
+					{ path: "expired-user-details", element: <ExpiredUserPage />}
 				],
 			},
 			{

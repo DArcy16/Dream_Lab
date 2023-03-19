@@ -2,232 +2,109 @@
 
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { FaCrown } from "react-icons/fa";
-
-import {
-	BsPersonCheckFill,
-	BsPersonFillAdd,
-	BsPlusCircleFill,
-} from "react-icons/bs";
+import { ClipLoader } from "react-spinners";
 
 import SubscriberList from "./SubscriberList";
 import RequestModal from "./RequestModal";
 import SearchSection from "./SearchSection";
-
-const data = [
-	{
-		name: "Xapher",
-		img: "../../../assets/profile.png",
-		plan: "12 Months Plan",
-		status: "p",
-		data: "15 Jan 2022",
-	},
-	{
-		name: "Xapher",
-		img: "../../../assets/profile.png",
-		plan: "12 Months Plan",
-		status: "a",
-		data: "15 Jan 2022",
-	},
-	{
-		name: "Xapher",
-		img: "../../../assets/profile.png",
-		plan: "12 Months Plan",
-		status: "p",
-		data: "15 Jan 2022",
-	},
-	{
-		name: "Xapher",
-		img: "../../../assets/profile.png",
-		plan: "12 Months Plan",
-		status: "a",
-		data: "15 Jan 2022",
-	},
-	{
-		name: "Xapher",
-		img: "../../../assets/profile.png",
-		plan: "12 Months Plan",
-		status: "p",
-		data: "15 Jan 2022",
-	},
-	{
-		name: "Xapher",
-		img: "../../../assets/profile.png",
-		plan: "12 Months Plan",
-		status: "a",
-		data: "15 Jan 2022",
-	},
-	{
-		name: "Xapher",
-		img: "../../../assets/profile.png",
-		plan: "12 Months Plan",
-		status: "p",
-		data: "15 Jan 2022",
-	},
-	{
-		name: "Xapher",
-		img: "../../../assets/profile.png",
-		plan: "12 Months Plan",
-		status: "a",
-		data: "15 Jan 2022",
-	},
-	{
-		name: "Xapher",
-		img: "../../../assets/profile.png",
-		plan: "12 Months Plan",
-		status: "p",
-		data: "15 Jan 2022",
-	},
-	{
-		name: "Xapher",
-		img: "../../../assets/profile.png",
-		plan: "12 Months Plan",
-		status: "a",
-		data: "15 Jan 2022",
-	},
-	{
-		name: "Xapher",
-		img: "../../../assets/profile.png",
-		plan: "12 Months Plan",
-		status: "e",
-		data: "15 Jan 2022",
-	},
-	{
-		name: "Xapher",
-		img: "../../../assets/profile.png",
-		plan: "12 Months Plan",
-		status: "e",
-		data: "15 Jan 2022",
-	},
-	{
-		name: "Xapher",
-		img: "../../../assets/profile.png",
-		plan: "12 Months Plan",
-		status: "e",
-		data: "15 Jan 2022",
-	},
-];
-
-
+import Navbar from "./Navbar";
+import { useSubscribers } from "../../../hooks/useSubscribers";
+import Paginaiton from "./Paginaiton";
+import CountSection from "./CountSection";
 
 const index = () => {
 	const [navLink, setNavLink] = useState("all");
 	const [showRequestModal, setShowRequestModal] = useState(false);
-	const [subscribers, setSubscribers] = useState(data);
+	const [subscribers, setSubscribers] = useState([]);
+	const [subscriber, setSubscriber] = useState([]);
+	const [filter, setFilter] = useState("all");
+	const [searchQuery, setSearchQuery] = useState("");
+	const [url, setUrl] = useState("");
+	const { data, isLoading, isError, error, refetch } = useSubscribers(
+		url,
+		navLink
+	);
+
+
+	const filterArr = isLoading
+		? null
+		: data.items.reduce((arr, subscriber) => {
+				if (index === 0) {
+					arr.push({
+						value: subscriber.subscription.id,
+						name: subscriber.subscription.name,
+					});
+				} else {
+					if (arr.some((item) => item.value === subscriber.subscription.id)) {
+					} else {
+						arr.push({
+							value: subscriber.subscription.id,
+							name: subscriber.subscription.name,
+						});
+					}
+				}
+
+				return arr;
+		  }, []);
+
 
 	useEffect(() => {
-		if(navLink === "all") {
-			setSubscribers(data)
-		} else if(navLink === "request") {
-			setSubscribers(data.filter(user => user.status === 'p'))
-		} else if(navLink === "active") {
-			setSubscribers(data.filter(user => user.status === 'a'))
-		} else {
-			setSubscribers(data.filter(user => user.status === 'e'))
+		if (!isLoading) {
+			setSubscribers(
+				data.items
+					?.filter((item) =>
+						filter === "all"
+							? true
+							: item?.subscription?.id === parseInt(filter)
+					)
+					?.filter((item) =>
+						searchQuery === ""
+							? true
+							: item?.user?.displayName
+									?.toLowerCase()
+									?.includes(searchQuery?.toLowerCase())
+					)
+			);
 		}
-
-	}, [navLink])
+	}, [filter, searchQuery, data]);
 
 	return (
 		<div className="p-10 basis-4/5">
 			<h2 className="text-lg font-bold">Subscribers</h2>
 
-			{/* Show Number of Subscribers Section */}
+			<CountSection />
 
-			<section className="w-full flex justify-center space-x-6 mt-8">
-				<div className="flex w-1/4 bg-grey6/30 rounded-md items-center justify-center space-x-4 px-3 py-6">
-					<div className="p-2 bg-dreamLabColor1/25 rounded-md">
-						<FaCrown className="text-dreamLabColor1 w-6 h-6" />
-					</div>
-					<div className="space-y-2">
-						<p>Total Subscribers</p>
-						<p className="text-2xl font-extrabold text-dreamLabColor1">
-							23,500
-						</p>
-					</div>
+			<Navbar navLink={navLink} setNavLink={setNavLink} setUrl={setUrl} setFilter={setFilter}/>
+
+			<SearchSection setSearchQuery={setSearchQuery} setFilter={setFilter} filterArr={filterArr}/>
+
+			{isError ? (
+				<div className="w-full h-60 flex items-center justify-center">
+					<p className="text-lg text-red-500">{error.message}</p>
 				</div>
-
-				<div className="flex w-1/4 bg-grey6/30 rounded-md items-center justify-center space-x-4 px-3 py-6">
-					<div className="p-2 bg-green/25 rounded-md">
-						<BsPersonCheckFill className="text-green w-6 h-6" />
-					</div>
-					<div className="space-y-2">
-						<p>Active Subscribers</p>
-						<p className="text-2xl font-extrabold text-green">23,500</p>
-					</div>
+			) : isLoading ? (
+				<div className="w-full h-60 flex items-center justify-center">
+					<ClipLoader color="grey" size={30} />
 				</div>
+			) : (
+				<>
+					<SubscriberList
+						subscribers={subscribers}
+						setSubscriber={setSubscriber}
+						setShowRequestModal={setShowRequestModal}
+					/>
 
-				<div className="flex w-1/4 bg-grey6/30 rounded-md items-center justify-center space-x-4 px-3 py-6">
-					<div className="p-2 bg-gold/25 rounded-md">
-						<BsPersonFillAdd className="text-gold w-6 h-6" />
-					</div>
-					<div className="space-y-2">
-						<p>Request Subscribers</p>
-						<p className="text-2xl font-extrabold text-gold">23,500</p>
-					</div>
-				</div>
-			</section>
+					<Paginaiton data={data} setUrl={setUrl} />
+				</>
+			)}
 
-			{/* Navbar*/}
-			<section className="mt-8">
-				<div className="w-full flex items-center justify-between py-2">
-					<nav className="flex item-center gap-6">
-						<h3
-							className={`font-semibold ${
-								navLink === "all"
-									? "text-dreamLabColor1 underline underline-offset-8 decoration-2"
-									: null
-							} cursor-pointer`}
-							onClick={() => setNavLink("all")}
-						>
-							All Subscribers
-						</h3>
-						<h3
-							className={`font-semibold ${
-								navLink === "request"
-									? "text-dreamLabColor1 underline underline-offset-8 decoration-2"
-									: null
-							} cursor-pointer`}
-							onClick={() => setNavLink("request")}
-						>
-							Request
-						</h3>
-						<h3
-							className={`font-semibold ${
-								navLink === "active"
-									? "text-dreamLabColor1 underline underline-offset-8 decoration-2"
-									: null
-							} cursor-pointer`}
-							onClick={() => setNavLink("active")}
-						>
-							Active
-						</h3>
-						<h3
-							className={`font-semibold ${
-								navLink === "expired"
-									? "text-dreamLabColor1 underline underline-offset-8 decoration-2"
-									: null
-							} cursor-pointer`}
-							onClick={() => setNavLink("expired")}
-						>
-							Expired
-						</h3>
-					</nav>
-					<button className="btn-2 flex gap-2 items-center justify-center px-4 py-2">
-						{" "}
-						<BsPlusCircleFill /> Add Subscription{" "}
-					</button>
-				</div>
-			</section>
-			<div className="w-full h-[0.05rem] bg-grey6 mt-2"></div>
-
-			{/* Search Section*/}
-			<SearchSection setSubscribers={setSubscribers}/>
-
-			{/* Subscribers List Section*/}
-			<SubscriberList subscribers={subscribers} setShowRequestModal={setShowRequestModal}/>
-
-			{showRequestModal ? <RequestModal setShowRequestModal={setShowRequestModal}/> : null}
+			{showRequestModal ? (
+				<RequestModal
+					setShowRequestModal={setShowRequestModal}
+					subscriber={subscriber}
+					refetch={refetch}
+				/>
+			) : null}
 		</div>
 	);
 };
