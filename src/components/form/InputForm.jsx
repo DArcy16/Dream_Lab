@@ -49,7 +49,7 @@ const InputForm = ({
             type={type}
             accept={accept}
             id={id}
-            className=" hidden"
+            className="hidden"
 			      onChange={handleImage}
           />
         </div>
