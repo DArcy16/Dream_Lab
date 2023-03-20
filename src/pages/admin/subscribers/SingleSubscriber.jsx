@@ -1,18 +1,18 @@
 /** @format */
 
 import React from "react";
-import { useNavigate } from "react-router-dom";
 import profileImg from "../../../assets/profile.png";
 
 const SingleSubscriber = ({ subscriber, setShowRequestModal, setSubscriber }) => {
-	const navigate = useNavigate();
 
 	const handleShowModal = (subscriber) => {
 		subscriber.status === "p"
-			? setShowRequestModal(true)
+			? setShowRequestModal("request")
 			: subscriber.status === "a"
-			? navigate("active-user-details")
-			: navigate("expired-user-details");
+			? setShowRequestModal("active")
+			: subscriber.status === "e"
+			? setShowRequestModal("expired")
+			:setShowRequestModal("cancel")
 			setSubscriber(subscriber)
 	};
 

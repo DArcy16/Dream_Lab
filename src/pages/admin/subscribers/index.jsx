@@ -13,7 +13,7 @@ import CountSection from "./CountSection";
 
 const index = () => {
 	const [navLink, setNavLink] = useState("all");
-	const [showRequestModal, setShowRequestModal] = useState(false);
+	const [showRequestModal, setShowRequestModal] = useState("");
 	const [subscribers, setSubscribers] = useState([]);
 	const [subscriber, setSubscriber] = useState([]);
 	const [filter, setFilter] = useState("all");
@@ -23,6 +23,7 @@ const index = () => {
 		url,
 		navLink
 	);
+
 
 	const filterArr = isLoading
 		? null
@@ -44,7 +45,6 @@ const index = () => {
 
 				return arr;
 		  }, []);
-
 
 	useEffect(() => {
 		if (!isLoading) {
@@ -72,9 +72,18 @@ const index = () => {
 
 			<CountSection />
 
-			<Navbar navLink={navLink} setNavLink={setNavLink} setUrl={setUrl} setFilter={setFilter}/>
+			<Navbar
+				navLink={navLink}
+				setNavLink={setNavLink}
+				setUrl={setUrl}
+				setFilter={setFilter}
+			/>
 
-			<SearchSection setSearchQuery={setSearchQuery} setFilter={setFilter} filterArr={filterArr}/>
+			<SearchSection
+				setSearchQuery={setSearchQuery}
+				setFilter={setFilter}
+				filterArr={filterArr}
+			/>
 
 			{isError ? (
 				<div className="w-full h-60 flex items-center justify-center">
@@ -96,11 +105,12 @@ const index = () => {
 				</>
 			)}
 
-			{showRequestModal ? (
+			{showRequestModal !== "" ? (
 				<RequestModal
 					setShowRequestModal={setShowRequestModal}
 					subscriber={subscriber}
 					refetch={refetch}
+					showRequestModal={showRequestModal}
 				/>
 			) : null}
 		</div>

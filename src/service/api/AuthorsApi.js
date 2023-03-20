@@ -20,27 +20,10 @@ export const fetchAuthors = async (navLink) => {
   }
 };
 
-export const fetchSingleAuthors = async (navLink) => {
-  const token = getToken();
-  const requestOption = {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-    mode: "cors",
-    method: "GET",
-  };
-  try {
-    const response = await fetch(`${URL}${navLink}`, requestOption);
-    const data = await response.json();
-    if (!response.ok) throw new Error(data.message);
-    return data;
-  } catch (error) {
-    throw error;
-  }
-};
 
 
-export const createAuthor = async (data,navLink) => {
+
+export const createAuthor = async (data) => {
   const token = getToken();
   const requestOption = {
     headers: {
@@ -50,10 +33,11 @@ export const createAuthor = async (data,navLink) => {
     },
     mode: "cors",
     method: "POST",
-    body: JSON.stringify(data),
+    body: JSON.stringify(data.body),
   };
+
   try {
-    const response = await fetch(`${URL}${navLink}`, requestOption);
+    const response = await fetch(`${URL}${data.url}`, requestOption);
     const result = await response.json();
     if (!response.ok) throw new Error(result.message);
     return result;
@@ -62,7 +46,7 @@ export const createAuthor = async (data,navLink) => {
   }
 };
 
-export const updateAuthor = async (data,navLink) => {
+export const updateAuthor = async (data) => {
   const token = getToken();
   const requestOption = {
     headers: {
@@ -72,10 +56,11 @@ export const updateAuthor = async (data,navLink) => {
     },
     mode: "cors",
     method: "PATCH",
-    body: JSON.stringify(data),
+    body: JSON.stringify(data.body),
   };
+
   try {
-    const response = await fetch(`${URL}${navLink}${data.code}`, requestOption);
+    const response = await fetch(`${URL}${data.url}/${data.body.id}`, requestOption);
     const result = await response.json();
     if (!response.ok) throw new Error(result.message);
     return result;
@@ -84,7 +69,7 @@ export const updateAuthor = async (data,navLink) => {
   }
 };
 
-export const deleteAuthor = async (key,navLink) => {
+export const deleteAuthor = async (data) => {
   const token = getToken();
   const requestOption = {
     headers: {
@@ -96,7 +81,7 @@ export const deleteAuthor = async (key,navLink) => {
     method: "DELETE",
   };
   try {
-    const response = await fetch(`${URL}${navLink}/${key}`, requestOption);
+    const response = await fetch(`${URL}${data.url}/${data.id}`, requestOption);
     const result = await response.json();
     if (!response.ok) throw new Error(result.message);
     return result;

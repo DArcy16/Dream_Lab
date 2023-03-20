@@ -9,8 +9,6 @@ import CreateSubscription from "./pages/admin/subscription/CreateSubscription";
 import EditSubscription from "./pages/admin/subscription/EditSubscription";
 import Subscribers from "./pages/admin/subscribers";
 import Categories from "./pages/admin/categories"
-import ActiveUserPage from "./pages/admin/subscribers/ActiveUserPage";
-import ExpiredUserPage from "./pages/admin/subscribers/ExpiredUserPage";
 
 const routes = [
 	{
@@ -37,8 +35,6 @@ const routes = [
 				path: "subscribers",
 				children: [
 					{ index: true, element: <Subscribers /> },
-					{ path: "active-user-details", element: <ActiveUserPage /> },
-					{ path: "expired-user-details", element: <ExpiredUserPage />}
 				],
 			},
 			{

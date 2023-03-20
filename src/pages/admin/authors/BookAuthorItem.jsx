@@ -1,6 +1,6 @@
 import React from "react";
 
-const BookAuthorItem = ({item, setDeleteStatus, setEditStatus,setEditAuthor,setKey }) => {
+const BookAuthorItem = ({item, setDeleteStatus, setEditStatus,setEditAuthor }) => {
   return (
     <div className="w-full p-4 shadow-xl rounded-lg border-x border-x-grey4/[.15] mt-4">
       <div className="flex justify-between items-center px-6">
@@ -32,7 +32,7 @@ const BookAuthorItem = ({item, setDeleteStatus, setEditStatus,setEditAuthor,setK
             className="text-red-600 font-semibold hover:text-red-400"
             onClick={() => {
               setDeleteStatus(true);
-              setKey(item.key);
+              setEditAuthor(item);
             }}
           >
             Delete
