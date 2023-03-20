@@ -6,7 +6,7 @@ import {
 	BsPersonFillAdd,
 } from "react-icons/bs";
 
-const CountSection = () => {
+const CountSection = ({count}) => {
     
 
   return (
@@ -17,7 +17,10 @@ const CountSection = () => {
 				</div>
 				<div className="space-y-2">
 					<p>Total Subscribers</p>
-					<p className="text-2xl font-extrabold text-dreamLabColor1">23,500</p>
+					<p className="text-2xl font-extrabold text-dreamLabColor1">
+						{" "}
+						{count.totalCount} <span className="text-xs">in this page</span>
+					</p>
 				</div>
 			</div>
 
@@ -27,7 +30,9 @@ const CountSection = () => {
 				</div>
 				<div className="space-y-2">
 					<p>Active Subscribers</p>
-					<p className="text-2xl font-extrabold text-green">23,500</p>
+					<p className="text-2xl font-extrabold text-green">
+						{count.activeCount} <span className="text-xs">in this page</span>
+					</p>
 				</div>
 			</div>
 
@@ -37,7 +42,9 @@ const CountSection = () => {
 				</div>
 				<div className="space-y-2">
 					<p>Request Subscribers</p>
-					<p className="text-2xl font-extrabold text-gold">23,500</p>
+					<p className="text-2xl font-extrabold text-gold">
+						{count.requestCount} <span className="text-xs">in this page</span>
+					</p>
 				</div>
 			</div>
 		</section>

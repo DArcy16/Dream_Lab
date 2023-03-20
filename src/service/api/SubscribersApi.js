@@ -94,7 +94,7 @@ export const createSubscriberSubscripiton = async (data) => {
   const token = getToken();
   const requestOption = {
     headers: {
-      Authorization: `Bearer ${token}users/subscribe/subscription`,
+      Authorization: `Bearer ${token}`,
     },
     mode: "cors",
     method: "POST",
@@ -102,7 +102,10 @@ export const createSubscriberSubscripiton = async (data) => {
   };
 
   try {
-    const res = await fetch(`${URL}`, requestOption);
+    const res = await fetch(
+			`${URL}users/subscribe/subscription`,
+			requestOption
+		);
     const result = await res.json();
 
     if (!res.ok) throw new Error(result.message);
