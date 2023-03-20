@@ -95,7 +95,7 @@ const Navbar = () => {
           </ul>
         </div>
         <div className="nav-right flex gap-5 lg:gap-10 items-center">
-          <div className="hidden relative w-[45px] h-[45px] bg-dreamLabColor5 rounded-full md:grid place-items-center lg:block lg:w-auto lg:h-auto">
+          <div className="hidden relative  bg-dreamLabColor5 rounded-full md:grid place-items-center lg:block lg:w-auto lg:h-auto">
             <BiSearch className="lg:absolute text-[20px] top-[12px] left-3 text-dreamLabColor1" />
             <input
               type="text"
