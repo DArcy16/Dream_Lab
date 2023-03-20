@@ -52,7 +52,7 @@ const index = () => {
             <p className="mb-0">Unlimited Podcasts</p>
             <p className="mb-0">Unlimited Videos</p>
           </div>
-          <div className="flex w-custom self-start mt-3">
+          <div className="flex w-[150px] self-start mt-3">
             <div className="flex flex-col items-center justify-center gap-8 mr-16 mt-5">
               <span>
                 <CheckIcon />

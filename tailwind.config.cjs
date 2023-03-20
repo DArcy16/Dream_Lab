@@ -47,9 +47,7 @@ module.exports = {
       greyNav: "#8E98B0",
       orangee : "#C99206"
     },
-    width: {
-      custom: "125px",
-    },
+ 
     extend: {},
   },
   plugins: [require("daisyui")],
