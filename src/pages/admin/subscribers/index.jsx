@@ -19,14 +19,15 @@ const index = () => {
 	const [filter, setFilter] = useState("all");
 	const [searchQuery, setSearchQuery] = useState("");
 	const [url, setUrl] = useState("");
-	const [count, setCount] = useState([]);
+	const [count, setCount] = useState({
+		totalCount: "",
+		activeCount: "--",
+		requestCount: "--",
+	});
 	const { data, isLoading, isError, error, refetch } = useSubscribers(
 		url,
 		navLink
 	);
-
-	
-
 
 	const filterArr = isLoading
 		? null
@@ -50,13 +51,14 @@ const index = () => {
 		  }, []);
 
 	useEffect(() => {
-		if ( !isLoading) {
-			const temp = {
-				totalCount: data?.items?.length,
-				activeCount: data?.items.filter((item) => item.status === "a").length,
-				requestCount: data?.items.filter((item) => item.status === "p").length,
-			};
-			setCount(temp);
+		if (!isLoading) {
+			if (navLink === "all") {
+				setCount({ ...count, totalCount: data.meta.totalItems });
+			} else if(navLink === "a") {
+				setCount({...count, activeCount: data.meta.totalItems});
+			} else if(navLink === "p") {
+				setCount({...count, requestCount: data.meta.totalItems});
+			}
 		}
 		if (!isLoading) {
 			setSubscribers(
@@ -81,7 +83,7 @@ const index = () => {
 		<div className="p-10 basis-4/5">
 			<h2 className="text-lg font-bold">Subscribers</h2>
 
-			<CountSection count={count}/>
+			<CountSection count={count} />
 
 			<Navbar
 				navLink={navLink}
@@ -122,6 +124,8 @@ const index = () => {
 					subscriber={subscriber}
 					refetch={refetch}
 					showRequestModal={showRequestModal}
+					setCount={setCount}
+					count={count}
 				/>
 			) : null}
 		</div>

@@ -270,7 +270,7 @@ const PaymentDetails = () => {
 							)}
 						</div>
 						{createSubscriberscriptionMutation.isError ? (
-							<p className="text-sm text-center text-red-400 normal-case">
+							<p className="text-base font-semibold mt-2 text-center text-red-400 normal-case">
 								{createSubscriberscriptionMutation.error.message}
 							</p>
 						) : null}

@@ -11,6 +11,8 @@ const RequestModal = ({
 	subscriber,
 	refetch,
 	showRequestModal,
+	setCount,
+	count,
 }) => {
 	const acceptSubscriberMutation = useAcceptSubscriber();
 
@@ -20,6 +22,18 @@ const RequestModal = ({
 			id: subscriber.id,
 			body: { status },
 		});
+			setCount(
+				count.activeCount === "--" && count.requestCount === "--"
+					? count
+					: showRequestModal === "active"
+					? { ...count, activeCount: count.activeCount - 1 }
+					: {
+							...count,
+							activeCount: count.activeCount + 1,
+							requestCount: count.requestCount - 1,
+					  }
+			);
+		
 	};
 
 	const handleReject = () => {
@@ -28,7 +42,20 @@ const RequestModal = ({
 			id: subscriber.id,
 			body: { status },
 		});
+			setCount(
+				count.activeCount === "--" && count.requestCount === "--"
+					? count
+					: showRequestModal === "active"
+					? { ...count, activeCount: count.activeCount - 1 }
+					: {
+							...count,
+							requestCount: count.requestCount - 1,
+					  }
+			);
+		
 	};
+
+	console.log(count)
 
 	useEffect(() => {
 		if (acceptSubscriberMutation.isSuccess) {
@@ -46,7 +73,7 @@ const RequestModal = ({
 		showRequestModal === "request"
 			? "btn-2"
 			: "border border-red-700 text-red-700 hover:text-red-700/80 hover:border-red-700/80";
-			
+
 	return (
 		<div className="z-50 absolute w-full h-full top-0 left-0 bg-grey4/40">
 			<div className="fixed top-0 right-0 w-1/4 h-full px-8 py-4 bg-white overflow-hidden overflow-y-auto [&::-webkit-scrollbar]:hidden">

@@ -87,7 +87,7 @@ const index = () => {
         <h3 className="text-center mt-10 mb-8 text-4xl font-semibold">
           Choose Your MemberShip
         </h3>
-        <div className="flex gap-6">
+        <div className="flex gap-6 flex-wrap items-center justify-center ">
           {data?.map((plan) => (
             <PlanCard key={plan?.id} planDetail={plan} />
           ))}

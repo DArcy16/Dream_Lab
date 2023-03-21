@@ -19,7 +19,7 @@ const CountSection = ({count}) => {
 					<p>Total Subscribers</p>
 					<p className="text-2xl font-extrabold text-dreamLabColor1">
 						{" "}
-						{count.totalCount} <span className="text-xs">in this page</span>
+						{count.totalCount} 
 					</p>
 				</div>
 			</div>
@@ -31,7 +31,7 @@ const CountSection = ({count}) => {
 				<div className="space-y-2">
 					<p>Active Subscribers</p>
 					<p className="text-2xl font-extrabold text-green">
-						{count.activeCount} <span className="text-xs">in this page</span>
+						{count.activeCount} 
 					</p>
 				</div>
 			</div>
@@ -43,7 +43,7 @@ const CountSection = ({count}) => {
 				<div className="space-y-2">
 					<p>Request Subscribers</p>
 					<p className="text-2xl font-extrabold text-gold">
-						{count.requestCount} <span className="text-xs">in this page</span>
+						{count.requestCount} 
 					</p>
 				</div>
 			</div>
