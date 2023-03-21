@@ -1,14 +1,25 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useLoginBoxContext } from "../../contexts/user/LoginBoxContext";
+import { TOKEN_LOCAL_STORAGE } from "../../hooks/useUserAuth";
+import { getToken } from "../../utils/getToken";
+
 const PlanCard = ({ planDetail }) => {
+  const [token, setToken] = useState(localStorage.getItem(TOKEN_LOCAL_STORAGE));
   const navigate = useNavigate();
+  const {setShow} = useLoginBoxContext();
   const formatPrice = (price) => {
     return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   };
+
   const handlePurchase = () => {
-    navigate("/payment-details", {
-      state: { subscriptionId: planDetail?.id, planData: planDetail },
-    });
+    if(token) {
+      navigate("/payment-details", {
+				state: { subscriptionId: planDetail?.id, planData: planDetail },
+			});
+    } else {
+      setShow(true);
+    }
   };
   return (
     <div className="w-[26rem] bg-white rounded-xl shadow-lg">
