@@ -49,7 +49,7 @@ const Navbar = () => {
   }, [token]);
 
   return (
-    <div className="w-full sticky top-0 left-0 right-0 shadow-sm bg-white">
+    <div className="w-full sticky top-0 left-0 right-0 shadow-sm bg-white z-50">
       <nav className="container mx-auto flex items-center justify-between h-[70px] md:h-[80px] text-[16px]">
         <div className="nav-left flex items-center">
           {/* drawer init and show */}
