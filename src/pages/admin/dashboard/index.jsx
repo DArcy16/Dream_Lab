@@ -1,10 +1,9 @@
 import React from 'react'
-import Authors from '../authors'
 
 const index = () => {
   return (
     <>
-      <Authors />
+      <h1>dashboard</h1>
     </>
   )
 }

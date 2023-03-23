@@ -11,22 +11,18 @@ const AdminLayout = () => {
   
 
   return (
+		<div className="relative h-screen overflow-hidden">
+			<Header>{headerName === "" ? "Admin Dashboard" : `${headerName}`}</Header>
 
-    <div className="relative h-full">
+			<div className="flex gap-4 flex-shrink-0 h-full">
+				<Sidebar />
 
-      <Header>
-        { headerName === '' ? "Admin Dashboard" : `${headerName}s`}
-      </Header>
-
-      <div className="flex gap-4 flex-shrink-0 h-full">
-        <Sidebar />
-
-        
-        <Outlet />
-        
-      </div>
-    </div>
-  );
+				<div className="w-full h-screen overflow-hidden overflow-y-auto [&::-webkit-scrollbar]:hidden pb-20">
+					<Outlet />
+				</div>
+			</div>
+		</div>
+	);
 };
 
 export default AdminLayout;

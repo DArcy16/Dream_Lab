@@ -9,6 +9,13 @@ import CreateSubscription from "./pages/admin/subscription/CreateSubscription";
 import EditSubscription from "./pages/admin/subscription/EditSubscription";
 import Subscribers from "./pages/admin/subscribers";
 import Categories from "./pages/admin/categories"
+import Authors from "./pages/admin/authors"
+import Books from "./pages/admin/books"
+import UpdataBook from "./pages/admin/books/UpdataBook";
+import CreateBook from "./pages/admin/books/CreateBook";
+import Articles from "./pages/admin/articles"
+import EditArticle from "./pages/admin/articles/EditArticle";
+import CreateArticles from "./pages/admin/articles/CreateArticles";
 
 const routes = [
 	{
@@ -33,13 +40,31 @@ const routes = [
 			},
 			{
 				path: "subscribers",
-				children: [
-					{ index: true, element: <Subscribers /> },
-				],
+				children: [{ index: true, element: <Subscribers /> }],
 			},
 			{
 				path: "categories",
 				element: <Categories />,
+			},
+			{
+				path: "authors",
+				element: <Authors />,
+			},
+			{
+				path: "books",
+				children: [
+					{ index: true, element: <Books /> },
+					{ path: "edit/:id", element: <UpdataBook /> },
+					{ path: "create", element: <CreateBook /> },
+				],
+			},
+			{
+				path: "articles",
+				children: [
+					{ index: true, element: <Articles /> },
+					{ path: "edit/:id", element: <EditArticle /> },
+					{ path: "create", element: <CreateArticles /> },
+				],
 			},
 		],
 	},

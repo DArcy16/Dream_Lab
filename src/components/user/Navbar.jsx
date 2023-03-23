@@ -38,6 +38,7 @@ const Navbar = () => {
       setActive("pricing");
     }
   }, [location]);
+  
   useEffect(() => {
     if (token) {
       setIsLogin(true);
