@@ -14,10 +14,10 @@ const AdminLayout = () => {
 		<div className="relative h-screen overflow-hidden">
 			<Header>{headerName === "" ? "Admin Dashboard" : `${headerName}`}</Header>
 
-			<div className="flex gap-4 h-full">
+			<div className="flex h-full">
 				<Sidebar />
 
-				<div className="basis-4/5 flex-shrink-0 h-screen overflow-hidden overflow-y-auto [&::-webkit-scrollbar]:hidden pb-20">
+				<div className="basis-4/5 h-screen overflow-hidden overflow-y-auto [&::-webkit-scrollbar]:hidden pb-20">
 					<Outlet />
 				</div>
 			</div>

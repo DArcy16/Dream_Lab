@@ -23,7 +23,7 @@ const Sidebar = () => {
     navigate("/login"); 
   };
   return (
-		<aside className="min-w-basis-1/5 flex-none h-screen pb-28 bg-dreamLabColor4 pl-16 pr-10 overflow-y-auto overflow-hidden [&::-webkit-scrollbar]:hidden">
+		<aside className="basis-1/5 flex-none h-screen pb-28 bg-dreamLabColor4 pl-16 pr-10 overflow-y-auto overflow-hidden [&::-webkit-scrollbar]:hidden">
 			<ul className="mt-8 text-textColor2 flex flex-col gap-3 text-xl">
 				<li className="font-medium mb-2">Admin Dashboard</li>
 				<AdminSidebarLink
