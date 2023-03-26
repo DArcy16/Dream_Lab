@@ -18,7 +18,7 @@ const SingleArticle = ({ article, index }) => {
 				/>
 			</div>
 
-			<h2 className="w-1/6 text-center font-semibold text-lg capitalize">
+			<h2 className=" w-1/6 text-center font-semibold text-lg capitalize">
 				{article.title ? (
 					article.title
 				) : (
@@ -26,10 +26,10 @@ const SingleArticle = ({ article, index }) => {
 				)}
 			</h2>
 
-			<div className="w-1/6 text-center">
+			<div className="w-1/6 flex flex-wrap gap-1 text-center">
 				{article.articleAuthors.length > 0 ? (
 					article.articleAuthors.map((author) => (
-						<p className="text-center font-medium capitalize">{author.name}</p>
+						<p className="text-center font-medium capitalize" key={author.id}>{author.name}, </p>
 					))
 				) : (
 					<p className="text-grey"> {"<-- author -->"} </p>
@@ -39,7 +39,7 @@ const SingleArticle = ({ article, index }) => {
 			<div className="w-1/6 flex items-center justify-center gap-2">
 				<div
 					className={`${
-						article.isFree !== false
+						article.isFree === false
 							? "bg-red-400 text-white line-through"
 							: " bg-subtleGrey"
 					} rounded-full py-1 px-4 font-medium `}
@@ -57,7 +57,7 @@ const SingleArticle = ({ article, index }) => {
 				</div>
 			</div>
 
-			<div className="w-1/6 space-y-2 text-center">
+			<div className="w-1/6 flex flex-wrap gap-1 items-center justify-center text-center text-sm ">
 				{article.categories.length > 0 ? (
 					article.categories.map((category) => (
 						<p className="border border-grey4 py-1 px-4 rounded-full font-medium text-grey4 w-fit mx-auto">
@@ -70,7 +70,7 @@ const SingleArticle = ({ article, index }) => {
 			</div>
 
 				<button className="btn-2 py-2 px-5"
-				onClick={() => navigate(`edit/${article.id}`)}>Edit</button>
+				onClick={() => navigate(`edit/${article.slug}`)}>Edit</button>
 		</article>
 	);
 };

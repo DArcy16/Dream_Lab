@@ -29,11 +29,13 @@ const InputForm = ({
 	}
   };
 
+
+
   useEffect(()=>{
-    if(isEdit){
+    if(isEdit && typeof(icon) !== "object"){
       setImage(icon);
     }
-  },[]);
+  },[icon]);
 
   if (accept !== "") {
     return (

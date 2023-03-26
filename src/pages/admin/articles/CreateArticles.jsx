@@ -1,32 +1,90 @@
 /** @format */
 
-import React, { useRef, useState } from "react";
-import { IoArrowBackOutline } from "react-icons/io5";
+import React, { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { MdOutlineKeyboardArrowDown } from "react-icons/md";
-import InputForm from "../../../components/form/InputForm";
+import * as yup from "yup";
+import { yupResolver } from "@hookform/resolvers/yup";
 import ReactSwitch from "react-switch";
+import { ClipLoader } from "react-spinners";
+
 import { useAuthorData } from "../../../hooks/useAuthor";
+import { useCreateArticle } from "../../../hooks/useArticles";
+import { useCategoryData } from "../../../hooks/useCategories";
+
+import InputForm from "../../../components/form/InputForm";
 import MultipleSelect from "../../../components/form/MultipleSelect";
-import { Editor } from "@tinymce/tinymce-react";
+import TextareaForm from "../../../components/form/TextareaForm";
+
+import { IoArrowBackOutline } from "react-icons/io5";
+import { useForm } from "react-hook-form";
+
+const createArticleSchema = yup.object({
+	title: yup.string().required(),
+	readingTime: yup.string().required(),
+	shortDesc: yup.string().required(),
+	content: yup.string().required(),
+});
 
 const CreateArticles = () => {
+	const navigate = useNavigate();
 	const [status, setStatus] = useState({
 		free: false,
 		active: false,
 	});
 	const [selectedAuthors, setSelectedAuthors] = useState([]);
+	const [selectedCategories, setSelectedCategories] = useState([]);
+	const [icon, setIcon] = useState();
 	const [showAuthorsOption, setShowAuthorsOption] = useState(false);
-	const editorRef = useRef(null);
+	const [showCategoriesOption, setShowCategoriesOption] = useState(false);
 
+	const createArticleMutation = useCreateArticle();
 
+	useEffect(() => {
+		if (createArticleMutation.isSuccess) {
+			navigate("/admin/articles");
+		}
+	}, [createArticleMutation.isSuccess]);
+
+	const {
+		register,
+		handleSubmit,
+		formState: { errors },
+	} = useForm({
+		resolver: yupResolver(createArticleSchema),
+	});
+
+	const { data: categories, isLoading: isCategoriesLoading } =
+		useCategoryData();
 
 	const { data: authors, isLoading: isAuthorsLoading } =
 		useAuthorData("articleauthors");
 
-	const navigate = useNavigate();
+	const onSubmit = (data) => {
+		const categories = selectedCategories.map((category) => category.id);
+		const articleAuthors = selectedAuthors.map((author) => author.id);
+		let isFree, tempStatus;
 
-	
+		if (status.free) {
+			isFree = 1;
+		} else {
+			isFree = 0;
+		}
+
+		if (status.active) {
+			tempStatus = "a";
+		} else {
+			tempStatus = "p";
+		}
+
+		createArticleMutation.mutate({
+			...data,
+			icon,
+			isFree,
+			status: tempStatus,
+			articleAuthors,
+			categories,
+		});
+	};
 
 	return (
 		<div className="w-full p-10">
@@ -41,24 +99,37 @@ const CreateArticles = () => {
 				<h3 className="sub-heading text-center">Create Subscription</h3>
 			</div>
 
-			<form className="w-full flex flex-col items-center  mt-10">
+			<form
+				onSubmit={handleSubmit(onSubmit)}
+				className="w-full flex flex-col items-center  mt-10"
+			>
 				{/* Top Section */}
 				<div className="w-full h-full flex gap-6">
 					{/* left input form */}
 					<div className="w-1/2 h-full mt-4">
-						<InputForm id="icon" type="file" accept="image/*" articlePage />
+						<InputForm
+							id="icon"
+							type="file"
+							accept="image/*"
+							icon={icon}
+							setIcon={setIcon}
+							articlePage
+						/>
 					</div>
 
 					{/* right input form */}
 					<div className="w-1/2">
 						<InputForm
 							type="text"
-							id="name"
+							id="title"
 							label="article name"
-							placeholder="Type Book Name"
+							placeholder="Type Article Name"
+							register={register}
+							errors={errors}
 						/>
 
 						<MultipleSelect
+							id="authors"
 							items={authors}
 							selectedItems={selectedAuthors}
 							setSelectedItems={setSelectedAuthors}
@@ -68,21 +139,24 @@ const CreateArticles = () => {
 							label="Author"
 						/>
 
-						{/* <MultipleSelect
-							items={authors}
-							selectedItems={false}
-							setSelectedItems={false}
-							isLoading={false}
-							showOption={false}
-							setShowOption={false}
+						<MultipleSelect
+							id="categories"
+							items={categories}
+							selectedItems={selectedCategories}
+							setSelectedItems={setSelectedCategories}
+							isLoading={isCategoriesLoading}
+							showOption={showCategoriesOption}
+							setShowOption={setShowCategoriesOption}
 							label="Category"
-						/> */}
+						/>
 
 						<InputForm
 							type="text"
-							id="duration"
+							id="readingTime"
 							label="Duration"
-							placeholder="Type Duration"
+							placeholder="eg : 10 min"
+							register={register}
+							errors={errors}
 						/>
 
 						<div className="flex w-1/3 items-center justify-between mt-4">
@@ -105,33 +179,36 @@ const CreateArticles = () => {
 					</div>
 				</div>
 
-				{/* Rich Text Section */}
-				<div className="mt-6 w-full">
-					<Editor
-						onInit={(evt, editor) => (editorRef.current = editor)}
-						initialValue="<p>This is the initial content of the editor.</p>"
-						init={{
-							height: 500,
-							menubar: false,
-							plugins: [
-								"advlist autolink lists link image charmap print preview anchor",
-								"searchreplace visualblocks code fullscreen",
-								"insertdatetime media table paste code help wordcount",
-							],
-							toolbar:
-								"undo redo | formatselect | " +
-								"bold italic backcolor | alignleft aligncenter " +
-								"alignright alignjustify | bullist numlist outdent indent | " +
-								"removeformat | help",
-							content_style:
-								"body { font-family:Helvetica,Arial,sans-serif; font-size:14px }",
-						}}
-					/>
-				</div>
+				<TextareaForm
+					id="shortDesc"
+					placeholder="type description"
+					label="description"
+					register={register}
+					errors={errors}
+				/>
 
-				<button className="w-1/4 btn-2 py-2 mx-auto mt-10"
-				type="submit"
-				>Create</button>
+				<TextareaForm
+					id="content"
+					placeholder="type content"
+					label="content"
+					register={register}
+					errors={errors}
+				/>
+				{createArticleMutation.isError ? (
+					<p className="text-red-400 text-center normal-case mt-2">
+						{createArticleMutation.error.message}
+					</p>
+				) : null}
+
+				<button
+					className="w-1/4 btn-2 flex items-center justify-center gap-1 py-2 mx-auto mt-8"
+					type="submit"
+				>
+					{createArticleMutation.isLoading ? (
+						<ClipLoader color="white" size={20} />
+					) : null}
+					Create
+				</button>
 			</form>
 		</div>
 	);
