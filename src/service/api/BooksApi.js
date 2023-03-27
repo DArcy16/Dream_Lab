@@ -20,11 +20,32 @@ export const fetchBooks = async () => {
   }
 };
 
+export const fetchSingleBook = async (slug) => {
+  const token = getToken();
+  const requestOption = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+    mode: "cors",
+    method: "GET",
+  };
+  try {
+    const response = await fetch(`${URL}books/${slug}`, requestOption);
+    const data = await response.json();
+
+    console.log("book single data", data);
+    if (!response.ok) throw new Error(data.message);
+    return data;
+  } catch (error) {
+    throw error;
+  }
+};
+
 export const createCategory = async (data) => {
   const token = getToken();
-  const formData= new FormData();
-    formData.append("name",data.name);
-    formData.append("icon",data.icon,data.icon.name);
+  const formData = new FormData();
+  formData.append("name", data.name);
+  formData.append("icon", data.icon, data.icon.name);
   const requestOption = {
     headers: {
       Authorization: `Bearer ${token}`,
@@ -34,7 +55,7 @@ export const createCategory = async (data) => {
     body: formData,
   };
   try {
-    const response = await fetch(`${URL}categories`,requestOption);
+    const response = await fetch(`${URL}categories`, requestOption);
     const result = await response.json();
     if (!response.ok) throw new Error(result.message);
     return result;
@@ -45,9 +66,9 @@ export const createCategory = async (data) => {
 
 export const updateCategory = async (data) => {
   const token = getToken();
-  const formData= new FormData();
-    formData.append("name",data.name);
-    formData.append("icon",data.icon);
+  const formData = new FormData();
+  formData.append("name", data.name);
+  formData.append("icon", data.icon);
   const requestOption = {
     headers: {
       Authorization: `Bearer ${token}`,
@@ -58,7 +79,7 @@ export const updateCategory = async (data) => {
   };
   try {
     const response = await fetch(`${URL}categories/${data.id}`, requestOption);
-    const result =await response.json();
+    const result = await response.json();
     if (!response.ok) throw new Error(result.message);
     return result;
   } catch (error) {
@@ -79,7 +100,7 @@ export const deleteCategory = async (id) => {
   };
   try {
     const response = await fetch(`${URL}categories/${id}`, requestOption);
-    const result =await response.json();
+    const result = await response.json();
     if (!response.ok) throw new Error(result.message);
     return result;
   } catch (error) {

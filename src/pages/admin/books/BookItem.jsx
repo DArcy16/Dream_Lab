@@ -1,9 +1,9 @@
 import React from "react";
-import {MdDiamond} from "react-icons/md";
+import { MdDiamond } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 
 const BookItem = ({ book, bookNo }) => {
-    const navigate= useNavigate();
+  const navigate = useNavigate();
   return (
     <div className="mb-2">
       <div className=" flex items-center py-3 relative">
@@ -22,7 +22,7 @@ const BookItem = ({ book, bookNo }) => {
             </button>
           ) : (
             <button className=" bg-green text-white text-[13px] rounded-md px-5">
-              <MdDiamond/>
+              <MdDiamond />
             </button>
           )}
           {book.status === "p" ? (
@@ -44,7 +44,16 @@ const BookItem = ({ book, bookNo }) => {
           </span>
         </div>
         <div className=" w-[60px] absolute right-0 top-0 bottom-0 bg-white flex justify-end items-center">
-          <button className="btn-2 px-3 py-2 text-[15px]" onClick={()=>navigate(`edit/${book.id}`)}>Edit</button>
+          <button
+            className="btn-2 px-3 py-2 text-[15px]"
+            onClick={() =>
+              navigate(`edit/${book.id}`, {
+                state: { slug: book?.slug },
+              })
+            }
+          >
+            Edit
+          </button>
         </div>
       </div>
       <div className=" w-full h-[1px] bg-greyNav"></div>
