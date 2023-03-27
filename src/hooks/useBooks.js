@@ -12,7 +12,7 @@ export const useBooksData = () => {
 };
 
 export const useSingleBookData = (slug) => {
-  return useQuery(["books"], fetchSingleBook(slug));
+  return useQuery(["books", slug], () => fetchSingleBook(slug));
 };
 export const useCreateCategory = () => {
   return useMutation(createCategory);

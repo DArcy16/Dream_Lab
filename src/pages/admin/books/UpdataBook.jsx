@@ -6,13 +6,15 @@ const UpdataBook = () => {
   const { id } = useParams();
   //159.223.60.208:3333/books/{{bookSlug}}
 
+
   const location = useLocation();
+  const slug = location?.state?.slug;
   const { isError, isLoading, error, data, refetch } = useSingleBookData(
-    location?.state?.slug
+    slug
   );
   console.log("data from update book", data);
 
-  http: return (
+   return (
     <>
       <div>UpdataBook {id}</div>
       <hr className="my-4" />

@@ -25,15 +25,16 @@ export const fetchSingleBook = async (slug) => {
   const requestOption = {
     headers: {
       Authorization: `Bearer ${token}`,
+      Accept : 'application/json', 
+      'Content-Type' : 'application/json'
     },
     mode: "cors",
     method: "GET",
   };
   try {
-    const response = await fetch(`${URL}books/${slug}`, requestOption);
+    const response = await fetch(`${URL}books/admin/${slug}`, requestOption);
     const data = await response.json();
 
-    console.log("book single data", data);
     if (!response.ok) throw new Error(data.message);
     return data;
   } catch (error) {
