@@ -1,6 +1,7 @@
 /** @format */
 
-import React, { useEffect, useRef } from "react";
+import React, { useRef } from "react";
+import { forwardRef } from "react";
 import { IoIosArrowUp } from "react-icons/io";
 import { MdOutlineKeyboardArrowDown } from "react-icons/md";
 import { RxCross2 } from "react-icons/rx";
@@ -15,7 +16,6 @@ const MultipleSelect = ({
 	setShowOption,
 	label,
 }) => {
-
 	const handleSelect = (e) => {
 		if (selectedItems.some((item) => item.name === e.target.outerText)) {
 			setSelectedItems(
@@ -24,17 +24,22 @@ const MultipleSelect = ({
 				)
 			);
 		} else {
-			setSelectedItems([...selectedItems, { id: e.target.value, name: e.target.outerText }]);
+			setSelectedItems([
+				...selectedItems,
+				{ id: e.target.value, name: e.target.outerText },
+			]);
 		}
 	};
-
-
 
 	
 
 	return (
-		<div id={id} className="w-full mt-3">
-			<label htmlFor="author" className="font-semibold">
+		<div className="w-full mt-3">
+			<label
+				onClick={() => setShowOption(false)}
+				htmlFor={id}
+				className={`font-semibold ${showOption ? "cursor-pointer" : null}`}
+			>
 				{label}
 			</label>
 
@@ -69,21 +74,22 @@ const MultipleSelect = ({
 							</h2>
 						)}
 					</div>
-					<div
-						className="flex items-center gap-2 cursor-pointer"
-						onClick={() => setShowOption(!showOption)}
-					>
+					<div className="flex items-center gap-2 cursor-pointer">
 						|
-						{showOption ? (
-							<IoIosArrowUp className="w-5 h-5"/>
-						) : (
-							<MdOutlineKeyboardArrowDown className="w-6 h-6"/>
-						)}
+						
+							<DropDownIcon
+								className="w-6 h-6"
+								onClick={() => {
+									setShowOption(!showOption)
+								}}
+								showoption={showOption}
+							/>
+						
 					</div>
 				</div>
 
 				{showOption && (
-					<ul className="w-full flex flex-wrap items-center justify-center bg-white shadow-md border-x border-grey6 absolute top-14 left-0 rounded-md outline outline-white z-50 px-6 py-4 space-y-2">
+					<ul className="w-full h-40 flex flex-wrap items-center justify-center bg-white shadow-md border-x border-grey6 absolute mt-2 left-0 rounded-md outline outline-white z-50 overflow-hidden overflow-y-auto px-6 py-4 space-y-2">
 						{!isLoading &&
 							items.map((item) => (
 								<div
@@ -114,3 +120,13 @@ const MultipleSelect = ({
 };
 
 export default MultipleSelect;
+
+const DropDownIcon = ((props) => {
+	return props.showoption ? (
+		<IoIosArrowUp {...props}  />
+	) : (
+		<MdOutlineKeyboardArrowDown {...props}  />
+	);
+});
+
+
