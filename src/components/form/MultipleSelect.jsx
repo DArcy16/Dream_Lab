@@ -17,10 +17,10 @@ const MultipleSelect = ({
 	label,
 }) => {
 	const handleSelect = (e) => {
-		if (selectedItems.some((item) => item.name === e.target.outerText)) {
+		if (selectedItems.some((item) => item.id === e.target.value)) {
 			setSelectedItems(
 				selectedItems.filter(
-					(item) => item.name.toLowerCase() !== e.target.outerText.toLowerCase()
+					(item) => item.id !== e.target.value
 				)
 			);
 		} else {
@@ -58,7 +58,7 @@ const MultipleSelect = ({
 										onClick={() =>
 											setSelectedItems(
 												selectedItems.filter(
-													(selectedItem) => selectedItem.name !== item.name
+													(selectedItem) => selectedItem.id !== item.id
 												)
 											)
 										}
@@ -89,7 +89,7 @@ const MultipleSelect = ({
 				</div>
 
 				{showOption && (
-					<ul className="w-full h-40 flex flex-wrap items-center justify-center bg-white shadow-md border-x border-grey6 absolute mt-2 left-0 rounded-md outline outline-white z-50 overflow-hidden overflow-y-auto px-6 py-4 space-y-2">
+					<ul className="w-full h-40 flex flex-wrap items-center justify-center bg-white shadow-md border-x border-grey6 absolute mt-1 left-0 rounded-md outline outline-white z-50 overflow-hidden overflow-y-auto px-6 py-4">
 						{!isLoading &&
 							items.map((item) => (
 								<div
@@ -103,7 +103,7 @@ const MultipleSelect = ({
 											)
 												? " border-dreamLabColor2 text-dreamLabColor2 hover:ring-1 hover:ring-dreamLabColor2/60 hover:text-dreamLabColor2 hover:border-dreamLabColor2"
 												: "border-grey text-grey hover:ring-1 hover:ring-grey2/60 hover:text-grey hover:border-grey"
-										} rounded-md text-center cursor-pointer`}
+										} rounded-full text-center cursor-pointer mt-2`}
 										value={item.id}
 										name={item.name}
 										onClick={handleSelect}

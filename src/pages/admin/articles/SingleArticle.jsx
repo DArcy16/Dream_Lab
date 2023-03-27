@@ -18,7 +18,7 @@ const SingleArticle = ({ article, index }) => {
 				/>
 			</div>
 
-			<h2 className=" w-1/6 text-center font-semibold text-lg capitalize">
+			<h2 className=" w-1/6 text-center font-semibold capitalize">
 				{article.title ? (
 					article.title
 				) : (
@@ -56,7 +56,7 @@ const SingleArticle = ({ article, index }) => {
 						article.status !== "a"
 							? "bg-red-400 text-white line-through"
 							: "bg-green text-white"
-					} rounded-full py-1 px-4 font-medium`}
+					} rounded-full py-1 text-sm px-4 font-medium`}
 				>
 					Active
 				</div>
@@ -78,7 +78,7 @@ const SingleArticle = ({ article, index }) => {
 			</div>
 
 			<button
-				className="btn-2 py-2 px-5"
+				className="btn-2 py-1 px-6"
 				onClick={() => navigate(`edit/${article.slug}`)}
 			>
 				Edit
