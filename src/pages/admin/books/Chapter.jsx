@@ -3,8 +3,8 @@ import { BsPlusCircleFill } from "react-icons/bs";
 import { FiTrash } from "react-icons/fi";
 import { AiOutlineRight } from "react-icons/ai";
 
-const Chapter = () => {
-  const [chapters, setChapters] = useState([]);
+const Chapter = (content) => {
+  const [chapters, setChapters] = useState(content?.chapters);
   const [newChapter, setNewChapter] = useState("");
 
   function ChapterCard({ chapter, onDelete }) {
@@ -16,7 +16,9 @@ const Chapter = () => {
             "0px 2px 4px rgba(136, 144, 194, 0.2), 0px 5px 15px rgba(37, 44, 97, 0.15)",
         }}
       >
-        <p className="text-lg">{chapter}</p>
+        <p className="text-lg">
+          {chapter?.id}. {chapter?.title}
+        </p>
         <button
           onClick={onDelete}
           className="mt-2 flex items-center gap-1 text-red-600 hover:text-red-800 transition-colors duration-200"
