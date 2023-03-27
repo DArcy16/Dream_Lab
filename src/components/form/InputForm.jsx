@@ -14,7 +14,8 @@ const InputForm = ({
   accept="",
   setIcon,
   icon,
-  isEdit
+  isEdit,
+  articlePage = false
 }) => {
 	const [image,setImage]= useState("");
   const inputClick = () => {
@@ -28,45 +29,58 @@ const InputForm = ({
 	}
   };
 
+
+
   useEffect(()=>{
-    if(isEdit){
+    if(isEdit && typeof(icon) !== "object"){
       setImage(icon);
     }
-  },[]);
+  },[icon]);
 
   if (accept !== "") {
     return (
-      <>
-        {
-			image=="" ? (
-				<div
-          className="mt-3 w-full border border-dashed flex justify-center items-center flex-col py-4 gap-2 cursor-pointer"
-          onClick={inputClick}
-        >
-          <RiImageAddFill size={25} />
-          <p className=" text-sm text-dreamLabColor1">Upload an icon image</p>
-          <input
-            type={type}
-            accept={accept}
-            id={id}
-            className="hidden"
-			      onChange={handleImage}
-          />
-        </div>
-			) : (
-				<div className="mt-3 w-full relative group">
-					<img src={image} alt="input-img" className="w-full"/>
-          <button className=" absolute top-2 right-[-100%] group-hover:right-2 transition-all duration-200 p-2 bg-white overflow-hidden" onClick={()=>setImage("")}>
-            <FaRegTrashAlt className=" text-red-500"/>
-          </button>
-				</div>
-			)
-		}
-		{errors === "" ? null : errors[id] ? (
-        <p className="text-red-400 text-sm normal-case">{errors[id].message}</p>
-      ) : null}
-      </>
-    );
+			<>
+				{image == "" ? (
+					<div
+						className={`mt-3 w-full ${
+							articlePage ? "h-56" : ""
+						} border border-dashed flex justify-center items-center flex-col py-4 gap-2 cursor-pointer`}
+						onClick={inputClick}
+					>
+						<RiImageAddFill size={25} />
+						<p className=" text-sm text-dreamLabColor1">Upload an icon image</p>
+						<input
+							type={type}
+							accept={accept}
+							id={id}
+							className="hidden"
+							onChange={handleImage}
+						/>
+					</div>
+				) : (
+					<div className="mt-3 w-full relative group">
+						<img
+							src={image}
+							alt="input-img"
+							className="w-full h-64 object-contain"
+						/>
+						<button
+							className={` absolute top-2 ${
+								articlePage ? "right-2 scale-0" : "right-[-100%]"
+							}  group-hover:right-2 group-hover:scale-100 transition-all duration-200 p-2 bg-white overflow-hidden`}
+							onClick={() => setImage("")}
+						>
+							<FaRegTrashAlt className=" text-red-500" />
+						</button>
+					</div>
+				)}
+				{errors === "" ? null : errors[id] ? (
+					<p className="text-red-400 text-sm normal-case">
+						{errors[id].message}
+					</p>
+				) : null}
+			</>
+		);
   }
 
   return (
