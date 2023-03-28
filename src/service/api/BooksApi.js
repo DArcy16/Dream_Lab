@@ -25,8 +25,8 @@ export const fetchSingleBook = async (slug) => {
   const requestOption = {
     headers: {
       Authorization: `Bearer ${token}`,
-      Accept : 'application/json', 
-      'Content-Type' : 'application/json'
+      Accept: "application/json",
+      "Content-Type": "application/json",
     },
     mode: "cors",
     method: "GET",
@@ -37,6 +37,77 @@ export const fetchSingleBook = async (slug) => {
 
     if (!response.ok) throw new Error(data.message);
     return data;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const createChapter = async (data) => {
+  const token = getToken();
+  const requestOption = {
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+    mode: "cors",
+    method: "POST",
+    body: JSON.stringify(data),
+  };
+  try {
+    const response = await fetch(`${URL}books/chapter`, requestOption);
+    const result = await response.json();
+    if (!response.ok) throw new Error(result.message);
+    return result;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const updateChapter = async (data) => {
+  const token = getToken();
+  const requestOption = {
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+    mode: "cors",
+    method: "PATCH",
+    body: JSON.stringify(data?.body),
+  };
+  try {
+    const response = await fetch(
+      `${URL}books/chapter/${data?.chapterId}`,
+      requestOption
+    );
+    const result = await response.json();
+    if (!response.ok) throw new Error(result.message);
+    return result;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const deleteChapter = async (chapterId) => {
+  const token = getToken();
+  const requestOption = {
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+    mode: "cors",
+    method: "DELETE",
+  };
+  try {
+    const response = await fetch(
+      `${URL}books/chapter/${chapterId}`,
+      requestOption
+    );
+    const result = await response.json();
+    if (!response.ok) throw new Error(result.message);
+    return result;
   } catch (error) {
     throw error;
   }
