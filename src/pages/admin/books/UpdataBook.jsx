@@ -15,7 +15,7 @@ const UpdataBook = () => {
     <>
       <div>UpdataBook {id}</div>
       <hr className="my-4" />
-      <Chapter content={data?.bookChapters} />
+      <Chapter bookChapters={data?.bookChapters} />
     </>
   );
 };

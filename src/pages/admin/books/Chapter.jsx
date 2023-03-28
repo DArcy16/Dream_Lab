@@ -1,13 +1,17 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { BsPlusCircleFill } from "react-icons/bs";
 import { FiTrash } from "react-icons/fi";
 import { AiOutlineRight } from "react-icons/ai";
-
-const Chapter = (content) => {
-  const [chapters, setChapters] = useState(content?.chapters);
+import { v4 as uuid } from "uuid";
+const Chapter = ({ bookChapters }) => {
+  console.log("content", bookChapters);
+  const [chapters, setChapters] = useState(bookChapters);
   const [newChapter, setNewChapter] = useState("");
 
-  function ChapterCard({ chapter, onDelete }) {
+  useEffect(() => {
+    setChapters(bookChapters);
+  }, [bookChapters]);
+  function ChapterCard({ index, chapter, onDelete }) {
     return (
       <div
         className="bg-white rounded-lg p-4 flex justify-between"
@@ -17,7 +21,7 @@ const Chapter = (content) => {
         }}
       >
         <p className="text-lg">
-          {chapter?.id}. {chapter?.title}
+          {index + 1}. {chapter?.title}
         </p>
         <button
           onClick={onDelete}
@@ -36,7 +40,7 @@ const Chapter = (content) => {
 
   function handleNewChapterSubmit(event) {
     event.preventDefault();
-    setChapters([...chapters, newChapter]);
+    setChapters([...chapters, { title: newChapter }]);
     setNewChapter("");
   }
 
@@ -61,16 +65,17 @@ const Chapter = (content) => {
         />
         <button
           className="btn-2 flex gap-2 items-center justify-center px-2 py-2 w-44"
-          onClick={() => {}}
+          onClick={handleNewChapterSubmit}
         >
           {" "}
           <BsPlusCircleFill /> Create New{" "}
         </button>
       </form>
-      <div className={`h-${chapters.length === 0 ? "[200px]" : "[100%]"} p-4`}>
-        {chapters.map((ch, index) => (
+      <div className={`h-${chapters?.length === 0 ? "[200px]" : "[100%]"} p-4`}>
+        {chapters?.map((ch, index) => (
           <div className="mb-4" key={index}>
             <ChapterCard
+              index={index}
               chapter={ch}
               onDelete={() => handleChapterDelete(index)}
             />
