@@ -1,31 +1,32 @@
 /** @format */
 
 import React, { useEffect, useRef, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import ReactSwitch from "react-switch";
 import { ClipLoader } from "react-spinners";
-import { useForm } from "react-hook-form";
 
 import { useAuthorData } from "../../../hooks/useAuthor";
 import { useCategoryData } from "../../../hooks/useCategories";
-import { useCreateBook } from "../../../hooks/useBooks";
 
 import InputForm from "../../../components/form/InputForm";
 import MultipleSelect from "../../../components/form/MultipleSelect";
 import TextareaForm from "../../../components/form/TextareaForm";
 
 import { IoArrowBackOutline } from "react-icons/io5";
+import { useForm } from "react-hook-form";
+import { useSingleBookData, useUpdateBook } from "../../../hooks/useBooks";
 
-const createBookSchema = yup.object({
+const editBookSchema = yup.object({
 	title: yup.string().required(),
 	readingTime: yup.string().required(),
 	shortDesc: yup.string().required(),
-  page: yup.string().required()
+	page: yup.string().required(),
 });
 
-const CreateBook = () => {
+const EditBookData = () => {
+	const { slug } = useParams();
 	const navigate = useNavigate();
 	const [status, setStatus] = useState({
 		free: false,
@@ -36,28 +37,46 @@ const CreateBook = () => {
 	const [icon, setIcon] = useState();
 	const [showAuthorsOption, setShowAuthorsOption] = useState(false);
 	const [showCategoriesOption, setShowCategoriesOption] = useState(false);
+	const [prevTitle, setPrevTitle] = useState("");
+	const [checkTitleUpdate, setCheckTitleUpdate] = useState(false);
 
-	const createBookMutation = useCreateBook();
+	const updateBookMutation = useUpdateBook();
 
-	const {
-		register,
-		handleSubmit,
-		formState: { errors },
-	} = useForm({
-		resolver: yupResolver(createBookSchema),
-	});
-
+	const { data: book, isSuccess: isBookSuccess } = useSingleBookData(slug);
 	const { data: categories, isLoading: isCategoriesLoading } =
 		useCategoryData();
 
 	const { data: authors, isLoading: isAuthorsLoading } =
 		useAuthorData("bookauthors");
 
-    useEffect(() => {
-			if (createBookMutation.isSuccess) {
-				navigate("/admin/books");
+	const {
+		register,
+		handleSubmit,
+		formState: { errors },
+		setValue,
+	} = useForm({
+		resolver: yupResolver(editBookSchema),
+	});
+
+	
+
+	useEffect(() => {
+		if (isBookSuccess) {
+			setValue("title", book.title);
+			setValue("readingTime", book.readingTime);
+			setValue("shortDesc", book.shortDesc);
+			setValue("page", book.page);
+			setSelectedCategories(book.categories);
+			setSelectedAuthors(book.bookAuthors);
+			setIcon(book.mainImage);
+			if (book.status) {
+				setStatus({ free: book.isFree, active: true });
+			} else {
+				setStatus({ free: book.isFree, active: false });
 			}
-		}, [createBookMutation.isSuccess]);
+			setPrevTitle(book.title);
+		}
+	}, [isBookSuccess]);
 
 	const onSubmit = (data) => {
 		const categories = selectedCategories.map((category) => category.id);
@@ -76,27 +95,32 @@ const CreateBook = () => {
 			tempStatus = "p";
 		}
 
-		createBookMutation.mutate({
-			...data,
-			icon,
-			isFree,
-			status: tempStatus,
-			bookAuthors,
-			categories,
-		});
+		if (prevTitle === data.title) {
+			setCheckTitleUpdate(true);
+		} else {
+			updateBookMutation.mutate({
+				...data,
+				id: book.id,
+				icon,
+				isFree,
+				status: tempStatus,
+				bookAuthors,
+				categories,
+			});
+		}
 	};
 
 	return (
 		<div className="w-full p-10">
 			<div className="flex items-center gap-[18vw]">
 				<button
-					className="flex items-center justify-center gap-2 btn-prev py-2 px-4 border-none"
+					className="flex items-center justify-center gap-2 btn-prev py-2 border-none"
 					onClick={() => navigate("/admin/books")}
 				>
 					<IoArrowBackOutline />
 					Back
 				</button>
-				<h3 className="sub-heading text-center">Create Book</h3>
+				<h3 className="sub-heading text-center">Edit Book</h3>
 			</div>
 
 			<form
@@ -114,6 +138,7 @@ const CreateBook = () => {
 							icon={icon}
 							setIcon={setIcon}
 							articlePage
+							isEdit
 						/>
 					</div>
 
@@ -122,8 +147,8 @@ const CreateBook = () => {
 						<InputForm
 							type="text"
 							id="title"
-							label="book name"
-							placeholder="Type Book Name"
+							label="article name"
+							placeholder="Type Article Name"
 							register={register}
 							errors={errors}
 						/>
@@ -187,7 +212,6 @@ const CreateBook = () => {
 						</div>
 					</div>
 				</div>
-
 				<TextareaForm
 					id="shortDesc"
 					placeholder="type description"
@@ -195,21 +219,27 @@ const CreateBook = () => {
 					register={register}
 					errors={errors}
 				/>
-
-				{createBookMutation.isError ? (
+				{updateBookMutation.isError ? (
 					<p className="text-red-400 text-center normal-case mt-2">
-						{createBookMutation.error.message}
+						{updateBookMutation.error.message}
+					</p>
+				) : checkTitleUpdate ? (
+					<p className="text-red-400 text-center normal-case mt-2">
+						You need to update title
+					</p>
+				) : updateBookMutation.isSuccess ? (
+					<p className=" text-dreamLabColor2 text-center normal-case mt-2 ">
+						Success
 					</p>
 				) : null}
-
 				<button
 					className="w-1/4 btn-2 flex items-center justify-center gap-1 py-2 mx-auto mt-8"
 					type="submit"
 				>
-					{createBookMutation.isLoading ? (
+					{updateBookMutation.isLoading ? (
 						<ClipLoader color="white" size={20} />
 					) : null}
-					Create
+					Save
 				</button>
 			</form>
 			{showAuthorsOption || showCategoriesOption ? (
@@ -225,4 +255,4 @@ const CreateBook = () => {
 	);
 };
 
-export default CreateBook;
+export default EditBookData;

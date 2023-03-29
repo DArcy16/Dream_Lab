@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useParams } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import { useLoginBoxContext } from "../contexts/user/LoginBoxContext";
 import { useUpdateChapter } from "../hooks/useBooks";
 
@@ -9,7 +9,8 @@ const UpdateChapterModal = ({ data, handleRefresh }) => {
 
   const { showEditChapterModal, setShowEditChapterModal } =
     useLoginBoxContext();
-  const { id } = useParams();
+  const location = useLocation();
+	const id = location?.state?.id;
 
   const updateChapterMutation = useUpdateChapter(handleRefresh);
 

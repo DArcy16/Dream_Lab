@@ -17,11 +17,11 @@ export const getSubscribers = async (url, navLink) => {
 	try {
 		const res = await fetch(
 			url === "" && navLink === "all"
-				? `${URL}users/subscription/request?page=1&sort=o`
+				? `${URL}users/subscription/request?page=1`
 				: url === "" && navLink
-				? `${URL}users/subscription/request?page=1&status=${navLink}&sort=o`
+				? `${URL}users/subscription/request?page=1&status=${navLink}` 
 				: url && navLink === "all"
-				? `${url}&sort=l`
+				? `${url}`
 				: `${url}&status=${navLink}&sort=o`,
 			requestOption
 		);

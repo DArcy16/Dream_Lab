@@ -47,8 +47,8 @@ const BookItem = ({ book, bookNo }) => {
           <button
             className="btn-2 px-3 py-2 text-[15px]"
             onClick={() =>
-              navigate(`edit/${book.id}`, {
-                state: { slug: book?.slug },
+              navigate(`edit/${book.slug}`, {
+                state: { id: book?.id },
               })
             }
           >

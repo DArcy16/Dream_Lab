@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useParams } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import { useLoginBoxContext } from "../contexts/user/LoginBoxContext";
 import { useCreateChapter } from "../hooks/useBooks";
 
@@ -8,7 +8,9 @@ const AddChapterModal = ({ handleRefresh }) => {
   const [description, setDescription] = useState("");
   const { showAddChapterModal, setShowAddChapterModal } = useLoginBoxContext();
 
-  const { id } = useParams();
+  const location = useLocation();
+	const id = location?.state?.id;
+  
 
   const createChapterMutation = useCreateChapter(handleRefresh);
 

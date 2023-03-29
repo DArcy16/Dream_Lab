@@ -6,16 +6,22 @@ import {
   updateChapter,
   createChapter,
   deleteChapter,
+  createBook,
+  updateBook,
+  fetchChaptersOfBook,
 } from "../service/api/BooksApi";
 import {
   createCategory,
   deleteCategory,
-  fetchCategories,
   updateCategory,
 } from "../service/api/CategoriesApi";
 
-export const useBooksData = () => {
-  return useQuery(["books"], fetchBooks);
+export const useBooksData = (url) => {
+  return useQuery(["books", url], () => fetchBooks(url));
+};
+
+export const useChaptersOfBook = (slug) => {
+	return useQuery(["chapters", slug], () => fetchChaptersOfBook(slug));
 };
 
 export const useSingleBookData = (slug) => {
@@ -42,6 +48,10 @@ export const useUpdateChapter = (handleRefresh) => {
   });
 };
 
+export const useUpdateBook = () => {
+	return useMutation(updateBook);
+};
+
 export const useDeleteChapter = (handleRefresh) => {
   return useMutation(deleteChapter, {
     onSuccess: () => {
@@ -59,4 +69,8 @@ export const useUpdateCategory = () => {
 
 export const useDeleteCategory = () => {
   return useMutation(deleteCategory);
+};
+
+export const useCreateBook = () => {
+	return useMutation(createBook);
 };

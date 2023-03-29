@@ -54,7 +54,7 @@ const routes = [
 				path: "books",
 				children: [
 					{ index: true, element: <Books /> },
-					{ path: "edit/:id", element: <UpdataBook /> },
+					{ path: "edit/:slug", element: <UpdataBook /> },
 					{ path: "create", element: <CreateBook /> },
 				],
 			},
@@ -62,7 +62,7 @@ const routes = [
 				path: "articles",
 				children: [
 					{ index: true, element: <Articles /> },
-					{ path: "edit/:id", element: <EditArticle /> },
+					{ path: "edit/:slug", element: <EditArticle /> },
 					{ path: "create", element: <CreateArticles /> },
 				],
 			},

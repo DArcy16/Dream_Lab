@@ -1,7 +1,7 @@
 import { getToken } from "../../utils/getToken";
 import { URL } from "./api_endpoint";
 
-export const fetchBooks = async () => {
+export const fetchBooks = async (url) => {
   const token = getToken();
   const requestOption = {
     headers: {
@@ -11,7 +11,10 @@ export const fetchBooks = async () => {
     method: "GET",
   };
   try {
-    const response = await fetch(`${URL}books/admin`, requestOption);
+    const response = await fetch(
+			url === "" ? `${URL}books/admin?sorting=l` : `${url}&sorting=l`,
+			requestOption
+		);
     const data = await response.json();
     if (!response.ok) throw new Error(data.message);
     return data;
@@ -26,7 +29,6 @@ export const fetchSingleBook = async (slug) => {
     headers: {
       Authorization: `Bearer ${token}`,
       Accept: "application/json",
-      "Content-Type": "application/json",
     },
     mode: "cors",
     method: "GET",
@@ -41,6 +43,97 @@ export const fetchSingleBook = async (slug) => {
     throw error;
   }
 };
+
+export const createBook = async (data) => {
+
+  const token = getToken();
+
+	const formData = new FormData();
+	formData.append("title", data.title);
+  formData.append("page", data.page);
+	formData.append("readingTime", data.readingTime);
+	formData.append("shortDesc", data.shortDesc);
+	formData.append("isFree", data.isFree);
+	formData.append("status", data.status);
+	formData.append("bookAuthors", JSON.stringify(data.bookAuthors));
+	formData.append("categories", JSON.stringify(data.categories));
+	formData.append("mainImage", data.icon, data.icon.name);
+
+	const requestOption = {
+		headers: {
+			Authorization: `Bearer ${token}`,
+		},
+		mode: "cors",
+		method: "POST",
+		body: formData,
+	};
+
+	try {
+		const res = await fetch(`${URL}books`, requestOption);
+		const result = await res.json();
+
+		if (!res.ok) throw new Error(result.message);
+		return result;
+	} catch (error) {
+		throw error;
+	}
+};
+
+export const updateBook = async (data) => {
+  const token = getToken();
+	const formData = new FormData();
+	formData.append("title", data.title);
+	formData.append("page", data.page);
+	formData.append("readingTime", data.readingTime);
+	formData.append("shortDesc", data.shortDesc);
+	formData.append("isFree", data.isFree);
+	formData.append("status", data.status);
+	formData.append("bookAuthors", JSON.stringify(data.bookAuthors));
+	formData.append("categories", JSON.stringify(data.categories));
+	formData.append("mainImage", data.icon);
+
+	const requestOption = {
+		headers: {
+			Authorization: `Bearer ${token}`,
+		},
+		mode: "cors",
+		method: "PATCH",
+		body: formData,
+	};
+
+	try {
+		const res = await fetch(`${URL}books/${data.id}`, requestOption);
+		const result = await res.json();
+
+		if (!res.ok) throw new Error(result.message);
+
+		return result;
+	} catch (error) {
+		throw error;
+	}
+};
+
+export const fetchChaptersOfBook = async (slug) => {
+	const token = getToken();
+	const requestOption = {
+		headers: {
+			Authorization: `Bearer ${token}`,
+			Accept: "application/json",
+			"Content-Type": "application/json",
+		},
+		mode: "cors",
+		method: "GET",
+	};
+	try {
+		const response = await fetch(`${URL}books/chapters/${slug}`, requestOption);
+		const data = await response.json();
+
+		if (!response.ok) throw new Error(data.message);
+		return data;
+	} catch (error) {
+		throw error;
+	}
+}; 
 
 export const createChapter = async (data) => {
   const token = getToken();
