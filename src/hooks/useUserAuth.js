@@ -28,6 +28,7 @@ export const useUserLogin = () => {
       localStorage.setItem(TOKEN_LOCAL_STORAGE, data.access_token);
       localStorage.setItem(USER_DATA_LOCAL_STORAGE, JSON.stringify(data));
       setShow(false);
+      location.reload();
     },
   });
 };

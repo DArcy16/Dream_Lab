@@ -16,7 +16,7 @@ import {
 } from "../../hooks/useUserAuth";
 
 const Navbar = () => {
-  const location = useLocation();
+  const locate = useLocation();
   const [active, setActive] = useState("home");
   const { show, setShow } = useLoginBoxContext();
   const token = localStorage.getItem(TOKEN_LOCAL_STORAGE);
@@ -25,11 +25,12 @@ const Navbar = () => {
 
   const userLogout = () => {
     localStorage.clear();
+    location.reload();
     setIsLogin(false);
   };
 
   useEffect(() => {
-    const currentPath = location.pathname;
+    const currentPath = locate.pathname;
     if (currentPath === "/") {
       setActive("home");
     } else if (currentPath === "/library") {
@@ -37,7 +38,7 @@ const Navbar = () => {
     } else if (currentPath === "/pricing") {
       setActive("pricing");
     }
-  }, [location]);
+  }, [locate]);
   
   useEffect(() => {
     if (token) {
