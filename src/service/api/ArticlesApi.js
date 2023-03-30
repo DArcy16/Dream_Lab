@@ -17,7 +17,7 @@ export const getArticle = async (url) => {
 
 	try {
 		const res = await fetch(
-			url === "" ? `${URL}articles/?sorting=l` : `${url}&sorting=l`,
+			url === "" ? `${URL}articles/admin/?sorting=l` : `${url}&sorting=l`,
 			requestOption
 		);
 		const data = await res.json();
@@ -65,14 +65,14 @@ export const createArticle = async (data) => {
 export const getSingleArticle = async (slug) => {
 	const requestOption = {
 		headers: {
-			Authorizatin: `Bearer ${token}`,
+			Authorization: `Bearer ${token}`,
 		},
 		mode: "cors",
 		method: "GET",
 	};
 
 	try {
-		const res = await fetch(`${URL}articles/${slug}`, requestOption);
+		const res = await fetch(`${URL}articles/admin/${slug}`, requestOption);
 		const result = await res.json();
 
 		if (!res.ok) throw new Error(result.message);
