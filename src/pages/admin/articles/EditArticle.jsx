@@ -49,6 +49,8 @@ const EditArticle = () => {
 	const { data: authors, isLoading: isAuthorsLoading } =
 		useAuthorData("articleauthors");
 
+		console.log(article);
+
 	const {
 		register,
 		handleSubmit,

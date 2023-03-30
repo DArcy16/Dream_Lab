@@ -39,6 +39,7 @@ const EditBookData = () => {
 	const [showCategoriesOption, setShowCategoriesOption] = useState(false);
 	const [prevTitle, setPrevTitle] = useState("");
 	const [checkTitleUpdate, setCheckTitleUpdate] = useState(false);
+	const [showEditSuccessToaster, setShowEditSuccessToaster] = useState(false);
 
 	const updateBookMutation = useUpdateBook();
 
@@ -78,6 +79,15 @@ const EditBookData = () => {
 		}
 	}, [isBookSuccess]);
 
+	useEffect(() => {
+		if(updateBookMutation.isSuccess) {
+			setShowEditSuccessToaster(true);
+			setTimeout(() => {
+				setShowEditSuccessToaster(false);
+			}, 1500)
+		}
+	}, [updateBookMutation.isSuccess])
+
 	const onSubmit = (data) => {
 		const categories = selectedCategories.map((category) => category.id);
 		const bookAuthors = selectedAuthors.map((author) => author.id);
@@ -107,6 +117,7 @@ const EditBookData = () => {
 				bookAuthors,
 				categories,
 			});
+			setCheckTitleUpdate(false);
 		}
 	};
 
@@ -220,15 +231,15 @@ const EditBookData = () => {
 					errors={errors}
 				/>
 				{updateBookMutation.isError ? (
-					<p className="text-red-400 text-center normal-case mt-2">
+					<p className="text-red-400 text-center normal-case mt-4">
 						{updateBookMutation.error.message}
 					</p>
 				) : checkTitleUpdate ? (
-					<p className="text-red-400 text-center normal-case mt-2">
+					<p className="text-red-400 text-center normal-case mt-4">
 						You need to update title
 					</p>
-				) : updateBookMutation.isSuccess ? (
-					<p className=" text-dreamLabColor2 text-center normal-case mt-2 ">
+				) : showEditSuccessToaster ? (
+					<p className=" text-dreamLabColor2 text-center normal-case mt-4 shadow-sm border-x px-6 py-1 rounded-lg  border-dreamLabColor2/30 shadow-dreamLabColor2/50 ">
 						Success
 					</p>
 				) : null}
