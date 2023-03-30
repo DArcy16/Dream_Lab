@@ -8,7 +8,7 @@ import ReactSwitch from "react-switch";
 import { ClipLoader } from "react-spinners";
 
 import { useAuthorData } from "../../../hooks/useAuthor";
-import { useCreateArticle, useSingleArticle, useUpdateArticle } from "../../../hooks/useArticles";
+import { useSingleArticle, useUpdateArticle } from "../../../hooks/useArticles";
 import { useCategoryData } from "../../../hooks/useCategories";
 
 import InputForm from "../../../components/form/InputForm";
@@ -28,6 +28,7 @@ const editArticleSchema = yup.object({
 const EditArticle = () => {
 	const { slug } = useParams();
 	const navigate = useNavigate();
+
 	const [status, setStatus] = useState({
 		free: false,
 		active: false,
@@ -37,6 +38,8 @@ const EditArticle = () => {
 	const [icon, setIcon] = useState();
 	const [showAuthorsOption, setShowAuthorsOption] = useState(false);
 	const [showCategoriesOption, setShowCategoriesOption] = useState(false);
+	const [prevTitle, setPrevTitle] = useState("");
+	const [checkTitleUpdate, setCheckTitleUpdate] = useState(false);
 
 	const updateArticleMutation = useUpdateArticle();
 
@@ -45,6 +48,8 @@ const EditArticle = () => {
 		useCategoryData();
 	const { data: authors, isLoading: isAuthorsLoading } =
 		useAuthorData("articleauthors");
+
+		console.log(article);
 
 	const {
 		register,
@@ -75,6 +80,7 @@ const EditArticle = () => {
 			} else {
 				setStatus({ free: article.isFree, active: false });
 			}
+			setPrevTitle(article.title);
 		}
 	}, [isArticleSuccess]);
 
@@ -95,17 +101,22 @@ const EditArticle = () => {
 			tempStatus = "p";
 		}
 
-		updateArticleMutation.mutate({
-			...data,
-      id : article.id,
-			icon,
-			isFree,
-			status: tempStatus,
-			articleAuthors,
-			categories,
-		});
+		if (data.title !== prevTitle) {
+			updateArticleMutation.mutate({
+				...data,
+				id: article.id,
+				icon,
+				isFree,
+				status: tempStatus,
+				articleAuthors,
+				categories,
+			});
+			setCheckTitleUpdate(false);
+		} else {
+			setCheckTitleUpdate(true);
+		}
 
-    // console.log({
+		// console.log({
 		// 	...data,
 		// 	id: article.id,
 		// 	icon,
@@ -114,7 +125,6 @@ const EditArticle = () => {
 		// 	articleAuthors,
 		// 	categories,
 		// });
-    
 	};
 
 	return (
@@ -127,7 +137,7 @@ const EditArticle = () => {
 					<IoArrowBackOutline />
 					Back
 				</button>
-				<h3 className="sub-heading text-center">Create Subscription</h3>
+				<h3 className="sub-heading text-center">Edit Article</h3>
 			</div>
 
 			<form
@@ -230,6 +240,10 @@ const EditArticle = () => {
 					<p className="text-red-400 text-center normal-case mt-2">
 						{updateArticleMutation.error.message}
 					</p>
+				) : checkTitleUpdate ? (
+					<p className="text-red-400 text-center normal-case mt-2">
+						You need to update title
+					</p>
 				) : null}
 
 				<button
@@ -242,6 +256,14 @@ const EditArticle = () => {
 					Save
 				</button>
 			</form>
+			{showAuthorsOption || showCategoriesOption ? (
+				<div className="absolute top-0 left-0 w-full h-screen transparent z-10"
+				onClick={() => {
+					setShowAuthorsOption(false)
+					setShowCategoriesOption(false)
+				}}
+				></div>
+			) : null}
 		</div>
 	);
 };

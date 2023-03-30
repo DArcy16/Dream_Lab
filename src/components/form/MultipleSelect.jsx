@@ -1,7 +1,6 @@
 /** @format */
 
-import React, { useRef } from "react";
-import { forwardRef } from "react";
+import React from "react";
 import { IoIosArrowUp } from "react-icons/io";
 import { MdOutlineKeyboardArrowDown } from "react-icons/md";
 import { RxCross2 } from "react-icons/rx";
@@ -17,7 +16,7 @@ const MultipleSelect = ({
 	label,
 }) => {
 	const handleSelect = (e) => {
-		if (selectedItems.some((item) => item.id === e.target.value)) {
+		if (selectedItems?.some((item) => item.id === e.target.value)) {
 			setSelectedItems(
 				selectedItems.filter(
 					(item) => item.id !== e.target.value
@@ -34,7 +33,7 @@ const MultipleSelect = ({
 	
 
 	return (
-		<div className="w-full mt-3">
+		<div className="w-full mt-3 z-50">
 			<label
 				onClick={() => setShowOption(false)}
 				htmlFor={id}
@@ -46,7 +45,7 @@ const MultipleSelect = ({
 			<div id={id} className="w-full relative mt-2">
 				<div className="w-full flex items-center justify-between bg-white rounded-md outline outline-1 outline-grey/30 focus:outline-2 py-2 px-4">
 					<div className="flex basis-5/6 flex-wrap items-center gap-2">
-						{selectedItems.length > 0 ? (
+						{selectedItems?.length > 0 ? (
 							selectedItems.map((item) => (
 								<div
 									className="w-fit flex items-center gap-2 px-2 py-1 text-sm border border-grey2 rounded-lg flex-shrink-0"

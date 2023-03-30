@@ -17,7 +17,7 @@ export const getArticle = async (url) => {
 
 	try {
 		const res = await fetch(
-			url === "" ? `${URL}articles/admin` : `${url}`,
+			url === "" ? `${URL}articles/?sorting=l` : `${url}&sorting=l`,
 			requestOption
 		);
 		const data = await res.json();

@@ -1,6 +1,6 @@
 /** @format */
 
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -210,6 +210,15 @@ const CreateArticles = () => {
 					Create
 				</button>
 			</form>
+			{showAuthorsOption || showCategoriesOption ? (
+				<div
+					className="absolute top-0 left-0 w-full h-screen transparent z-10"
+					onClick={() => {
+						setShowAuthorsOption(false);
+						setShowCategoriesOption(false);
+					}}
+				></div>
+			) : null}
 		</div>
 	);
 };
