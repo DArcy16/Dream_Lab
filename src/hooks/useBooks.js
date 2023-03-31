@@ -9,6 +9,7 @@ import {
   createBook,
   updateBook,
   fetchChaptersOfBook,
+  fetchUserBooks,
 } from "../service/api/BooksApi";
 import {
   createCategory,
@@ -74,3 +75,7 @@ export const useDeleteCategory = () => {
 export const useCreateBook = () => {
 	return useMutation(createBook);
 };
+
+export const useUserBook = (url) => {
+  return useQuery(["userBooks", url], () => fetchUserBooks(url))
+}

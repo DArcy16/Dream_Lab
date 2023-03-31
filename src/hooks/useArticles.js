@@ -1,9 +1,13 @@
 import { useMutation, useQuery } from "@tanstack/react-query"
-import { createArticle, getArticle, getSingleArticle, updateArticle } from "../service/api/ArticlesApi"
+import { createArticle, getArticle, getSingleArticle, getUserArticle, updateArticle } from "../service/api/ArticlesApi"
 
 export const useArticle = (url) => {
     return useQuery(['articles', url],() =>  getArticle(url))
 }
+
+export const useUserArticle = (url) => {
+	return useQuery(["userArticles", url], () => getUserArticle(url));
+};
 
 export const useCreateArticle = () => {
     return useMutation(createArticle);

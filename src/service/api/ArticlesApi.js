@@ -30,6 +30,31 @@ export const getArticle = async (url) => {
 	}
 };
 
+export const getUserArticle = async (url) => {
+	const requestOption = {
+		headers: {
+			Authorization: `Bearer ${token}`,
+			Accept: "application/json",
+		},
+		mode: "cors",
+		method: "GET",
+	};
+
+	try {
+		const res = await fetch(
+			url === "" ? `${URL}articles/?sorting=l` : `${url}&sorting=l`,
+			requestOption
+		);
+		const data = await res.json();
+
+		if (!res.ok) throw new Error();
+
+		return data;
+	} catch (error) {
+		throw error;
+	}
+};
+
 export const createArticle = async (data) => {
 	const formData = new FormData();
 	formData.append("title", data.title);

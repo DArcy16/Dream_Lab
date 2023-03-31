@@ -23,6 +23,28 @@ export const fetchBooks = async (url) => {
   }
 };
 
+export const fetchUserBooks = async (url) => {
+	const token = getToken();
+	const requestOption = {
+		headers: {
+			Authorization: `Bearer ${token}`,
+		},
+		mode: "cors",
+		method: "GET",
+	};
+	try {
+		const response = await fetch(
+			url === "" ? `${URL}books?sorting=l` : `${url}&sorting=l`,
+			requestOption
+		);
+		const data = await response.json();
+		if (!response.ok) throw new Error(data.message);
+		return data;
+	} catch (error) {
+		throw error;
+	}
+};
+
 export const fetchSingleBook = async (slug) => {
   const token = getToken();
   const requestOption = {
@@ -272,3 +294,5 @@ export const deleteCategory = async (id) => {
     throw error;
   }
 };
+
+
