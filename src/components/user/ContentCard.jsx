@@ -2,9 +2,9 @@ import React from 'react'
 import {IoIosTimer} from 'react-icons/io'
 import {MdKeyboardDoubleArrowRight} from 'react-icons/md'
 
-const ContentCard = ({item, isHome = false, type}) => {
+const ContentCard = ({item, type}) => {
   return (
-		<article className="px-6 py-4 w-52 flex flex-col justify-center border-x  border-x-grey6/30 shadow-md flex-none mt-4 space-y-3">
+		<article className="px-6 py-4 w-52 flex flex-col justify-center border-x  border-x-grey6/30 shadow-md flex-none mt-4 space-y-3 cursor-pointer transition-all duration-500 hover:scale-105">
 			<img
 				src={item.mainImage}
 				alt="item.title"
