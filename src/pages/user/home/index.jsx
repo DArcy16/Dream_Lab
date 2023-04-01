@@ -1,9 +1,190 @@
 import React from "react";
+import { RiVipCrownLine, RiBook2Fill, RiHeadphoneFill } from "react-icons/ri";
+import { CgArrowLongRight } from "react-icons/cg";
+import { AiOutlineClockCircle } from "react-icons/ai";
+import { IoDocumentText } from "react-icons/io5";
+import {MdOutlineVideoSettings} from 'react-icons/md'
+import playStore from "../../../assets/playstore.png";
+import appleStore from "../../../assets/applestore.png";
+import freeImg from "../../../assets/freeImage.png";
+import dreamLab from "../../../assets/dreamLab.png";
+function Card({ imgSrc, title, body, buttonText }) {
+  return (
+    <div className="max-w-[250px] rounded shadow-lg p-4">
+      <div className="flex items-center justify-center mb-3">
+        <img src={imgSrc} alt={title} width={120} height={150} />
+      </div>
+      <div>
+        <div className="font-semibold textColor4 mb-2 leading-6">{title}</div>
+        <p className="textColor3 text-sm">{body}</p>
+      </div>
+      <div className="flex justify-between items-center mt-3">
+        <span className="text-sm flex items-center gap-2 text-textColor3">
+          <AiOutlineClockCircle />5 mins
+        </span>
+        <button className="text-dreamLabColor1 text-sm font-semibold rounded">
+          View Now
+        </button>
+      </div>
+    </div>
+  );
+}
 
 const index = () => {
   return (
-    <div className="h-screen">
-      <div className=" container mx-auto">Home</div>
+    <div>
+      <div className="text-white bg-dreamLabColor4 flex justify-between items-center p-3 mb-14">
+        <div className="mx-auto container py-6 px-12">
+          <h2 className="text-5xl font-semibold">နေ့စဉ်စာ တစ်အုပ်ဖတ်ပါ</h2>
+          <div className="mt-12 text-xl w-[660px] leading-10">
+            အဆီအနှစ်ထုတ်ထားတဲ့ Personal, Professional နဲ့ Business Development
+            စာအုပ်များကို မြန်မာလို တစ်နေရာတည်းတွင် အချိန်မရွေး နေရာမရွေး
+            ဖတ်ရှု့နိုင်ပါသည်။
+          </div>
+          <button className="w-1/3 btn-2 flex gap-2 items-center justify-center px-4 py-3 mt-8 mb-6">
+            {" "}
+            <RiVipCrownLine size={20} /> Subscribe to premium
+          </button>
+          <div className="flex gap-12">
+            <img src={playStore} preview="playstore" />
+            <img src={appleStore} preview="appleStore" />
+          </div>
+        </div>
+        <div>hero section</div>
+      </div>
+      <div className="container mx-auto flex gap-44 items-center mb-14">
+        <img src={freeImg} width={350} height={250} />
+        <div className="self-start text-textColor4">
+          <h3 className="font-semibold text-3xl">Dream Lab FREE</h3>
+          <p className="text-[22px] mt-4 mb-6">
+            E-books are fun to read anywhere, anytime!
+          </p>
+          <div className="flex justify-between text-lg">
+            <div className="flex flex-col">
+              <p className="flex items-center gap-4 mb-4">
+                <span
+                  style={{ background: "rgba(0, 190, 255, 0.3)" }}
+                  className="w-[35px] h-[35px] rounded-[50%] flex items-center justify-center"
+                >
+                  <RiBook2Fill className="text-dreamLabColor1" size={21} />
+                </span>
+                Free Books
+              </p>
+
+              <p className="flex items-center gap-4">
+                <span
+                  style={{ background: "rgba(0, 190, 255, 0.3)" }}
+                  className="w-[35px] h-[35px] rounded-[50%] flex items-center justify-center"
+                >
+                  <IoDocumentText className="text-dreamLabColor1" size={21} />
+                </span>
+                Free Articles
+              </p>
+            </div>
+            <div className="flex flex-col">
+              <p className="flex items-center gap-4 mb-4">
+                <span
+                  style={{ background: "rgba(0, 190, 255, 0.3)" }}
+                  className="w-[35px] h-[35px] rounded-[50%] flex items-center justify-center"
+                >
+                  <RiHeadphoneFill className="text-dreamLabColor1" size={21} />
+                </span>
+                Free Podcasts
+              </p>
+              <p className="flex items-center gap-4">
+                <span
+                  style={{ background: "rgba(0, 190, 255, 0.3)" }}
+                  className="w-[35px] h-[35px] rounded-[50%] flex items-center justify-center"
+                >
+                  <MdOutlineVideoSettings
+                    className="text-dreamLabColor1"
+                    size={21}
+                  />
+                </span>
+                Free Videos
+              </p>
+            </div>
+          </div>
+          <button className="btn-1 mt-8 py-4 px-8 w-1/2 flex items-center justify-center gap-4">
+            Discover More <CgArrowLongRight size={23} />
+          </button>
+        </div>
+      </div>
+      <section className="container mx-auto mb-14">
+        <h3 className="text-center text-textColor4 text-3xl font-semibold mb-12">
+          Featured Books
+        </h3>
+        <Card
+          imgSrc={freeImg}
+          title="Card Title"
+          body="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin iaculis, lorem quis lacinia pretium, ligula velit auctor enim, vel ultricies arcu diam at libero."
+          buttonText="Read More"
+        />
+      </section>
+      <section
+        style={{ background: "rgba(0, 215, 255, 0.1)" }}
+        className="py-12 mb-14"
+      >
+        <div className="flex gap-20 items-center container mx-auto">
+          <div>
+            <img src={dreamLab} width={420} height={200} />
+          </div>
+          <div className="self-start">
+            <h3 className="text-dreamLabColor4 text-3xl font-semibold mb-6">
+              Why Choose DreamLab
+            </h3>
+            <ul className="list-disc leading-10 ml-4 text-dreamLabColor4">
+              <li>
+                Dreamlab ဆိုတာကေတာ့ ကမ္ဘာကျော် personal, professional and
+                business development စာအုပ်််််််တွေကို "မြန်မာလို"
+                ဖတ်ရှုနိုင်အောင် အနှစ်ချုပ်ထားသည့် website တစ်ခုဖြစ်ပါတယ်။{" "}
+              </li>
+              <li>
+                နေ့စဥ် ကမ္ဘာကျော်စာအုပ်များကို မြန်မာလို အဆီအနှစ်ထုတ်
+                အနှစ်ချုပ်ရေးပေးထားပါတယ်။
+              </li>
+              <li>
+                ဖုန်းနဲ့အင်တာနက်ရှိရင် စာအုပ်တွေ သယ်သွားစရာမလိုတော့ဘူးပေါ့။
+              </li>
+              <li>
+                1st June 2020 ကစတင်ခဲ့ပါသည်။ တစ်ရက်တစ်အုပ် စာအုပ်တွေအပြင်
+                နေ့စဉ်တင်််််််််ဆက်ပေးနေတဲ့ စာအုပ်အသစ်တွေကိုလည်း
+                ဖတ်ရှုနိုင်မှာဖြစ်ပါတယ်။ ဒါကြောင့် နေ့စဥ် ကိုယ့်ရဲ့ဦးနှောက်မှာ
+                ရင်းနှီးမြှုပ်နှံဖို့ အခုပဲ Dream Lab မှာ Subscribe
+                လုပ်လိုက်ပါနော်။
+              </li>
+            </ul>
+          </div>
+        </div>
+      </section>
+      <section className="container mx-auto mb-14">
+        <div className="flex justify-between items-center mb-12">
+          <h3 className="text-textColor4 text-3xl font-semibold">
+            New Released Books
+          </h3>
+          <button className="btn-1 py-2 px-3 text-sm">VEIW MORE</button>
+        </div>
+        <Card
+          imgSrc={freeImg}
+          title="Card Title"
+          body="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin iaculis, lorem quis lacinia pretium, ligula velit auctor enim, vel ultricies arcu diam at libero."
+          buttonText="Read More"
+        />
+      </section>
+      <section className="container mx-auto mb-14">
+        <div className="flex justify-between items-center mb-12">
+          <h3 className="text-textColor4 text-3xl font-semibold">
+            New Released Articles
+          </h3>
+          <button className="btn-1 py-2 px-3 text-sm">VEIW MORE</button>
+        </div>
+        <Card
+          imgSrc={freeImg}
+          title="Card Title"
+          body="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin iaculis, lorem quis lacinia pretium, ligula velit auctor enim, vel ultricies arcu diam at libero."
+          buttonText="Read More"
+        />
+      </section>
     </div>
   );
 };
