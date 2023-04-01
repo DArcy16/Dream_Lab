@@ -23,7 +23,7 @@ const index = () => {
 
 
 	return (
-		<div className="p-8">
+		<div className="flex flex-col items-center justify-center p-8">
 			<h1 className="text-center font-bold text-xl">Library</h1>
 
 			<LibraryNav type={type} setUrl={setUrl}/>

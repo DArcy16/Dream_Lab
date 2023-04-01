@@ -17,24 +17,24 @@ const UserLayout = () => {
   
 
   return (
-    <div>
-      <Navbar />
-      <article>
-        <Outlet />
-      </article>
-      <Footer />
-      {show ? (
-        <div className="">
-          <UserLoginModal />
-        </div>
-      ) : null}
-      {showRegister ? (
-        <div className="">
-          <UserRegisterModal />
-        </div>
-      ) : null}
-    </div>
-  );
+		<div className="w-full overflow-hidden">
+			<Navbar />
+			<article>
+				<Outlet />
+			</article>
+			<Footer />
+			{show ? (
+				<div className="">
+					<UserLoginModal />
+				</div>
+			) : null}
+			{showRegister ? (
+				<div className="">
+					<UserRegisterModal />
+				</div>
+			) : null}
+		</div>
+	);
 };
 
 export default UserLayout;

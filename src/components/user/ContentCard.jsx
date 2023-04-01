@@ -2,9 +2,11 @@ import React from 'react'
 import {IoIosTimer} from 'react-icons/io'
 import {MdKeyboardDoubleArrowRight} from 'react-icons/md'
 
-const ContentCard = ({item, type}) => {
+const ContentCard = ({item, type, isHome = false}) => {
   return (
-		<article className="px-6 py-4 w-52 flex flex-col justify-center border-x  border-x-grey6/30 shadow-md flex-none mt-4 space-y-3 cursor-pointer transition-all duration-500 hover:scale-105">
+		<article
+			className={`px-6 py-4 ${isHome ? "w-10/12" : "w-full"} snap-center sm:w-48 md:w-52 flex flex-col justify-center border-x  border-x-grey6/30 shadow-md flex-none mt-4 space-y-3 cursor-pointer transition-all duration-500 hover:scale-105`}
+		>
 			<img
 				src={item.mainImage}
 				alt="item.title"
@@ -23,7 +25,7 @@ const ContentCard = ({item, type}) => {
 			</p>
 			<div className="flex items-center justify-between">
 				<div className="flex items-center text-sm gap-1">
-					<IoIosTimer /> 10 mins
+					<IoIosTimer /> {item.readingTime}
 				</div>
 				<MdKeyboardDoubleArrowRight />
 			</div>
