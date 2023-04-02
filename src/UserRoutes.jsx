@@ -73,14 +73,14 @@ const routes = [
 				],
 			},
 			{
-				path : "view",
+				path : ":type/:name",
 				children : [
 					{
 						index: true,
 						element : <SampleView />
 					},
 					{
-						index: 'details',
+						path: 'details',
 						element : <DetailsView />
 					}
 

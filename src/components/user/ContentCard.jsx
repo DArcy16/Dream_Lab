@@ -1,11 +1,19 @@
 import React from 'react'
 import {IoIosTimer} from 'react-icons/io'
 import {MdKeyboardDoubleArrowRight} from 'react-icons/md'
+import { useLocation, useNavigate } from 'react-router-dom'
 
 const ContentCard = ({item, type, isHome = false}) => {
+	const location = useLocation();
+	const navigate = useNavigate();
+	const handleCardClick = () => {
+		navigate(`/${type}/${item.slug}?prevPath=${encodeURIComponent(location.pathname)}`)
+	}
+
   return (
 		<article
 			className={`px-6 py-4 ${isHome ? "w-10/12" : "w-full"} snap-center sm:w-48 md:w-52 flex flex-col justify-center border-x  border-x-grey6/30 shadow-md flex-none mt-4 space-y-3 cursor-pointer transition-all duration-500 hover:scale-105`}
+			onClick={handleCardClick}
 		>
 			<img
 				src={item.mainImage}

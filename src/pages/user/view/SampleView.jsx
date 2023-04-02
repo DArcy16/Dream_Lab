@@ -1,9 +1,22 @@
-import React from 'react'
+/** @format */
+
+import React from "react";
+import { useLocation, useParams } from "react-router-dom";
+import BookSampleView from "../../../components/user/BookSampleView";
+import ArticleSampleView from "../../../components/user/ArticleSampleView";
 
 const SampleView = () => {
-  return (
-    <div>SampleView</div>
-  )
-}
+	const { type, name } = useParams();
 
-export default SampleView
+	return (
+		<>
+			{type === "book" ? (
+				<BookSampleView type={type} name={name} />
+			) : (
+				<ArticleSampleView type={type} name={name} />
+			)}
+		</>
+	);
+};
+
+export default SampleView;

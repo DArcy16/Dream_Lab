@@ -7,7 +7,6 @@ const CategorizedView = () => {
     const {pathname : path} = useLocation();
     const pathSplit = path.split("/");
     const categoryName = pathSplit[2];
-    // type === books or articles 
     const type = pathSplit[3]; 
 
    

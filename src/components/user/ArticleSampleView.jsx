@@ -1,8 +1,15 @@
 import React from 'react'
+import { useLocation } from 'react-router-dom'
 
-const ArticleSampleView = () => {
+const ArticleSampleView = ({ name}) => {
+  const location = useLocation();
+
+  const prevPath = new URLSearchParams(location.search).get('prevPath');
+
+  
+  
   return (
-    <div>ArticleSampleView</div>
+    <div>{name} sample view</div>
   )
 }
 
