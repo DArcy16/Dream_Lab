@@ -87,76 +87,81 @@ const index = () => {
   return (
     <div>
       <div className="text-white bg-dreamLabColor4 flex justify-between items-center p-3 pb-0 mb-14">
-        <div className="mx-auto container pt-6 px-12">
-          <h2 className="text-5xl font-semibold">နေ့စဉ်စာ တစ်အုပ်ဖတ်ပါ</h2>
-          <div className="mt-12 text-xl w-[660px] leading-10">
-            အဆီအနှစ်ထုတ်ထားတဲ့ Personal, Professional နဲ့ Business Development
-            စာအုပ်များကို မြန်မာလို တစ်နေရာတည်းတွင် အချိန်မရွေး နေရာမရွေး
-            ဖတ်ရှု့နိုင်ပါသည်။
+        <div className="text-white bg-dreamLabColor4 flex flex-col sm:flex-row justify-between items-center p-3 pb-0">
+          <div className="mx-auto container pt-6 px-6 sm:px-12">
+            <h2 className="text-3xl sm:text-5xl font-semibold text-center sm:text-left">
+              နေ့စဉ်စာ တစ်အုပ်ဖတ်ပါ
+            </h2>
+            <div className="mt-8 sm:mt-12 text-base sm:text-xl w-full sm:w-4/5 leading-8 sm:leading-10 text-center sm:text-left">
+              အဆီအနှစ်ထုတ်ထားတဲ့ Personal, Professional နဲ့ Business Development
+              စာအုပ်များကို မြန်မာလို တစ်နေရာတည်းတွင် အချိန်မရွေး နေရာမရွေး
+              ဖတ်ရှု့နိုင်ပါသည်။
+            </div>
+            <button
+              className="w-full sm:w-1/2 btn-2 flex gap-2 items-center justify-center px-4 py-3 mt-6 sm:mt-8 mb-4 sm:mb-6"
+              onClick={redirectToSubscription}
+            >
+              <RiVipCrownLine size={20} /> Subscribe to premium
+            </button>
+            <div className="flex justify-center sm:justify-start gap-8 mb-6 sm:mb-12">
+              <img src={playStore} className="h-10" preview="playstore" />
+              <img src={appleStore} className="h-10" preview="appleStore" />
+            </div>
           </div>
-          <button
-            className="w-1/2 btn-2 flex gap-2 items-center justify-center px-4 py-3 mt-8 mb-6"
-            onClick={redirectToSubscription}
-          >
-            {" "}
-            <RiVipCrownLine size={20} /> Subscribe to premium
-          </button>
-          <div className="flex gap-12 mb-12">
-            <img src={playStore} preview="playstore" />
-            <img src={appleStore} preview="appleStore" />
+          <div className="w-full h-full self-end">
+            <img src={heroImg} className="w-full h-auto" />
           </div>
-        </div>
-        <div className="w-full h-full self-end">
-          <img src={heroImg} />
         </div>
       </div>
-      <div className="container mx-auto flex gap-44 items-center mb-14">
-        <img src={freeImg} width={350} height={250} />
+      <div class="container mx-auto flex flex-col md:flex-row md:gap-16 items-center mb-14">
+        <img src={freeImg} class="w-full md:w-2/6 md:h-auto" />
 
-        <div className="self-start text-textColor4">
-          <h3 className="font-semibold text-3xl">Dream Lab FREE</h3>
-          <p className="text-[22px] mt-4 mb-6">
+        <div class="self-start md:self-center text-center md:text-left text-textColor4 md:w-3/5">
+          <h3 class="font-semibold text-3xl md:text-3xl lg:text-3xl mb-4 md:mb-6">
+            Dream Lab FREE
+          </h3>
+          <p class="text-lg md:text-xl lg:text-xl mb-4 md:mb-6">
             E-books are fun to read anywhere, anytime!
           </p>
-          <div className="flex justify-between text-lg">
-            <div className="flex flex-col">
-              <p className="flex items-center gap-4 mb-4">
+          <div class="flex flex-col md:flex-row md:justify-between text-base lg:text-lg">
+            <div class="flex flex-col mb-6 md:mb-0">
+              <p class="flex items-center gap-4 mb-2 md:mb-4">
                 <span
                   style={{ background: "rgba(0, 190, 255, 0.3)" }}
-                  className="w-[35px] h-[35px] rounded-[50%] flex items-center justify-center"
+                  class="w-10 h-10 md:w-12 md:h-12 rounded-full flex items-center justify-center"
                 >
-                  <RiBook2Fill className="text-dreamLabColor1" size={21} />
+                  <RiBook2Fill class="text-dreamLabColor1" size={21} />
                 </span>
                 Free Books
               </p>
 
-              <p className="flex items-center gap-4">
+              <p class="flex items-center gap-4">
                 <span
                   style={{ background: "rgba(0, 190, 255, 0.3)" }}
-                  className="w-[35px] h-[35px] rounded-[50%] flex items-center justify-center"
+                  class="w-10 h-10 md:w-12 md:h-12 rounded-full flex items-center justify-center"
                 >
-                  <IoDocumentText className="text-dreamLabColor1" size={21} />
+                  <IoDocumentText class="text-dreamLabColor1" size={21} />
                 </span>
                 Free Articles
               </p>
             </div>
-            <div className="flex flex-col">
-              <p className="flex items-center gap-4 mb-4">
+            <div class="flex flex-col">
+              <p class="flex items-center gap-4 mb-2 md:mb-4">
                 <span
                   style={{ background: "rgba(0, 190, 255, 0.3)" }}
-                  className="w-[35px] h-[35px] rounded-[50%] flex items-center justify-center"
+                  class="w-10 h-10 md:w-12 md:h-12 rounded-full flex items-center justify-center"
                 >
-                  <RiHeadphoneFill className="text-dreamLabColor1" size={21} />
+                  <RiHeadphoneFill class="text-dreamLabColor1" size={21} />
                 </span>
                 Free Podcasts
               </p>
-              <p className="flex items-center gap-4">
+              <p class="flex items-center gap-4">
                 <span
                   style={{ background: "rgba(0, 190, 255, 0.3)" }}
-                  className="w-[35px] h-[35px] rounded-[50%] flex items-center justify-center"
+                  class="w-10 h-10 md:w-12 md:h-12 rounded-full flex items-center justify-center"
                 >
                   <MdOutlineVideoSettings
-                    className="text-dreamLabColor1"
+                    class="text-dreamLabColor1"
                     size={21}
                   />
                 </span>
@@ -164,42 +169,44 @@ const index = () => {
               </p>
             </div>
           </div>
-          <button className="btn-1 mt-8 py-4 px-8 w-1/2 flex items-center justify-center gap-4">
+          <button class="btn-1 mt-6 md:mt-10 py-3 md:py-4 px-6 md:px-8 w-1/2 md:w-auto flex items-center justify-center gap-2">
             Discover More <CgArrowLongRight size={23} />
           </button>
         </div>
       </div>
-      <section className="container mx-auto mb-14">
-        <h3 className="text-center text-textColor4 text-3xl font-semibold mb-12">
+      <section className="container mx-auto mb-14 px-4 md:px-0">
+        <h3 className="text-center text-textColor4 text-3xl font-semibold mb-8 md:mb-12">
           Featured Books
         </h3>
-        <div className="flex items-center gap-8 flex-wrap">
+        <div className="flex flex-col md:flex-row md:items-center md:justify-center gap-4 md:gap-8">
           {featuredBooks?.items?.map((book) => (
             <Card
               imgSrc={book?.mainImage}
               title={book?.title}
               body={book?.shortDesc}
+              className="mb-4 md:mb-0 w-full md:w-auto"
             />
           ))}
         </div>
       </section>
+
       <section
         style={{ background: "rgba(0, 215, 255, 0.1)" }}
-        className="py-12 mb-14"
+        className="py-6 md:py-12 mb-6 md:mb-14"
       >
-        <div className="flex gap-20 items-center container mx-auto">
-          <div>
-            <img src={dreamLab} width={420} height={200} />
+        <div className="flex flex-col md:flex-row gap-6 md:gap-12 items-center container mx-auto">
+          <div className="w-full md:w-1/2">
+            <img src={dreamLab} className="w-1/2 md:w-full" />
           </div>
-          <div className="self-start">
-            <h3 className="text-dreamLabColor4 text-3xl font-semibold mb-6">
+          <div className="self-start w-full">
+            <h3 className="text-dreamLabColor4 text-xl md:text-3xl font-semibold mb-3 md:mb-6">
               Why Choose DreamLab
             </h3>
             <ul className="list-disc leading-10 ml-4 text-dreamLabColor4">
               <li>
                 Dreamlab ဆိုတာကေတာ့ ကမ္ဘာကျော် personal, professional and
-                business development စာအုပ်််််််တွေကို "မြန်မာလို"
-                ဖတ်ရှုနိုင်အောင် အနှစ်ချုပ်ထားသည့် website တစ်ခုဖြစ်ပါတယ်။{" "}
+                business development စာအုပ်တွေကို "မြန်မာလို" ဖတ်ရှုနိုင်အောင်
+                အနှစ်ချုပ်ထားသည့် website တစ်ခုဖြစ်ပါတယ်။
               </li>
               <li>
                 နေ့စဥ် ကမ္ဘာကျော်စာအုပ်များကို မြန်မာလို အဆီအနှစ်ထုတ်
@@ -219,21 +226,22 @@ const index = () => {
           </div>
         </div>
       </section>
-      <section className="container mx-auto mb-14">
-        <div className="flex justify-between items-center mb-12">
-          <h3 className="text-textColor4 text-3xl font-semibold">
+      <section className="container mx-auto mb-14 px-4 sm:px-6 lg:px-8">
+        <div className="flex flex-col sm:flex-row justify-between items-center mb-8 sm:mb-12">
+          <h3 className="text-textColor4 text-2xl sm:text-3xl font-semibold mb-4 sm:mb-0">
             New Released Books
           </h3>
           <button
             className="btn-1 py-2 px-3 text-sm"
             onClick={redirectToBookLibrary}
           >
-            VEIW MORE
+            VIEW MORE
           </button>
         </div>
-        <div className="flex items-center gap-8 flex-wrap">
+        <div className="flex flex-wrap gap-4 sm:gap-8">
           {featuredBooks?.items?.map((book) => (
             <Card
+              key={book?.id}
               imgSrc={book?.mainImage}
               title={book?.title}
               body={book?.shortDesc}
@@ -241,19 +249,20 @@ const index = () => {
           ))}
         </div>
       </section>
+
       <section className="container mx-auto mb-14">
-        <div className="flex justify-between items-center mb-12">
-          <h3 className="text-textColor4 text-3xl font-semibold">
+        <div className="flex flex-col md:flex-row justify-between items-center mb-6 md:mb-12">
+          <h3 className="text-textColor4 text-3xl font-semibold mb-4 md:mb-0">
             New Released Articles
           </h3>
           <button
             className="btn-1 py-2 px-3 text-sm"
             onClick={redirectToArticleLibrary}
           >
-            VEIW MORE
+            VIEW MORE
           </button>
         </div>
-        <div className="flex items-center gap-8 flex-wrap">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {newArticles?.items?.map((article) => (
             <Card
               imgSrc={article?.mainImage}
