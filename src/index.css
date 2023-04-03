@@ -9,7 +9,7 @@
 
 @layer components {
     .btn-1 {
-        @apply bg-dreamLabColor1 text-white font-semibold rounded-md;
+        @apply bg-dreamLabColor1 text-white font-semibold rounded-md hover:bg-dreamLabColor1/80 disabled:bg-dreamLabColor1/40;
     }
 
     .btn-2 {
@@ -25,7 +25,7 @@
     }
 
     .btn-prev{
-        @apply border-2 border-dreamLabColor1 rounded-md text-dreamLabColor1 font-semibold;
+        @apply border-2 border-dreamLabColor1 rounded-md text-dreamLabColor1 font-semibold hover:border-dreamLabColor1/80 hover:text-dreamLabColor1/80 disabled:border-dreamLabColor1/40 disabled:text-dreamLabColor1/40;
     }
 
     .btn-disable{

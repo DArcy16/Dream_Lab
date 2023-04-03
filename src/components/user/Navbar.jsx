@@ -27,7 +27,7 @@ import {
 } from "../../hooks/useUserAuth";
 
 const Navbar = () => {
-  const locate = useLocation();
+  const {pathname} = useLocation();
   const [active, setActive] = useState("home");
   const { show, setShow } = useLoginBoxContext();
   const token = localStorage.getItem(TOKEN_LOCAL_STORAGE);
@@ -41,7 +41,7 @@ const Navbar = () => {
   };
 
   useEffect(() => {
-    const currentPath = locate.pathname;
+    const currentPath = pathname;
     if (currentPath === "/") {
       setActive("home");
     } else if (currentPath === "/library") {
@@ -49,7 +49,7 @@ const Navbar = () => {
     } else if (currentPath === "/pricing") {
       setActive("pricing");
     }
-  }, [locate]);
+  }, [pathname]);
   
   useEffect(() => {
     if (token) {

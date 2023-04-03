@@ -1,23 +1,19 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+/** @format */
+
+import React from "react";
+import { Link } from "react-router-dom";
+import { useCategoryData } from "../../../hooks/useCategories";
+import CategoryCardsList from "../../../components/user/CategoryCardsList";
 
 const index = () => {
-  return (
-		<div className="flex items-center justify-center gap-4 py-4">
-			<Link
-				to={"category1"}
-				className="underline hover:no-underline hover:text-dreamLabColor2"
-			>
-				Category1
-			</Link>
-			<Link
-				to={"category2"}
-				className="underline hover:no-underline hover:text-dreamLabColor2"
-			>
-				Category2
-			</Link>
+	const { data: categories, isLoading } = useCategoryData();
+
+	return (
+		<div className="w-full p-10">
+			<h2 className="text-xl font-bold text-center">Category</h2>
+			<CategoryCardsList categories={categories} isLoading={isLoading}/>
 		</div>
 	);
-}
+};
 
-export default index
+export default index;

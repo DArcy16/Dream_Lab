@@ -10,6 +10,7 @@ import {
   updateBook,
   fetchChaptersOfBook,
   fetchUserBooks,
+  fetchUserSingleBook,
 } from "../service/api/BooksApi";
 import {
   createCategory,
@@ -21,8 +22,8 @@ export const useBooksData = (url) => {
   return useQuery(["books", url], () => fetchBooks(url));
 };
 
-export const useChaptersOfBook = (slug) => {
-	return useQuery(["chapters", slug], () => fetchChaptersOfBook(slug));
+export const useChaptersOfBook = (id) => {
+	return useQuery(["chapters", id], () => fetchChaptersOfBook(id));
 };
 
 export const useSingleBookData = (slug) => {
@@ -79,3 +80,7 @@ export const useCreateBook = () => {
 export const useUserBook = (url) => {
   return useQuery(["userBooks", url], () => fetchUserBooks(url))
 }
+
+export const useUserSingleBookData = (slug) => {
+	return useQuery(["books", slug], () => fetchUserSingleBook(slug));
+};

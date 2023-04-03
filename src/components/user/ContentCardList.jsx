@@ -1,7 +1,7 @@
 import React from 'react'
 import ContentCard from './ContentCard'
 
-const ContentCardList = ({data, isHome = false, type}) => {
+const ContentCardList = ({data, isHome = false, type, isView = false}) => {
   return (
 		
 			<div
@@ -12,7 +12,7 @@ const ContentCardList = ({data, isHome = false, type}) => {
 				} [&::-webkit-scrollbar]:hidden`}
 			>
 				{data?.map((item) => (
-					<ContentCard key={item?.id} item={item} type={type} isHome={isHome} />
+					<ContentCard key={item?.id} item={item} type={type} isHome={isHome} isView={isView}/>
 				))}
 			</div>
 		
