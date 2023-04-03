@@ -18,6 +18,7 @@ const CategoryCardsList = ({ categories, isLoading }) => {
 					<div
 						className="flex items-center justify-center gap-6 border border-grey2/30 hover:border-grey2/60 rounded-lg px-6 py-2 mt-6 cursor-pointer"
 						onClick={() => handleCategorySelect(category)}
+						key={category.id}
 					>
 						<img
 							src={category.icon}

@@ -17,9 +17,9 @@ const UserLayout = () => {
   
 
   return (
-		<div className="w-full overflow-hidden">
+		<div className="w-full overflow-hidden snap-y">
 			<Navbar />
-			<article>
+			<article className="snap-start">
 				<Outlet />
 			</article>
 			<Footer />

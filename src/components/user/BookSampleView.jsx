@@ -13,6 +13,7 @@ import {
 	BsTwitter,
 	BsLinkedin,
 } from "react-icons/bs";
+
 import CategoryCardsList from "./CategoryCardsList";
 import ContentCardList from "./ContentCardList";
 
@@ -21,13 +22,10 @@ const BookSampleView = ({ name }) => {
 	const location = useLocation();
 
 	const { data, isLoading, isError, error } = useUserSingleBookData(name);
-
-	console.log(data);
-
 	const prevPath = new URLSearchParams(location.search).get("prevPath");
 
 	return (
-		<div className="w-full p-8 md:px-20 md:py-10">
+		<div className="w-full p-8 sm:px-20 sm:py-10">
 			<button
 				className="flex items-center justify-center gap-2 btn-prev py-2 px-4 border-none"
 				onClick={() => {
@@ -50,7 +48,7 @@ const BookSampleView = ({ name }) => {
 						/>
 
 						<div className="space-y-6 flex flex-col sm:justify-between w-full sm:h-full sm:w-2/3 mt-6">
-							<h2 className="text-xl font-bold text-start">{data?.title}</h2>
+							<h2 className="text-lg font-bold text-start">{data?.title}</h2>
 							<p>
 								by{" "}
 								{data?.bookAuthors?.map((author) => (
@@ -70,7 +68,27 @@ const BookSampleView = ({ name }) => {
 								</div>
 							</div>
 
-							<button className="btn-2 w-full py-2">Subscribe Now</button>
+							{data?.hasAccess ? (
+								<button
+									className="btn-2 w-full py-2"
+									onClick={() =>
+										navigate(
+											`details?prevPath=${encodeURIComponent(
+												prevPath
+											)}&id=${encodeURIComponent(data?.id)}`
+										)
+									}
+								>
+									View
+								</button>
+							) : (
+								<button
+									className="btn-2 w-full py-2"
+									onClick={() => navigate("/pricing")}
+								>
+									Subscribe Now
+								</button>
+							)}
 
 							<div className="flex flex-col sm:flex-row items-center justify-between space-y-3">
 								<div className="flex items-center justify-center gap-1 text-dreamLabColor2">
@@ -88,10 +106,12 @@ const BookSampleView = ({ name }) => {
 						</div>
 					</div>
 
-					<hr className="text-grey my-5" />
+					<hr className="bg-grey my-10" />
 					{/* Preview */}
 					<div>
-						<h3 className="text-lg font-medium">What is it about?</h3>
+						<h3 className="text-lg font-medium text-center md:text-left">
+							What is it about?
+						</h3>
 						<CategoryCardsList
 							categories={data?.categories}
 							isLoading={false}
@@ -99,15 +119,19 @@ const BookSampleView = ({ name }) => {
 					</div>
 
 					<div className="mt-6">
-						<h3 className="text-lg font-medium">Overview</h3>
+						<h3 className="text-lg font-medium text-center md:text-left">
+							Overview
+						</h3>
 						<p className="mt-2">{data?.shortDesc}</p>
 					</div>
 				</div>
 
 				{/* Releated Books */}
-				<div className="md:basis-1/5 lg:basis-2/5">
-					<h2 className="text-lg font-medium my-4 text-left lg:text-center">Related</h2>
-					<ContentCardList data={data?.related} type="book" />
+				<div className=" lg:basis-2/5">
+					<h2 className="text-lg font-medium my-4 text-center">
+						Related Books
+					</h2>
+					<ContentCardList data={data?.related} type="book" isView />
 				</div>
 			</div>
 		</div>

@@ -156,7 +156,7 @@ export const updateBook = async (data) => {
 	}
 };
 
-export const fetchChaptersOfBook = async (slug) => {
+export const fetchChaptersOfBook = async (id) => {
 	const token = getToken();
 	const requestOption = {
 		headers: {
@@ -168,7 +168,7 @@ export const fetchChaptersOfBook = async (slug) => {
 		method: "GET",
 	};
 	try {
-		const response = await fetch(`${URL}books/chapters/${slug}`, requestOption);
+		const response = await fetch(`${URL}books/chapters/${id}`, requestOption);
 		const data = await response.json();
 
 		if (!response.ok) throw new Error(data.message);

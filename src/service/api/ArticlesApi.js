@@ -108,6 +108,45 @@ export const getSingleArticle = async (slug) => {
 	}
 };
 
+export const getUserSingleArticle = async (slug) => {
+	const requestOption = {
+		mode: "cors",
+		method: "GET",
+	};
+
+	try {
+		const res = await fetch(`${URL}articles/${slug}`, requestOption);
+		const result = await res.json();
+
+		if (!res.ok) throw new Error(result.message);
+
+		return result;
+	} catch (error) {
+		throw error;
+	}
+};
+
+export const getArticleContent = async (slug) => {
+	const requestOption = {
+		headers : {
+			Authorization : `Bearer ${token}`
+		},
+		mode: "cors",
+		method: "GET",
+	};
+
+	try {
+		const res = await fetch(`${URL}articles/content/${slug}`, requestOption);
+		const result = await res.json();
+
+		if (!res.ok) throw new Error(result.message);
+
+		return result;
+	} catch (error) {
+		throw error;
+	}
+};
+
 export const updateArticle = async (data) => {
 	const formData = new FormData();
 	formData.append("title", data.title);

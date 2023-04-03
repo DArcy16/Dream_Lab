@@ -3,11 +3,22 @@ import {IoIosTimer} from 'react-icons/io'
 import {MdKeyboardDoubleArrowRight} from 'react-icons/md'
 import { useLocation, useNavigate } from 'react-router-dom'
 
-const ContentCard = ({item, type, isHome = false}) => {
+const ContentCard = ({item, type, isHome = false, isView = false}) => {
 	const location = useLocation();
 	const navigate = useNavigate();
+	const prevPath = isView ? new URLSearchParams(location.search).get('prevPath') : null;
+
+	
 	const handleCardClick = () => {
-		navigate(`/${type}/${item.slug}?prevPath=${encodeURIComponent(location.pathname)}`)
+		!isView
+			? navigate(
+					`/${type}/${item.slug}?prevPath=${encodeURIComponent(
+						location.pathname
+					)}`
+			  )
+			: navigate(
+					`/${type}/${item.slug}?prevPath=${encodeURIComponent(prevPath)}`
+			  );
 	}
 
   return (
