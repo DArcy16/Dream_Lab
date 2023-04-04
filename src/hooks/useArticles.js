@@ -5,8 +5,8 @@ export const useArticle = (url) => {
     return useQuery(['articles', url],() =>  getArticle(url))
 }
 
-export const useUserArticle = (url) => {
-	return useQuery(["userArticles", url], () => getUserArticle(url));
+export const useUserArticle = (url, cid = "") => {
+	return useQuery(["userArticles", url, cid], () => getUserArticle(url, cid));
 };
 
 export const useCreateArticle = () => {

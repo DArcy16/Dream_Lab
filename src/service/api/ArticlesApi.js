@@ -30,7 +30,7 @@ export const getArticle = async (url) => {
 	}
 };
 
-export const getUserArticle = async (url) => {
+export const getUserArticle = async (url, cid) => {
 	const requestOption = {
 		headers: {
 			Authorization: `Bearer ${token}`,
@@ -42,7 +42,10 @@ export const getUserArticle = async (url) => {
 
 	try {
 		const res = await fetch(
-			url === "" ? `${URL}articles/?sorting=l` : `${url}&sorting=l`,
+			url === "" && cid === "" ? `${URL}articles/?sorting=l` 
+			: url === "" && cid ? `${URL}articles/?sorting=l&categoryIds=[${cid}]` 
+			: url && cid === "" ? `${url}&sorting=l` 
+			:`${url}&sorting=l&categoryIds=[${cid}]`,
 			requestOption
 		);
 		const data = await res.json();

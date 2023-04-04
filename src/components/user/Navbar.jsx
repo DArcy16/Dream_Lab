@@ -68,7 +68,7 @@ const Navbar = () => {
 					{/* drawer init and show */}
 					<NavDrawer />
 					<img src={Logo} className="mr-10" alt="logo" />
-					<ul className="hidden md:flex gap-6 ">
+					<ul className="hidden lg:flex gap-6 ">
 						<li>
 							<Link
 								className={`flex items-center gap-2 ${
@@ -120,12 +120,12 @@ const Navbar = () => {
 					</ul>
 				</div>
 				<div className="nav-right flex gap-5 lg:gap-10 items-center">
-					<div className="hidden relative w-[45px] h-[45px] bg-dreamLabColor5 rounded-full md:grid place-items-center lg:block lg:w-auto lg:h-auto">
+					<div className="hidden relative w-[45px] h-[45px] bg-dreamLabColor5 rounded-full md:grid place-items-center xl:block xl:w-auto xl:h-auto">
 						<BiSearch className="lg:absolute text-[20px] top-[12px] left-3 text-dreamLabColor1" />
 						<input
 							type="text"
 							placeholder="search here"
-							className="bg-dreamLabColor5 text-grey4 focus-visible:outline-none py-3 pl-10 text-sm rounded-full md:hidden lg:inline-block"
+							className="bg-dreamLabColor5 text-grey4 focus-visible:outline-none py-3 pl-10 text-sm rounded-full md:hidden xl:inline-block"
 						/>
 					</div>
 					<div>
@@ -139,7 +139,7 @@ const Navbar = () => {
 									<div className="w-[45px] rounded-full">
 										<img src="https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=880&q=80" />
 									</div>
-									<p className=" font-semibold">
+									<p className=" font-semibold text-sm md:text-base">
 										{user?.displayName ? user?.displayName : user?.email}
 									</p>
 								</div>

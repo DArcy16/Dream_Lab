@@ -25,12 +25,14 @@ const ArticleSampleView = ({ name }) => {
 
 	const prevPath = new URLSearchParams(location.search).get("prevPath");
 
+	const cid = new URLSearchParams(location.search).get('cid');
+
 	return (
 		<div className="w-full p-8 sm:px-20 sm:py-10">
 			<button
 				className="flex items-center justify-center gap-2 btn-prev py-2 px-4 border-none"
 				onClick={() => {
-					navigate(prevPath);
+					navigate(`${prevPath}?cid=${encodeURIComponent(cid)}`);
 				}}
 			>
 				<IoArrowBackOutline />
@@ -65,7 +67,7 @@ const ArticleSampleView = ({ name }) => {
 							{data?.hasAccess ? (
 								<button
 									className="btn-2 w-full py-2"
-									onClick={() => navigate(`details?prevPath=${encodeURIComponent(prevPath)}`)}
+									onClick={() => navigate(`details?prevPath=${encodeURIComponent(prevPath)}&cid=${cid}`)}
 								>
 									View
 								</button>
@@ -103,6 +105,7 @@ const ArticleSampleView = ({ name }) => {
 						<CategoryCardsList
 							categories={data?.categories}
 							isLoading={false}
+							isViewPage
 						/>
 					</div>
 

@@ -1,29 +1,40 @@
-import React from 'react'
-import {IoIosTimer} from 'react-icons/io'
-import {MdKeyboardDoubleArrowRight} from 'react-icons/md'
-import { useLocation, useNavigate } from 'react-router-dom'
+/** @format */
 
-const ContentCard = ({item, type, isHome = false, isView = false}) => {
+import React from "react";
+import { IoIosTimer } from "react-icons/io";
+import { MdKeyboardDoubleArrowRight } from "react-icons/md";
+import { useLocation, useNavigate } from "react-router-dom";
+
+const ContentCard = ({
+	item,
+	type,
+	isHome = false,
+	isView = false,
+}) => {
 	const location = useLocation();
 	const navigate = useNavigate();
-	const prevPath = isView ? new URLSearchParams(location.search).get('prevPath') : null;
+	const prevPath = isView
+		? new URLSearchParams(location.search).get("prevPath")
+		: null;
+	const cid = new URLSearchParams(location.search).get("cid") ;
 
-	
 	const handleCardClick = () => {
-		!isView
+		isView
 			? navigate(
-					`/${type}/${item.slug}?prevPath=${encodeURIComponent(
-						location.pathname
-					)}`
+					`/${type}/${item.slug}?prevPath=${encodeURIComponent(prevPath)}&cid=${encodeURIComponent(cid)}`
 			  )
 			: navigate(
-					`/${type}/${item.slug}?prevPath=${encodeURIComponent(prevPath)}`
+					`/${type}/${item.slug}?prevPath=${encodeURIComponent(
+						location.pathname
+					)}&cid=${encodeURIComponent(cid)}`
 			  );
-	}
+	};
 
-  return (
+	return (
 		<article
-			className={`px-6 py-4 ${isHome ? "w-10/12" : "w-full"} snap-center sm:w-48 md:w-52 flex flex-col justify-center border-x  border-x-grey6/30 shadow-md flex-none mt-4 space-y-3 cursor-pointer transition-all duration-500 hover:scale-105`}
+			className={`px-6 py-4 ${
+				isHome ? "w-10/12" : "w-full"
+			} snap-center sm:w-48 md:w-52 flex flex-col justify-center border-x  border-x-grey6/30 shadow-md flex-none mt-4 space-y-3 cursor-pointer transition-all duration-500 hover:scale-105`}
 			onClick={handleCardClick}
 		>
 			<img
@@ -50,6 +61,6 @@ const ContentCard = ({item, type, isHome = false, isView = false}) => {
 			</div>
 		</article>
 	);
-}
+};
 
-export default ContentCard
+export default ContentCard;

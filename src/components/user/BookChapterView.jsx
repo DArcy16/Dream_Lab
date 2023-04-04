@@ -18,10 +18,10 @@ const BookChapterView = ({ name }) => {
 
 	const prevPath = new URLSearchParams(location.search).get("prevPath");
 	const id = new URLSearchParams(location.search).get("id");
-
-	console.log(prevPath)
+	const cid = new URLSearchParams(location.search).get("cid");
 
 	const { data } = useChaptersOfBook(id);
+
 
 	const handlePrevious = () => {
 		setPage(page - 1);
@@ -41,10 +41,10 @@ const BookChapterView = ({ name }) => {
 							className={`${
 								index === page ? "text-dreamLabColor2" : "hover:text-grey4"
 							} cursor-pointer `}
-							key={chapter.id}
+							key={chapter?.id}
 							onClick={() => setPage(index)}
 						>
-							<p>{chapter.title}</p>
+							<p>{chapter?.title}</p>
 						</li>
 					))}
 				</ul>
@@ -63,7 +63,9 @@ const BookChapterView = ({ name }) => {
 				<div className="flex justify-between items-center">
 					<button
 						className="flex items-center justify-center gap-2 btn-prev py-2 border-none"
-						onClick={() => navigate(`/book/${name}?prevPath=${encodeURIComponent(prevPath)}`)}
+						onClick={() =>
+							navigate(`/book/${name}?prevPath=${encodeURIComponent(prevPath)}&cid=${encodeURIComponent(cid)}`)
+						}
 					>
 						<IoArrowBackOutline />
 						Back
@@ -77,9 +79,11 @@ const BookChapterView = ({ name }) => {
 					</button>
 				</div>
 				<h1 className="text-xl font-bold mt-8 capitalize">{bookTitle}</h1>
-				<h2 className="font-semibold my-4">{data?.bookChapters[page].title}</h2>
+				<h2 className="font-semibold my-4">
+					{data?.bookChapters.length >= 0 ? data?.bookChapters[page].title : "NO CONTENT YET"}
+				</h2>
 				<p className="overflow-hidden overflow-y-auto">
-					{data?.bookChapters[page].content}
+					{data?.bookChapters.length >= 0 ? data?.bookChapters[page].content : "NO CONTENT YET"}
 				</p>
 
 				<div className="sticky flex bottom-0 left-0 right-0 items-center justify-between sm:justify-center gap-4 bg-white mt-4 py-4 border-t border-grey4/50">
