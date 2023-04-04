@@ -23,13 +23,14 @@ const BookSampleView = ({ name }) => {
 
 	const { data, isLoading, isError, error } = useUserSingleBookData(name);
 	const prevPath = new URLSearchParams(location.search).get("prevPath");
+	const cid = new URLSearchParams(location.search).get("cid");
 
 	return (
 		<div className="w-full p-8 sm:px-20 sm:py-10">
 			<button
 				className="flex items-center justify-center gap-2 btn-prev py-2 px-4 border-none"
 				onClick={() => {
-					navigate(prevPath);
+					navigate(`${prevPath}?cid=${encodeURIComponent(cid)}`);
 				}}
 			>
 				<IoArrowBackOutline />
@@ -75,7 +76,7 @@ const BookSampleView = ({ name }) => {
 										navigate(
 											`details?prevPath=${encodeURIComponent(
 												prevPath
-											)}&id=${encodeURIComponent(data?.id)}`
+											)}&id=${encodeURIComponent(data?.id)}&cid=${cid}`
 										)
 									}
 								>
@@ -115,6 +116,7 @@ const BookSampleView = ({ name }) => {
 						<CategoryCardsList
 							categories={data?.categories}
 							isLoading={false}
+							isViewPage
 						/>
 					</div>
 

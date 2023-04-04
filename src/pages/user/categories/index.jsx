@@ -7,6 +7,7 @@ import CategoryCardsList from "../../../components/user/CategoryCardsList";
 
 const index = () => {
 	const { data: categories, isLoading } = useCategoryData();
+	
 
 	return (
 		<div className="w-full p-10">

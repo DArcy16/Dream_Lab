@@ -1,18 +1,25 @@
-import React from 'react'
-import { useLocation, useNavigate } from 'react-router-dom';
+/** @format */
+
+import React from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import { ClipLoader } from "react-spinners";
 
-
-const CategoryCardsList = ({ categories, isLoading }) => {
-    const location = useLocation();
-    const navigate = useNavigate();
+const CategoryCardsList = ({ categories, isLoading, isViewPage = false }) => {
+	const navigate = useNavigate();
 
 	const handleCategorySelect = (category) => {
-        console.log(category)
+		if (!isViewPage) {
+			navigate(
+				`${category.name
+					.toLowerCase()
+					.split(" ")
+					.join("-")}/book?cid=${encodeURIComponent(category.id)}`
+			);
+		}
 	};
 
 	return (
-		<div className="flex w-full px-10 flex-wrap gap-4 items-center">
+		<div className="flex w-full px-2 md:px-10 flex-wrap gap-4 items-center">
 			{!isLoading ? (
 				categories?.map((category) => (
 					<div
@@ -23,9 +30,11 @@ const CategoryCardsList = ({ categories, isLoading }) => {
 						<img
 							src={category.icon}
 							alt={category.name}
-							className="w-10 h-10 rounded-lg object-fit"
+							className="w-6 h-6 md:w-10 md:h-10 rounded-lg object-fit"
 						/>
-						<p className="text-lg font-semibold">{category.name}</p>
+						<p className="font-medium md:text-lg md:font-semibold">
+							{category.name}
+						</p>
 					</div>
 				))
 			) : (
@@ -37,4 +46,4 @@ const CategoryCardsList = ({ categories, isLoading }) => {
 	);
 };
 
-export default CategoryCardsList
+export default CategoryCardsList;
