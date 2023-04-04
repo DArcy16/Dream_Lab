@@ -80,10 +80,10 @@ const BookChapterView = ({ name }) => {
 				</div>
 				<h1 className="text-xl font-bold mt-8 capitalize">{bookTitle}</h1>
 				<h2 className="font-semibold my-4">
-					{data?.bookChapters.length >= 0 ? data?.bookChapters[page].title : "NO CONTENT YET"}
+					{data?.bookChapters.length >= 0 ? data?.bookChapters[page]?.title : "NO CONTENT YET"}
 				</h2>
 				<p className="overflow-hidden overflow-y-auto">
-					{data?.bookChapters.length >= 0 ? data?.bookChapters[page].content : "NO CONTENT YET"}
+					{data?.bookChapters.length >= 0 ? data?.bookChapters[page]?.content : "NO CONTENT YET"}
 				</p>
 
 				<div className="sticky flex bottom-0 left-0 right-0 items-center justify-between sm:justify-center gap-4 bg-white mt-4 py-4 border-t border-grey4/50">
@@ -95,12 +95,12 @@ const BookChapterView = ({ name }) => {
 						Previous
 					</button>
 					<p>
-						Page {page + 1} of {data?.bookChapters.length}
+						Page {page + 1} of {data?.bookChapters?.length}
 					</p>
 					<button
 						className="btn-1 px-4 py-1"
 						onClick={handleNext}
-						disabled={page === data?.bookChapters.length - 1}
+						disabled={page === data?.bookChapters?.length - 1}
 					>
 						Next
 					</button>
