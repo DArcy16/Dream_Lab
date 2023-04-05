@@ -12,6 +12,8 @@ import SubscriptionView from "./pages/user/UserInfo/SubscriptionView";
 import { Navigate } from "react-router-dom";
 import SampleView from "./pages/user/view/SampleView";
 import DetailsView from "./pages/user/view/DetailsView";
+import { getToken } from "./utils/getToken";
+const token = getToken();
 
 const routes = [
 	{
@@ -52,11 +54,11 @@ const routes = [
 				children: [
 					{
 						path: "info",
-						element: <UserInfo />,
+						element: token ? <UserInfo /> : <Navigate to="/" />,
 					},
 					{
 						path: "subscription",
-						element: <SubscriptionView />,
+						element: token ? <SubscriptionView /> : <Navigate to="/" />,
 					},
 				],
 			},

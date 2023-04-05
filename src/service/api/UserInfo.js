@@ -1,5 +1,6 @@
 import { getToken } from "../../utils/getToken";
 import { URL } from "./api_endpoint";
+import dayjs from "dayjs";
 
 export const fetchUserInfo = async () => {
   const token = getToken();
@@ -21,16 +22,22 @@ export const fetchUserInfo = async () => {
 };
 
 export const updateUserInfo = async (data) => {
+  const formData = new FormData();
+  formData.append("displayName", data.name)
+  formData.append("dob", dayjs(data.dob).format("YYYY-MM-DD"))
+  formData.append("email", data.email)
+  formData.append("profileImage", data.profileImage)
+  formData.append("phoneNumber", data.phoneNumber)
+  
   const token = getToken();
   const requestOption = {
     headers: {
       Accept: "application/json",
-      "Content-Type": "application/json",
       Authorization: `Bearer ${token}`,
     },
     mode: "cors",
     method: "PATCH",
-    body: JSON.stringify(data),
+    body: formData,
   };
   try {
     const response = await fetch(`${URL}users/${data.id}`, requestOption);
@@ -42,7 +49,7 @@ export const updateUserInfo = async (data) => {
   }
 };
 
-export const getSingleUserData = async (user) => {
+export const getSingleUserData = async (id) => {
   const token = getToken();
   const requestOption = {
     headers: {
@@ -52,7 +59,7 @@ export const getSingleUserData = async (user) => {
     method: "GET",
   };
   try {
-    const response = await fetch(`${URL}users`, requestOption);
+    const response = await fetch(`${URL}users/${id}`, requestOption);
     const result = await response.json();
 
     if (!response.ok) throw new Error(result.message);

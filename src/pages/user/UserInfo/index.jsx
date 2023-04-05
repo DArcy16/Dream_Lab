@@ -1,11 +1,14 @@
 import React, { useState } from "react";
 import * as yup from "yup";
 import InputForm from "../../../components/form/InputForm";
-import { useUpdateUserInfo, useUserData } from "../../../hooks/useUserInfo";
+import { useSingleUserData, useUpdateUserInfo } from "../../../hooks/useUserInfo";
 import { set, useForm } from "react-hook-form";
 import { useEffect } from "react";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { USER_DATA_LOCAL_STORAGE } from "../../../hooks/useUserAuth";
+import {ClipLoader} from "react-spinners"
+import dayjs from "dayjs";
+import { useLoginBoxContext } from "../../../contexts/user/LoginBoxContext";
 
 const UpdateUserDataInfoSchema = yup.object({
   name: yup.string(),
@@ -16,16 +19,15 @@ const UpdateUserDataInfoSchema = yup.object({
 });
 const index = () => {
   const [icon, setIcon] = useState();
+  const {setShow} = useLoginBoxContext();
   const updateUserInfoMutation = useUpdateUserInfo();
-  const [user, setUser] = useState([])
-  const {
-    
-    data: userData,
-    isSuccess: isUserDataUpdateSuccess,
-    refetch,
-  } = useUserData(user.id);
+  const [user, setUser] = useState(JSON.parse(localStorage.getItem(USER_DATA_LOCAL_STORAGE)))
 
-  
+  const { 
+    data: userData,
+    isSuccess: isSingleUserDataSuccess,
+    refetch,
+  } = useSingleUserData(user.id);
 
   const {
     register,
@@ -39,32 +41,26 @@ const index = () => {
   const onSubmit = (data) => {
     updateUserInfoMutation.mutate({
       ...data,
-      name: userData.displayName,
       id: userData.id,
-      email: userData.email,
-      phoneNumber: userData.phoneNumber,
-      dob: userData.dob,
-      profileImage: userData.profileImage,
+      profileImage: icon,
     });
-    
-    console.log(user);
     
   };
 
   useEffect(() => {
-    if (isUserDataUpdateSuccess) {
+    if (isSingleUserDataSuccess) {
       setValue("name", userData.displayName);
       setValue("email", userData.email);
       setValue("phoneNumber", userData.phoneNumber);
       setValue("dob", userData.dob);
-      setUser(JSON.parse(localStorage.getItem(USER_DATA_LOCAL_STORAGE)))
-      setIcon(userData.profileImage)
+      setIcon(userData.profileImage);
     }
-  }, [isUserDataUpdateSuccess]);
+  }, [isSingleUserDataSuccess]);
 
   useEffect(() => {
     if (updateUserInfoMutation.isSuccess) {
       refetch();
+      setShow(true);
     }
   }, [updateUserInfoMutation.isSuccess]);
 
@@ -114,6 +110,7 @@ const index = () => {
               label="date of birth"
               register={register}
               errors={errors}
+              isDate
             />
             {updateUserInfoMutation.isError && (
               <p className="text-red-600">
@@ -121,7 +118,10 @@ const index = () => {
               </p>
             )}
 
-            <button className="btn-2 w-full py-2 px-3 mt-4" type="submit">
+            <button className="btn-2 flex items-center justify-center w-full py-2 px-3 mt-4" type="submit">
+              {
+                updateUserInfoMutation.isLoading ? <ClipLoader color="white" /> : null
+              }
               Update
             </button>
           </form>
