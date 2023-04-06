@@ -2,6 +2,7 @@
 
 import React from "react";
 import { useState } from "react";
+import { ClipLoader } from "react-spinners";
 
 import { IoArrowBackOutline } from "react-icons/io5";
 import { GoThreeBars } from "react-icons/go";
@@ -20,8 +21,7 @@ const BookChapterView = ({ name }) => {
 	const id = new URLSearchParams(location.search).get("id");
 	const cid = new URLSearchParams(location.search).get("cid");
 
-	const { data } = useChaptersOfBook(id);
-
+	const { data, isLoading, isError, error } = useChaptersOfBook(id);
 
 	const handlePrevious = () => {
 		setPage(page - 1);
@@ -59,12 +59,16 @@ const BookChapterView = ({ name }) => {
 				/>
 			) : null}
 
-			<div className="relative w-screen md:basis-4/5 md:mx-auto h-full md:h-full md:px-10 md:overflow-hidden md:overflow-y-auto [&::-webkit-scrollbar]:hidden">
+			<div className="relative w-screen md:basis-4/5 md:mx-auto h-full md:h-[83vh] md:px-10 md:overflow-hidden md:overflow-y-auto [&::-webkit-scrollbar]:hidden">
 				<div className="flex justify-between items-center">
 					<button
 						className="flex items-center justify-center gap-2 btn-prev py-2 border-none"
 						onClick={() =>
-							navigate(`/book/${name}?prevPath=${encodeURIComponent(prevPath)}&cid=${encodeURIComponent(cid)}`)
+							navigate(
+								`/book/${name}?prevPath=${encodeURIComponent(
+									prevPath
+								)}&cid=${encodeURIComponent(cid)}`
+							)
 						}
 					>
 						<IoArrowBackOutline />
@@ -78,13 +82,31 @@ const BookChapterView = ({ name }) => {
 						<GoThreeBars />
 					</button>
 				</div>
-				<h1 className="text-xl font-bold mt-8 capitalize">{bookTitle}</h1>
-				<h2 className="font-semibold my-4">
-					{data?.bookChapters.length > 0 ? data?.bookChapters[page]?.title : "NO CONTENT YET"}
-				</h2>
-				<p className="overflow-hidden overflow-y-auto">
-					{data?.bookChapters.length > 0 ? data?.bookChapters[page]?.content : "NO CONTENT YET"}
-				</p>
+				{isError ? (
+					<div className="w-full h-40 flex items-center justify-center">
+						<p className="text-center text-semibold text-lg normal-case">
+							{error.message}
+						</p>
+					</div>
+				) : isLoading ? (
+					<div className="w-full h-40 flex items-center justify-center">
+						<ClipLoader size={30} />
+					</div>
+				) : (
+					<>
+						<h1 className="text-xl font-bold mt-8 capitalize">{bookTitle}</h1>
+						<h2 className="font-semibold my-4">
+							{data?.bookChapters.length > 0
+								? data?.bookChapters[page]?.title
+								: "NO CONTENT YET"}
+						</h2>
+						<p className="overflow-hidden overflow-y-auto">
+							{data?.bookChapters.length > 0
+								? data?.bookChapters[page]?.content
+								: "NO CONTENT YET"}
+						</p>
+					</>
+				)}
 
 				<div className="sticky flex bottom-0 left-0 right-0 items-center justify-between sm:justify-center gap-4 bg-white mt-4 py-4 border-t border-grey4/50">
 					<button

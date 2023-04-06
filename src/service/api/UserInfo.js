@@ -68,3 +68,25 @@ export const getSingleUserData = async (id) => {
     throw error;
   }
 };
+
+export const fetchUserSubscription = async () => {
+  const token = getToken();
+  const requestOption = {
+    headers : {
+      Authorization : `Bearer ${token}`,
+      accept : 'application/json'
+    },
+    mode : 'cors',
+    method : 'GET'
+  }
+
+  try {
+    const res = await fetch(`${URL}users/subscription/history`, requestOption);
+    const result  = await res.json();
+
+    if(!res.ok) throw new Error(result.message);
+    return result;
+  } catch (error) {
+    throw error;
+  }
+}

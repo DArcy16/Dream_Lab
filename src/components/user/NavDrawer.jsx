@@ -1,3 +1,5 @@
+/** @format */
+
 import React, { useState } from "react";
 import { AiFillHome } from "react-icons/ai";
 import { BiMenuAltLeft, BiCategory } from "react-icons/bi";
@@ -5,10 +7,11 @@ import { MdLocalLibrary } from "react-icons/md";
 import { RiMoneyDollarCircleFill } from "react-icons/ri";
 import { Link } from "react-router-dom";
 
-const NavDrawer = () => {
-  const [navShow, setNavShow] = useState(true);
-  const [active, setActive] = useState("home");
-  return (
+const NavDrawer = ({active, setActive}) => {
+	const [navShow, setNavShow] = useState(true);
+	
+
+	return (
 		<div>
 			<button
 				className="lg:hidden mr-5"
@@ -63,10 +66,10 @@ const NavDrawer = () => {
 							<li>
 								<Link
 									className={`flex items-center gap-2 ${
-										active == "home" ? "text-dreamLabColor1" : null
+										active == "" ? "text-dreamLabColor1" : null
 									}`}
 									to={"/"}
-									onClick={() => setActive("home")}
+									onClick={() => setActive("")}
 								>
 									<AiFillHome />
 									<p>Home</p>
@@ -108,7 +111,6 @@ const NavDrawer = () => {
 									<p>Category</p>
 								</Link>
 							</li>
-							
 						</ul>
 					</div>
 				</div>

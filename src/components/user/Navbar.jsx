@@ -28,11 +28,13 @@ import {
 
 const Navbar = () => {
   const {pathname} = useLocation();
-  const [active, setActive] = useState("home");
+  const [active, setActive] = useState(pathname.split("/")[1]);
   const { show, setShow } = useLoginBoxContext();
   const token = localStorage.getItem(TOKEN_LOCAL_STORAGE);
   const [isLogin, setIsLogin] = useState(false);
   const [user, setUser] = useState();
+
+  console.log(pathname.split("/"))
 
   const userLogout = () => {
     localStorage.clear();
@@ -41,9 +43,9 @@ const Navbar = () => {
   };
 
   useEffect(() => {
-    const currentPath = pathname;
-    if (currentPath === "/") {
-      setActive("home");
+    const currentPath = pathname.split("/")[1];
+    if (currentPath === "") {
+      setActive("");
     } else if (currentPath === "/library") {
       setActive("library");
     } else if (currentPath === "/pricing") {
@@ -66,16 +68,16 @@ const Navbar = () => {
 			<nav className="container mx-auto flex items-center justify-between h-[70px] md:h-[80px] text-[16px]">
 				<div className="nav-left flex items-center">
 					{/* drawer init and show */}
-					<NavDrawer />
+					<NavDrawer active={active} setActive={setActive}/>
 					<img src={Logo} className="mr-10" alt="logo" />
 					<ul className="hidden lg:flex gap-6 ">
 						<li>
 							<Link
 								className={`flex items-center gap-2 ${
-									active === "home" ? "text-dreamLabColor1" : ""
+									active === "" ? "text-dreamLabColor1" : ""
 								}`}
 								to={"/"}
-								onClick={() => setActive("home")}
+								onClick={() => setActive("")}
 							>
 								<AiFillHome />
 								<p>Home</p>

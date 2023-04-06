@@ -26,11 +26,8 @@ export const fetchBooks = async (url) => {
 };
 
 export const fetchUserBooks = async (url, cid) => {
-	const token = getToken();
 	const requestOption = {
-		headers: {
-			Authorization: `Bearer ${token}`,
-		},
+		
 		mode: "cors",
 		method: "GET",
 	};

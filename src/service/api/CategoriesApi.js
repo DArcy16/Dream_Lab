@@ -2,11 +2,7 @@ import { getToken } from "../../utils/getToken";
 import { URL } from "./api_endpoint";
 
 export const fetchCategories = async () => {
-  const token = getToken();
   const requestOption = {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
     mode: "cors",
     method: "GET",
   };

@@ -34,15 +34,15 @@ const ContentCard = ({
 		<article
 			className={`px-6 py-4 ${
 				isHome ? "w-10/12" : "w-full"
-			} snap-center sm:w-48 md:w-52 flex flex-col justify-center border-x  border-x-grey6/30 shadow-md flex-none mt-4 space-y-3 cursor-pointer transition-all duration-500 hover:scale-105`}
+			} snap-center sm:w-52 md:w-60 md:shadow-lg flex flex-col justify-center border-x  border-x-grey6/30 shadow-md flex-none mt-4 space-y-3 cursor-pointer transition-all duration-500 hover:scale-105`}
 			onClick={handleCardClick}
 		>
 			<img
 				src={item.mainImage}
 				alt="item.title"
-				className=" w-20 h-20 mx-auto object-contain overflow-hidden"
+				className=" w-28 h-32 mx-auto object-contain rounded-lg overflow-hidden"
 			/>
-			<h2 className="text-center font-medium">{item.title}</h2>
+			<h2 className="text-center font-medium capitalize">{item.title}</h2>
 			<p className="text-sm">
 				By{" "}
 				{type === "book"

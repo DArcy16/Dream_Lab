@@ -11,7 +11,7 @@ import appleStore from "../../../assets/applestore.png";
 import freeImg from "../../../assets/freeImage.png";
 import dreamLab from "../../../assets/dreamLab.png";
 import heroImg from "../../../assets/heroImg.png";
-import { useBooksData } from "../../../hooks/useBooks";
+import { useBooksData, useUserBook } from "../../../hooks/useBooks";
 import { useUserArticle } from "../../../hooks/useArticles";
 import { useLoginBoxContext } from "../../../contexts/user/LoginBoxContext";
 import { useNavigate } from "react-router-dom";
@@ -47,7 +47,7 @@ function Card({ imgSrc, title, body, redirectToLibrary }) {
 }
 
 const index = () => {
-	const { isError, isLoading, error, data: featuredBooks } = useBooksData("");
+	const { isError, isLoading, error, data: featuredBooks } = useUserBook("");
 	const { data: newArticles } = useUserArticle("");
 	const { setShow } = useLoginBoxContext();
 	const token = localStorage.getItem(TOKEN_LOCAL_STORAGE);

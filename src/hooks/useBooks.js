@@ -77,7 +77,7 @@ export const useCreateBook = () => {
 	return useMutation(createBook);
 };
 
-export const useUserBook = (url, cid = "") => {
+export const useUserBook = (url = "", cid = "") => {
   return useQuery(["userBooks", url, cid], () => fetchUserBooks(url, cid))
 }
 

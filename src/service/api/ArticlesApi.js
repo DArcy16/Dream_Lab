@@ -33,7 +33,7 @@ export const getArticle = async (url) => {
 export const getUserArticle = async (url, cid) => {
 	const requestOption = {
 		headers: {
-			Authorization: `Bearer ${token}`,
+			// Authorization: `Bearer ${token}`,
 			Accept: "application/json",
 		},
 		mode: "cors",
