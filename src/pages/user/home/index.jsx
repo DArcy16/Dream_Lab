@@ -230,7 +230,7 @@ const index = () => {
 					</div>
 				</div>
 			</section>
-			<section className="container mx-auto mb-14 px-4 sm:px-6 lg:px-8">
+			<section className="container mx-auto mb-14 px-4 sm:px-8 lg:px-12">
 				<div className="flex flex-col sm:flex-row justify-between items-center mb-8 sm:mb-12">
 					<h3 className="text-textColor4 text-2xl sm:text-3xl font-semibold mb-4 sm:mb-0">
 						New Released Books

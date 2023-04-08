@@ -7,7 +7,7 @@ const ContentCardList = ({data, isHome = false, type, isView = false, isCategory
 		<div
 			className={`flex items-end gap-6 ${
 				isHome
-					? "w-full snap-x overflow-x-auto overflow-hidden justify-start py-6 px-2"
+					? "w-full snap-x overflow-x-auto overflow-hidden justify-start py-6 sm:px-12 px-2"
 					: isView
 					? "flex-wrap py-4 justify-center mx-auto"
 					: "flex-wrap py-4 px-10 justify-center mx-auto"

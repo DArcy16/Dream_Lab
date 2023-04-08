@@ -56,7 +56,7 @@ const ArticleSampleView = ({ name }) => {
 					<ClipLoader size={30} />
 				</div>
 			) : (
-				<div className="flex flex-col items-start justify-between gap-4 lg:flex-row">
+				<div className="flex flex-col items-start justify-between gap-5 lg:flex-row">
 					{/* Book View Left */}
 					<div className="w-full lg:basis-3/5">
 						{/* Book Cover */}
